@@ -5,9 +5,12 @@
         "node": true
     },
     "extends": [
-        "plugin:vue/vue3-essential",
-        "standard-with-typescript",
-        "prettier"
+        // "plugin:vue/vue3-essential",
+        // "standard-with-typescript",
+        // "prettier"
+        "eslint:recommended",
+        "plugin:vue/essential",
+        "plugin:prettier/recommended"
     ],
     "overrides": [
     ],
@@ -17,11 +20,13 @@
         "project": "./tsconfig.json"
     },
     "plugins": [
-        "vue"
+        "vue",
+        "prettier"
     ],
     "rules": {
         "no-unused-vars": "off",
         "@typescript-eslint/triple-slash-reference": "off",
+        "prettier/prettier": "error", // 追加
  "@typescript-eslint/no-unused-vars": ["error", {
    "vars": "all",
    "args": "after-used",

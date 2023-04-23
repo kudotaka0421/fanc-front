@@ -318,6 +318,7 @@ const sidebarOpen = ref(false);
             <main class="py-10">
                 <div class="px-4 sm:px-6 lg:px-8">
                     <!-- Your content -->
+                    <routerView></routerView>
                 </div>
             </main>
         </div>

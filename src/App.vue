@@ -25,16 +25,26 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
 const navigation = [
-    { name: "スクールを見つける", href: "#", icon: HomeIcon, current: false },
+    { name: "スクールを見つける", href: "/", icon: HomeIcon, current: false },
     {
         name: "カウンセリングを予約する",
         href: "#",
         icon: UsersIcon,
         current: false,
     },
-    { name: "カウンセリング一覧", href: "#", icon: FolderIcon, current: false },
+    {
+        name: "カウンセリング一覧",
+        href: "counseling",
+        icon: FolderIcon,
+        current: false,
+    },
     { name: "ユーザー一覧", href: "#", icon: CalendarIcon, current: false },
-    { name: "スタッフ一覧", href: "#", icon: CalendarIcon, current: false },
+    {
+        name: "スタッフ一覧",
+        href: "staffs",
+        icon: CalendarIcon,
+        current: false,
+    },
     { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
 ];
 
@@ -315,7 +325,7 @@ const sidebarOpen = ref(false);
                 </div>
             </div>
 
-            <main class="py-10">
+            <main>
                 <div class="px-4 sm:px-6 lg:px-8">
                     <!-- Your content -->
                     <routerView></routerView>
@@ -326,6 +336,9 @@ const sidebarOpen = ref(false);
 </template>
 
 <style scoped>
+main {
+    text-align: left;
+}
 .logo {
     height: 6em;
     padding: 1.5em;

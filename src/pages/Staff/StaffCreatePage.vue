@@ -17,6 +17,6 @@ const staff = {
     LastName: "",
     FirstNameKana: "",
     LastNameKana: "",
-    Mail: "",
+    Email: "",
 };
 </script>

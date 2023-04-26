@@ -226,28 +226,28 @@
                         >
                         <div class="relative mt-2 h-20">
                             <input
-                                v-model="staff.Mail"
+                                v-model="staff.Email"
                                 id="email"
                                 name="email"
                                 type="email"
                                 autocomplete="email"
-                                @input="inputValue('Mail')"
+                                @input="inputValue('Email')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.Mail && hasInvalidMail
+                                    !isInitialForm.Email && hasInvalidEmail
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
                             <p
-                                v-if="!isInitialForm.Mail && isEmptyMail"
+                                v-if="!isInitialForm.Email && isEmptyEmail"
                                 class="mt-2 text-sm text-red-600"
                                 id="email-error"
                             >
                                 メールアドレスを入力してください
                             </p>
                             <p
-                                v-if="!isInitialForm.Mail && isLengthOverMail"
+                                v-if="!isInitialForm.Email && isLengthOverEmail"
                                 class="mt-2 text-sm text-red-600"
                                 id="email-error"
                             >
@@ -284,7 +284,7 @@ interface Staff {
     LastName: string;
     FirstNameKana: string;
     LastNameKana: string;
-    Mail: string;
+    Email: string;
 }
 
 interface Props {
@@ -298,7 +298,7 @@ const staff = ref<Staff>({
     LastName: props.staff.LastName,
     FirstNameKana: props.staff.FirstNameKana,
     LastNameKana: props.staff.LastNameKana,
-    Mail: props.staff.Mail,
+    Email: props.staff.Email,
 });
 
 const isInitialForm = reactive({
@@ -306,7 +306,7 @@ const isInitialForm = reactive({
     LastName: true,
     FirstNameKana: true,
     LastNameKana: true,
-    Mail: true,
+    Email: true,
 });
 
 //FirstName バリデーション
@@ -373,20 +373,20 @@ const hasInvalidLastNameKana = computed(() => {
     );
 });
 
-// Mail バリデーション
-const isEmptyMail = computed(() => {
-    return staff.value.Mail === "";
+// Email バリデーション
+const isEmptyEmail = computed(() => {
+    return staff.value.Email === "";
 });
-const isLengthOverMail = computed(() => {
-    return !isEmptyMail.value && staff.value.Mail.length > 225;
+const isLengthOverEmail = computed(() => {
+    return !isEmptyEmail.value && staff.value.Email.length > 225;
 });
-const hasInvalidMail = computed(() => {
-    return isEmptyMail.value || isLengthOverMail.value;
+const hasInvalidEmail = computed(() => {
+    return isEmptyEmail.value || isLengthOverEmail.value;
 });
 
 const hasInvalidValue = computed(() => {
     return (
-        hasInvalidMail.value ||
+        hasInvalidEmail.value ||
         hasInvalidFirstName.value ||
         hasInvalidLastName.value ||
         hasInvalidFirstNameKana.value ||

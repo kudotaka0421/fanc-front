@@ -23,7 +23,7 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
-
+import BaseAlert from "./components/BaseAlert.vue";
 const navigation = [
     { name: "スクールを見つける", href: "/", icon: HomeIcon, current: false },
     {
@@ -328,6 +328,7 @@ const sidebarOpen = ref(false);
             <main>
                 <div class="px-4 sm:px-6 lg:px-8">
                     <!-- Your content -->
+                    <BaseAlert />
                     <routerView></routerView>
                 </div>
             </main>
@@ -338,6 +339,8 @@ const sidebarOpen = ref(false);
 <style scoped>
 main {
     text-align: left;
+    margin-left: auto;
+    margin-right: auto;
 }
 .logo {
     height: 6em;

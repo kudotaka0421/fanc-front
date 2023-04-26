@@ -13,10 +13,10 @@ const pages = [
 ];
 
 const staff = {
-    FirstName: "",
-    LastName: "",
-    FirstNameKana: "",
-    LastNameKana: "",
-    Email: "",
+    firstName: "",
+    lastName: "",
+    firstNameKana: "",
+    lastNameKana: "",
+    email: "",
 };
 </script>

@@ -16,15 +16,15 @@
                         >
                         <div class="mt-2 h-14">
                             <input
-                                v-model="staff.FirstName"
+                                v-model="staff.firstName"
                                 type="text"
                                 name="first-name"
                                 id="first-name"
                                 autocomplete="given-name"
-                                @input="inputValue('FirstName')"
+                                @input="inputValue('firstName')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.FirstName &&
+                                    !isInitialForm.firstName &&
                                     hasInvalidFirstName
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
@@ -32,7 +32,7 @@
                             />
                             <p
                                 v-if="
-                                    !isInitialForm.FirstName && isEmptyFirstName
+                                    !isInitialForm.firstName && isEmptyFirstName
                                 "
                                 class="mt-2 text-sm text-red-600"
                                 id="first-name-error"
@@ -41,7 +41,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.FirstName &&
+                                    !isInitialForm.firstName &&
                                     isLengthOverFirstName
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -63,15 +63,15 @@
                         >
                         <div class="mt-2 h-14">
                             <input
-                                v-model="staff.LastName"
+                                v-model="staff.lastName"
                                 type="text"
                                 name="last-name"
                                 id="last-name"
                                 autocomplete="family-name"
-                                @input="inputValue('LastName')"
+                                @input="inputValue('lastName')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.LastName &&
+                                    !isInitialForm.lastName &&
                                     hasInvalidLastName
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
@@ -79,7 +79,7 @@
                             />
                             <p
                                 v-if="
-                                    !isInitialForm.LastName && isEmptyLastName
+                                    !isInitialForm.lastName && isEmptyLastName
                                 "
                                 class="mt-2 text-sm text-red-600"
                                 id="last-name-error"
@@ -88,7 +88,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.LastName &&
+                                    !isInitialForm.lastName &&
                                     isLengthOverLastName
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -110,15 +110,15 @@
                         >
                         <div class="mt-2 h-20">
                             <input
-                                v-model="staff.FirstNameKana"
+                                v-model="staff.firstNameKana"
                                 type="text"
                                 name="first-name"
                                 id="first-name"
                                 autocomplete="given-name"
-                                @input="inputValue('FirstNameKana')"
+                                @input="inputValue('firstNameKana')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.FirstNameKana &&
+                                    !isInitialForm.firstNameKana &&
                                     hasInvalidFirstNameKana
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
@@ -126,7 +126,7 @@
                             />
                             <p
                                 v-if="
-                                    !isInitialForm.FirstNameKana &&
+                                    !isInitialForm.firstNameKana &&
                                     isEmptyFirstNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -136,7 +136,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.FirstNameKana &&
+                                    !isInitialForm.firstNameKana &&
                                     isLengthOverFirstNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -146,7 +146,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.FirstNameKana &&
+                                    !isInitialForm.firstNameKana &&
                                     isInvalidFirstNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -168,15 +168,15 @@
                         >
                         <div class="mt-2 h-20">
                             <input
-                                v-model="staff.LastNameKana"
+                                v-model="staff.lastNameKana"
                                 type="text"
                                 name="last-name"
                                 id="last-name"
                                 autocomplete="family-name"
-                                @input="inputValue('LastNameKana')"
+                                @input="inputValue('lastNameKana')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.LastNameKana &&
+                                    !isInitialForm.lastNameKana &&
                                     hasInvalidLastNameKana
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
@@ -184,7 +184,7 @@
                             />
                             <p
                                 v-if="
-                                    !isInitialForm.LastNameKana &&
+                                    !isInitialForm.lastNameKana &&
                                     isEmptyLastNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -194,7 +194,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.LastNameKana &&
+                                    !isInitialForm.lastNameKana &&
                                     isLengthOverLastNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -204,7 +204,7 @@
                             </p>
                             <p
                                 v-if="
-                                    !isInitialForm.LastNameKana &&
+                                    !isInitialForm.lastNameKana &&
                                     isInvalidLastNameKana
                                 "
                                 class="mt-2 text-sm text-red-600"
@@ -226,28 +226,28 @@
                         >
                         <div class="relative mt-2 h-20">
                             <input
-                                v-model="staff.Email"
+                                v-model="staff.email"
                                 id="email"
                                 name="email"
                                 type="email"
                                 autocomplete="email"
-                                @input="inputValue('Email')"
+                                @input="inputValue('email')"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                                 :class="[
-                                    !isInitialForm.Email && hasInvalidEmail
+                                    !isInitialForm.email && hasInvalidEmail
                                         ? 'ring-red-300 focus:ring-red-500 bg-red-100'
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
                             <p
-                                v-if="!isInitialForm.Email && isEmptyEmail"
+                                v-if="!isInitialForm.email && isEmptyEmail"
                                 class="mt-2 text-sm text-red-600"
                                 id="email-error"
                             >
                                 メールアドレスを入力してください
                             </p>
                             <p
-                                v-if="!isInitialForm.Email && isLengthOverEmail"
+                                v-if="!isInitialForm.email && isLengthOverEmail"
                                 class="mt-2 text-sm text-red-600"
                                 id="email-error"
                             >
@@ -281,11 +281,11 @@ import { defineProps, ref, computed, reactive } from "vue";
 
 // TODO Keyが大文字開始になっているのでCamelCaseに変更する
 interface Staff {
-    FirstName: string;
-    LastName: string;
-    FirstNameKana: string;
-    LastNameKana: string;
-    Email: string;
+    firstName: string;
+    lastName: string;
+    firstNameKana: string;
+    lastNameKana: string;
+    email: string;
 }
 
 interface Props {
@@ -295,54 +295,54 @@ interface Props {
 const props = defineProps<Props>();
 
 const staff = ref<Staff>({
-    FirstName: props.staff.FirstName,
-    LastName: props.staff.LastName,
-    FirstNameKana: props.staff.FirstNameKana,
-    LastNameKana: props.staff.LastNameKana,
-    Email: props.staff.Email,
+    firstName: props.staff.firstName,
+    lastName: props.staff.lastName,
+    firstNameKana: props.staff.firstNameKana,
+    lastNameKana: props.staff.lastNameKana,
+    email: props.staff.email,
 });
 
 const isInitialForm = reactive({
-    FirstName: true,
-    LastName: true,
-    FirstNameKana: true,
-    LastNameKana: true,
-    Email: true,
+    firstName: true,
+    lastName: true,
+    firstNameKana: true,
+    lastNameKana: true,
+    email: true,
 });
 
-//FirstName バリデーション
+//firstName バリデーション
 const isEmptyFirstName = computed(() => {
-    return staff.value.FirstName === "";
+    return staff.value.firstName === "";
 });
 const isLengthOverFirstName = computed(() => {
-    return !isEmptyFirstName.value && staff.value.FirstName.length > 50;
+    return !isEmptyFirstName.value && staff.value.firstName.length > 50;
 });
 const hasInvalidFirstName = computed(() => {
     return isEmptyFirstName.value || isLengthOverFirstName.value;
 });
 
-//LastName バリデーション
+//lastName バリデーション
 const isEmptyLastName = computed(() => {
-    return staff.value.LastName === "";
+    return staff.value.lastName === "";
 });
 const isLengthOverLastName = computed(() => {
-    return !isEmptyLastName.value && staff.value.LastName.length > 50;
+    return !isEmptyLastName.value && staff.value.lastName.length > 50;
 });
 const hasInvalidLastName = computed(() => {
     return isEmptyLastName.value || isLengthOverLastName.value;
 });
 
-//FirstNameKana バリデーション
+//firstNameKana バリデーション
 const isEmptyFirstNameKana = computed(() => {
-    return staff.value.FirstNameKana === "";
+    return staff.value.firstNameKana === "";
 });
 const isLengthOverFirstNameKana = computed(() => {
-    return !isEmptyFirstNameKana.value && staff.value.FirstNameKana.length > 50;
+    return !isEmptyFirstNameKana.value && staff.value.firstNameKana.length > 50;
 });
 const isInvalidFirstNameKana = computed(() => {
     return (
         !isEmptyFirstNameKana.value &&
-        !!staff.value.FirstNameKana.match(/[^ァ-ヶー　]+$/)
+        !!staff.value.firstNameKana.match(/[^ァ-ヶー　]+$/)
     );
 });
 const hasInvalidFirstNameKana = computed(() => {
@@ -353,17 +353,17 @@ const hasInvalidFirstNameKana = computed(() => {
     );
 });
 
-//LastNameKana バリデーション
+//lastNameKana バリデーション
 const isEmptyLastNameKana = computed(() => {
-    return staff.value.LastNameKana === "";
+    return staff.value.lastNameKana === "";
 });
 const isLengthOverLastNameKana = computed(() => {
-    return !isEmptyLastNameKana.value && staff.value.LastNameKana.length > 50;
+    return !isEmptyLastNameKana.value && staff.value.lastNameKana.length > 50;
 });
 const isInvalidLastNameKana = computed(() => {
     return (
         !isEmptyLastNameKana.value &&
-        !!staff.value.LastNameKana.match(/[^ァ-ヶー　]+$/)
+        !!staff.value.lastNameKana.match(/[^ァ-ヶー　]+$/)
     );
 });
 const hasInvalidLastNameKana = computed(() => {
@@ -374,12 +374,12 @@ const hasInvalidLastNameKana = computed(() => {
     );
 });
 
-// Email バリデーション
+// email バリデーション
 const isEmptyEmail = computed(() => {
-    return staff.value.Email === "";
+    return staff.value.email === "";
 });
 const isLengthOverEmail = computed(() => {
-    return !isEmptyEmail.value && staff.value.Email.length > 225;
+    return !isEmptyEmail.value && staff.value.email.length > 225;
 });
 const hasInvalidEmail = computed(() => {
     return isEmptyEmail.value || isLengthOverEmail.value;

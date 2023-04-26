@@ -279,6 +279,7 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive } from "vue";
 
+// TODO Keyが大文字開始になっているのでCamelCaseに変更する
 interface Staff {
     FirstName: string;
     LastName: string;

@@ -8,7 +8,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.vue";
 import StaffForm from "../../components/Staff/StaffForm.vue";
 
 const pages = [
-    { name: "スタッフ一覧", href: "staff", current: false },
+    { name: "スタッフ一覧", href: "staffs", current: false },
     { name: "スタッフ新規作成", href: "staffCreate", current: true },
 ];
 

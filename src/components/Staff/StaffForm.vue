@@ -268,7 +268,7 @@
                 :class="[
                     hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
                 ]"
-                @click="create"
+                @click.prevent="create"
             >
                 新規作成
             </button>
@@ -278,8 +278,12 @@
 
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive } from "vue";
+import { useAlertStore } from "../../store/alert";
+import { useRouter } from "vue-router";
 
-// TODO Keyが大文字開始になっているのでCamelCaseに変更する
+const alertStore = useAlertStore();
+const router = useRouter();
+
 interface Staff {
     firstName: string;
     lastName: string;
@@ -395,9 +399,13 @@ const hasInvalidValue = computed(() => {
     );
 });
 
-const create = () => {
-    // TODO ここに処理を追加
-    // console.log(staff.value);
+const create = (event: Event) => {
+    // TODO
+    //成功したら
+    // router.push("/staffs");
+    // alertStore.showSuccessAlert();
+    // 失敗したら
+    // alertStore.showErrorAlert();
 };
 
 const inputValue = (key: string) => {

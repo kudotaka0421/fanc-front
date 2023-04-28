@@ -1,29 +1,29 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import SchoolPage from "../pages/SchoolPage.vue";
-import CounselingPage from "../pages/CounselingPage.vue";
-import StaffsPage from "../pages/Staff/StaffsPage.vue";
-import StaffCreatePage from "../pages/Staff/StaffCreatePage.vue";
+import School from "../pages/School.vue";
+import Counseling from "../pages/Counseling.vue";
+import Staffs from "../pages/Staffs/Staffs.vue";
+import StaffCreate from "../pages/StaffCreate/StaffCreate.vue";
 
 const routes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "School",
-        component: SchoolPage,
+        component: School,
     },
     {
         path: "/counseling",
         name: "Counseling",
-        component: CounselingPage,
+        component: Counseling,
     },
     {
         path: "/staffs",
         name: "Staffs",
-        component: StaffsPage,
+        component: Staffs,
     },
     {
         path: "/staffCreate",
         name: "StaffCreate",
-        component: StaffCreatePage,
+        component: StaffCreate,
     },
 ];
 

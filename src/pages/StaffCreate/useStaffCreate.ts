@@ -28,16 +28,12 @@ export function useStaffCreate() {
         email: "",
     };
 
-    // emitでstaffの値を送ってもらう
     const createStaff = async (params: Staff) => {
         try {
             await axios.post("http://localhost:8080/api/staff", params);
-            //成功のアラートを表示させる
             alertStore.showSuccessAlert();
-            //staff一覧にリダイレクト
             router.push("/staffs");
         } catch (err) {
-            // エラーのアラートを表ss示させる
             alertStore.showErrorAlert();
         }
     };

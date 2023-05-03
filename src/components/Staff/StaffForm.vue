@@ -278,11 +278,6 @@
 
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive } from "vue";
-import { useAlertStore } from "../../store/alert";
-import { useRouter } from "vue-router";
-
-const alertStore = useAlertStore();
-const router = useRouter();
 
 type Staff = {
     firstName: string;
@@ -403,12 +398,6 @@ const emits = defineEmits(["create"]);
 
 const clickCreate = (event: Event) => {
     emits("create", staff.value);
-    // TODO
-    //成功したら
-    // router.push("/staffs");
-    // alertStore.showSuccessAlert();
-    // 失敗したら
-    // alertStore.showErrorAlert();
 };
 
 const inputValue = (key: string) => {

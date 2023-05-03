@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <!-- 失敗時のアラート -->3
+        <!-- 失敗時のアラート -->
         <div
             v-if="alertStore.showAlertType == alertStore.alertType.error"
             class="rounded-md bg-red-100 p-4"

@@ -2,7 +2,7 @@
     <div class="fixed-alert">
         <!--  成功時のアラート -->
         <div
-            v-if="alertStore.showAlertSuccess"
+            v-if="alertStore.showAlertType == alertStore.alertType.success"
             class="rounded-md bg-green-50 p-4"
         >
             <div class="flex">
@@ -20,8 +20,11 @@
             </div>
         </div>
 
-        <!-- 失敗時のアラート -->
-        <div v-if="alertStore.showAlertError" class="rounded-md bg-red-100 p-4">
+        <!-- 失敗時のアラート -->3
+        <div
+            v-if="alertStore.showAlertType == alertStore.alertType.error"
+            class="rounded-md bg-red-100 p-4"
+        >
             <div class="flex">
                 <div class="flex-shrink-0">
                     <XCircleIcon

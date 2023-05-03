@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 
 export function useStaffs() {
     const alertStore = useAlertStore();
-    const pages = [{ name: "スタッフ一覧", href: "staffs", current: true }];
+    const pages = [{ name: "スタッフ一覧", href: "/staffs", current: true }];
 
     const staffs = ref<Staff[]>([]);
 

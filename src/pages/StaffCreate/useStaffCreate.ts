@@ -1,15 +1,7 @@
 import axios from "axios";
 import { useAlertStore } from "../../store/alert";
 import { useRouter } from "vue-router";
-
-type Staff = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    firstNameKana: string;
-    lastNameKana: string;
-    email: string;
-};
+import { Staff } from "../../types/staff";
 
 export function useStaffCreate() {
     const alertStore = useAlertStore();

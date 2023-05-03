@@ -21,7 +21,7 @@
         </div>
 
         <!-- 失敗時のアラート -->
-        <div v-if="alertStore.showAlertError" class="rounded-md bg-red-50 p-4">
+        <div v-if="alertStore.showAlertError" class="rounded-md bg-red-100 p-4">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <XCircleIcon

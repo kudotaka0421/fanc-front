@@ -268,7 +268,7 @@
                 :class="[
                     hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
                 ]"
-                @click.prevent="create"
+                @click.prevent="clickCreate"
             >
                 新規作成
             </button>
@@ -284,13 +284,13 @@ import { useRouter } from "vue-router";
 const alertStore = useAlertStore();
 const router = useRouter();
 
-interface Staff {
+type Staff = {
     firstName: string;
     lastName: string;
     firstNameKana: string;
     lastNameKana: string;
     email: string;
-}
+};
 
 interface Props {
     staff: Staff;
@@ -399,7 +399,10 @@ const hasInvalidValue = computed(() => {
     );
 });
 
-const create = (event: Event) => {
+const emits = defineEmits(["create"]);
+
+const clickCreate = (event: Event) => {
+    emits("create", staff.value);
     // TODO
     //成功したら
     // router.push("/staffs");

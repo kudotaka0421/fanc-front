@@ -12,7 +12,7 @@ export const useAlertStore = defineStore("alert", {
     }),
     actions: {
         showSuccessAlert() {
-            console.log("showSuccessAlert");
+            this.showAlertError = false;
             this.showAlertSuccess = true;
 
             setTimeout(() => {
@@ -21,6 +21,7 @@ export const useAlertStore = defineStore("alert", {
         },
 
         showErrorAlert() {
+            this.showAlertSuccess = false;
             this.showAlertError = true;
         },
     },

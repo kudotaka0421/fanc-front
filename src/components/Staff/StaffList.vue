@@ -39,8 +39,14 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
-                            <tr v-for="staff in staffs" :key="staff.id">
+                        <tbody
+                            class="hover:cursor-pointer divide-y divide-gray-200"
+                        >
+                            <tr
+                                v-for="staff in staffs"
+                                :key="staff.id"
+                                @click="goToStaffDetail(staff.id)"
+                            >
                                 <td
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                                 >
@@ -68,6 +74,9 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 type Staff = {
     id: number;
@@ -83,4 +92,8 @@ type Props = {
 };
 
 const props = defineProps<Props>();
+
+const goToStaffDetail = (staffId: number) => {
+    router.push(`/staffs/${staffId}`);
+};
 </script>

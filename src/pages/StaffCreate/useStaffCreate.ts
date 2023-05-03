@@ -8,7 +8,7 @@ export function useStaffCreate() {
     const router = useRouter();
 
     const pages = [
-        { name: "スタッフ一覧", href: "staffs", current: false },
+        { name: "スタッフ一覧", href: "/staffs", current: false },
         { name: "スタッフ新規作成", href: "staffCreate", current: true },
     ];
 

@@ -1,21 +1,43 @@
 <template>
     <form>
         <div class="space-y-12">
+            <div class="h-10">
+                <div
+                    v-if="isViewMode"
+                    class="flex items-center justify-end gap-x-6"
+                >
+                    <button
+                        type="submit"
+                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        編集
+                    </button>
+                    <button
+                        type="submit"
+                        class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                    >
+                        削除
+                    </button>
+                </div>
+            </div>
+
             <div class="border-b border-gray-900/10 pb-12">
                 <div
-                    class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+                    class="mt- grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
                 >
                     <div class="sm:col-span-3">
                         <label
                             for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900"
                             >姓<span
+                                v-show="!isViewMode"
                                 class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                 >必須</span
                             ></label
                         >
                         <div class="mt-2 h-14">
                             <input
+                                v-if="!isViewMode"
                                 v-model="staff.firstName"
                                 type="text"
                                 name="first-name"
@@ -30,6 +52,12 @@
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ staff.firstName }}
+                            </div>
                             <p
                                 v-if="
                                     !isInitialForm.firstName && isEmptyFirstName
@@ -57,12 +85,14 @@
                             for="last-name"
                             class="block text-sm font-medium leading-6 text-gray-900"
                             >名<span
+                                v-show="!isViewMode"
                                 class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                 >必須</span
                             ></label
                         >
                         <div class="mt-2 h-14">
                             <input
+                                v-if="!isViewMode"
                                 v-model="staff.lastName"
                                 type="text"
                                 name="last-name"
@@ -77,6 +107,12 @@
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ staff.lastName }}
+                            </div>
                             <p
                                 v-if="
                                     !isInitialForm.lastName && isEmptyLastName
@@ -104,12 +140,14 @@
                             for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900"
                             >姓(ヨミガナ)<span
+                                v-show="!isViewMode"
                                 class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                 >必須</span
                             ></label
                         >
                         <div class="mt-2 h-20">
                             <input
+                                v-if="!isViewMode"
                                 v-model="staff.firstNameKana"
                                 type="text"
                                 name="first-name"
@@ -124,6 +162,12 @@
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ staff.firstNameKana }}
+                            </div>
                             <p
                                 v-if="
                                     !isInitialForm.firstNameKana &&
@@ -162,12 +206,14 @@
                             for="last-name"
                             class="block text-sm font-medium leading-6 text-gray-900"
                             >名(ヨミガナ)<span
+                                v-show="!isViewMode"
                                 class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                 >必須</span
                             ></label
                         >
                         <div class="mt-2 h-20">
                             <input
+                                v-if="!isViewMode"
                                 v-model="staff.lastNameKana"
                                 type="text"
                                 name="last-name"
@@ -182,6 +228,12 @@
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ staff.lastNameKana }}
+                            </div>
                             <p
                                 v-if="
                                     !isInitialForm.lastNameKana &&
@@ -220,12 +272,14 @@
                             for="email"
                             class="block text-sm font-medium leading-6 text-gray-900"
                             >メールアドレス<span
+                                v-show="!isViewMode"
                                 class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                 >必須</span
                             ></label
                         >
                         <div class="relative mt-2 h-20">
                             <input
+                                v-if="!isViewMode"
                                 v-model="staff.email"
                                 id="email"
                                 name="email"
@@ -239,6 +293,12 @@
                                         : 'ring-gray-300 focus:ring-indigo-600',
                                 ]"
                             />
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ staff.email }}
+                            </div>
                             <p
                                 v-if="!isInitialForm.email && isEmptyEmail"
                                 class="mt-2 text-sm text-red-600"
@@ -262,6 +322,7 @@
         <div class="mt-6 flex items-center justify-end gap-x-6">
             <!-- TODO editモードの場合は、ここに「編集/保存/キャンセル」ボタンを設定 -->
             <button
+                v-if="!isViewMode"
                 :disabled="hasInvalidValue"
                 type="submit"
                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -277,7 +338,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, computed, reactive } from "vue";
+import { defineProps, ref, computed, reactive, watch } from "vue";
 
 type Staff = {
     firstName: string;
@@ -287,19 +348,18 @@ type Staff = {
     email: string;
 };
 
-interface Props {
+type FormType = "create" | "edit" | "view";
+
+type Props = {
     staff: Staff;
-}
+    formType: FormType;
+};
 
 const props = defineProps<Props>();
 
-const staff = ref<Staff>({
-    firstName: props.staff.firstName,
-    lastName: props.staff.lastName,
-    firstNameKana: props.staff.firstNameKana,
-    lastNameKana: props.staff.lastNameKana,
-    email: props.staff.email,
-});
+const isViewMode = ref(props.formType === "view");
+
+const staff = ref<Staff>({ ...props.staff });
 
 const isInitialForm = reactive({
     firstName: true,
@@ -403,4 +463,12 @@ const clickCreate = (event: Event) => {
 const inputValue = (key: string) => {
     isInitialForm[key] = false;
 };
+
+watch(
+    () => props.staff,
+    (newStaff) => {
+        staff.value = { ...newStaff };
+    },
+    { deep: true }
+);
 </script>

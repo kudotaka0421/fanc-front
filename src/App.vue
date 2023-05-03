@@ -41,7 +41,7 @@ const navigation = [
     { name: "ユーザー一覧", href: "#", icon: CalendarIcon, current: false },
     {
         name: "スタッフ一覧",
-        href: "staffs",
+        href: "/staffs",
         icon: CalendarIcon,
         current: false,
     },

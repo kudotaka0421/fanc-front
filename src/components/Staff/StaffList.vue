@@ -69,18 +69,18 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 
-interface Staff {
+type Staff = {
     id: number;
     firstName: string;
     lastName: string;
     firstNameKana: string;
     lastNameKana: string;
     email: string;
-}
+};
 
-interface Props {
+type Props = {
     staffs: Staff[];
-}
+};
 
 const props = defineProps<Props>();
 </script>

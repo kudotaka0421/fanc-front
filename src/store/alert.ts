@@ -1,27 +1,35 @@
 import { defineStore } from "pinia";
 
-interface AlertState {
-    showAlertSuccess: boolean;
-    showAlertError: boolean;
-}
+const alertType = {
+    hide: 0,
+    success: 1,
+    error: 2,
+};
 
 export const useAlertStore = defineStore("alert", {
-    state: (): AlertState => ({
-        showAlertSuccess: false,
-        showAlertError: false,
-    }),
+    state: () => {
+        const alertType = {
+            hide: 0,
+            success: 1,
+            error: 2,
+        };
+
+        return {
+            showAlertType: alertType.hide,
+            alertType: alertType,
+        };
+    },
     actions: {
         showSuccessAlert() {
-            console.log("showSuccessAlert");
-            this.showAlertSuccess = true;
+            this.showAlertType = alertType.success;
 
             setTimeout(() => {
-                this.showAlertSuccess = false;
+                this.showAlertType = alertType.hide;
             }, 3000);
         },
 
         showErrorAlert() {
-            this.showAlertError = true;
+            this.showAlertType = alertType.error;
         },
     },
 });

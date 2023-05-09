@@ -9,6 +9,7 @@
                     <button
                         type="submit"
                         class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        @click.prevent="clickEdit"
                     >
                         編集
                     </button>
@@ -320,9 +321,8 @@
         </div>
 
         <div class="mt-6 flex items-center justify-end gap-x-6">
-            <!-- TODO editモードの場合は、ここに「編集/保存/キャンセル」ボタンを設定 -->
             <button
-                v-if="!isViewMode"
+                v-if="!isViewMode && !staff.id"
                 :disabled="hasInvalidValue"
                 type="submit"
                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -334,6 +334,29 @@
                 新規作成
             </button>
         </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button
+                v-if="!isViewMode && staff.id"
+                type="submit"
+                class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-gray-500"
+                @click.stop="clickCancel"
+            >
+                キャンセル
+            </button>
+            <button
+                v-if="!isViewMode && staff.id"
+                :disabled="hasInvalidValue"
+                type="submit"
+                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                :class="[
+                    hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
+                ]"
+                @click.prevent="clickUpdate"
+            >
+                更新
+            </button>
+        </div>
     </form>
 </template>
 
@@ -341,6 +364,7 @@
 import { defineProps, ref, computed, reactive, watch } from "vue";
 
 type Staff = {
+    id?: number;
     firstName: string;
     lastName: string;
     firstNameKana: string;
@@ -357,7 +381,9 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const isViewMode = ref(props.formType === "view");
+const isViewMode = computed(() => {
+    return props.formType === "view";
+});
 
 const staff = ref<Staff>({ ...props.staff });
 
@@ -454,10 +480,27 @@ const hasInvalidValue = computed(() => {
     );
 });
 
-const emits = defineEmits(["create"]);
+const emits = defineEmits(["create", "update", "change-mode"]);
 
-const clickCreate = (event: Event) => {
+const clickCreate = () => {
     emits("create", staff.value);
+};
+
+const clickEdit = () => {
+    changeMode("edit");
+};
+
+const clickCancel = () => {
+    changeMode("view");
+    staff.value = { ...props.staff };
+};
+
+const changeMode = (type: string) => {
+    emits("change-mode", type);
+};
+
+const clickUpdate = () => {
+    emits("update", staff.value);
 };
 
 const inputValue = (key: string) => {

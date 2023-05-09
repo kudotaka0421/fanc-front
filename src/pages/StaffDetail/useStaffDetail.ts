@@ -9,13 +9,24 @@ export function useStaffDetail() {
         { name: "スタッフ一覧", href: "/staffs", current: false },
         { name: "スタッフ詳細", href: "", current: true },
     ];
+    const staffId = location.pathname.split("/")[2];
 
-    const staff = ref<Staff | null>(null);
+    const staff = ref<Staff>({
+        id: 0,
+        firstName: "",
+        lastName: "",
+        firstNameKana: "",
+        lastNameKana: "",
+        email: "",
+    });
 
     const formType = ref<"view" | "edit">("view");
 
+    const changeMode = (mode: "view" | "edit") => {
+        formType.value = mode;
+    };
+
     const fetchStaff = async () => {
-        const staffId = location.pathname.split("/")[2];
         try {
             const { data } = await axios.get(
                 `http://localhost:8080/api/staff/${staffId}`
@@ -26,9 +37,23 @@ export function useStaffDetail() {
         }
     };
 
+    const updateStaff = async (params: Staff) => {
+        try {
+            await axios.put(
+                `http://localhost:8080/api/staff/${staffId}`,
+                params
+            );
+            await fetchStaff();
+            formType.value = "view";
+            alertStore.showSuccessAlert();
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
     onMounted(async () => {
         fetchStaff();
     });
 
-    return { pages, staff, formType };
+    return { pages, staff, formType, updateStaff, changeMode };
 }

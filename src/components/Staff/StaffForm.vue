@@ -16,6 +16,7 @@
                     <button
                         type="submit"
                         class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                        @click.prevent="clickDelete"
                     >
                         削除
                     </button>
@@ -480,10 +481,16 @@ const hasInvalidValue = computed(() => {
     );
 });
 
-const emits = defineEmits(["create", "update", "change-mode"]);
+const emits = defineEmits(["create", "update", "delete", "change-mode"]);
 
 const clickCreate = () => {
     emits("create", staff.value);
+};
+
+const clickDelete = () => {
+    if (window.confirm("本当に削除しますか？")) {
+        emits("delete");
+    }
 };
 
 const clickEdit = () => {

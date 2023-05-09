@@ -4,6 +4,7 @@
         :staff="staff"
         :form-type="formType"
         @changeMode="changeMode"
+        @delete="deleteStaff"
         @update="updateStaff"
     />
 </template>
@@ -14,5 +15,6 @@ import StaffForm from "../../components/Staff/StaffForm.vue";
 
 import { useStaffDetail } from "./useStaffDetail";
 
-const { pages, staff, formType, changeMode, updateStaff } = useStaffDetail();
+const { pages, staff, formType, changeMode, updateStaff, deleteStaff } =
+    useStaffDetail();
 </script>

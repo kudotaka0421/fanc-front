@@ -2,9 +2,11 @@ import axios from "axios";
 import { useAlertStore } from "../../store/alert";
 import { Staff } from "../../types/staff";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 export function useStaffDetail() {
     const alertStore = useAlertStore();
+    const router = useRouter();
     const pages = [
         { name: "スタッフ一覧", href: "/staffs", current: false },
         { name: "スタッフ詳細", href: "", current: true },
@@ -51,9 +53,20 @@ export function useStaffDetail() {
         }
     };
 
+    const deleteStaff = async () => {
+        try {
+            await axios.delete(`http://localhost:8080/api/staff/${staffId}`);
+            await fetchStaff();
+            alertStore.showSuccessAlert();
+            router.push("/staffs");
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
     onMounted(async () => {
         fetchStaff();
     });
 
-    return { pages, staff, formType, updateStaff, changeMode };
+    return { pages, staff, formType, updateStaff, changeMode, deleteStaff };
 }

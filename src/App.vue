@@ -25,7 +25,12 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 import BaseAlert from "./components/BaseAlert.vue";
 const navigation = [
-    { name: "スクールを検索する", href: "/", icon: HomeIcon, current: false },
+    {
+        name: "スクールを探す",
+        href: "/schools",
+        icon: HomeIcon,
+        current: false,
+    },
     {
         name: "カウンセリングを予約する",
         href: "#",

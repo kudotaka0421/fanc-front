@@ -30,7 +30,7 @@
                 <div class="lg:row-span-3 lg:mt-20">
                     <button
                         type="button"
-                        class="inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         <CheckCircleIcon
                             class="-ml-0.5 h-5 w-5"
@@ -206,24 +206,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
-
-type School = {
-    id: number;
-    status: number; //ステータス(enum 0:非表示, 1:表示)
-    name: string; // スクール名
-    monthlyFee: number; //月額料金
-    termNum: number; //期間値
-    termUnit: string; //期間単位(週刊/ヶ月)
-    overview: string; //概要
-    remarks?: string; //備考
-    imageLink: string[]; // 画像付きリンク
-    link: string; //リンク(ボタンやメールリンクに使用)
-    couponImage: string; //クーポン画像(S3のパス)
-    recommendations: string[]; //おすすめポイント
-    features: string[]; //特徴
-    tags: string[]; //タグ
-    // mailText: string; //メール本文
-};
+import { School } from "../../types/school";
 
 type Props = {
     school: School;

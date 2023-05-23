@@ -6,6 +6,7 @@ import StaffDetail from "../pages/StaffDetail/StaffDetail.vue";
 import StaffCreate from "../pages/StaffCreate/StaffCreate.vue";
 import SchoolDetail from "../pages/SchoolDetail/SchoolDetail.vue";
 import Schools from "../pages/Schools/Schools.vue";
+import SchoolCreate from "../pages/SchoolCreate/SchoolCreate.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -42,6 +43,11 @@ const routes: RouteRecordRaw[] = [
         path: "/schools/:schoolId",
         name: "SchoolDetail",
         component: SchoolDetail,
+    },
+    {
+        path: "/schoolCreate",
+        name: "SchoolCreate",
+        component: SchoolCreate,
     },
 ];
 

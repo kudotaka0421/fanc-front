@@ -28,8 +28,6 @@ export function useSchools() {
                     <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+609HT" alt="">`,
             ],
             link: "https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5YZ77",
-            couponImage:
-                "https://lp.prodig.jp/wp-content/uploads/2022/01/dmm-campaign_prodig.png",
             recommendations: [
                 "自分のペースでプログラミングの基礎を学びたい人",
                 "将来的なキャリアのためにスキルを身に付けたい人",
@@ -71,8 +69,6 @@ export function useSchools() {
                     <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+609HT" alt="">`,
             ],
             link: "https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5YZ77",
-            couponImage:
-                "https://lp.prodig.jp/wp-content/uploads/2022/01/dmm-campaign_prodig.png",
             recommendations: [
                 "自分のペースでプログラミングの基礎を学びたい人",
                 "将来的なキャリアのためにスキルを身に付けたい人",
@@ -114,8 +110,6 @@ export function useSchools() {
                     <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+609HT" alt="">`,
             ],
             link: "https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5YZ77",
-            couponImage:
-                "https://lp.prodig.jp/wp-content/uploads/2022/01/dmm-campaign_prodig.png",
             recommendations: [
                 "自分のペースでプログラミングの基礎を学びたい人",
                 "将来的なキャリアのためにスキルを身に付けたい人",

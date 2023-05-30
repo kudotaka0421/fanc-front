@@ -17,12 +17,12 @@
                         class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:gap-x-8 lg:px-8"
                     >
                         <div
-                            v-html="school.imageLink[0]"
+                            v-html="school.imageLinks[0]"
                             class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                         ></div>
                         <!-- スマホ表示用 -->
                         <div class="block lg:hidden">
-                            <div v-html="school.imageLink[0]"></div>
+                            <div v-html="school.imageLinks[0]"></div>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     </form>
 
                     <div
-                        v-html="school.imageLink[1]"
+                        v-html="school.imageLinks[1]"
                         class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                     ></div>
 
@@ -90,7 +90,7 @@
                         ></div>
                         <div class="block lg:hidden">
                             <div class="block lg:hidden">
-                                <div v-html="school.imageLink[1]"></div>
+                                <div v-html="school.imageLinks[1]"></div>
                             </div>
                         </div>
                         <div class="button_area">

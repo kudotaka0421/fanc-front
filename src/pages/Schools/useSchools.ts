@@ -7,7 +7,7 @@ export function useSchools() {
     const mockSchoolsData = ref<School[]>([
         {
             id: 1,
-            status: 1,
+            isShow: true,
             name: "サンプルTECHスクール",
             monthlyFee: 20000,
             termNum: 10,
@@ -18,7 +18,7 @@ export function useSchools() {
             そのため、卒業生の約8割がサンプル株式会社に就職しています。`,
             // remarks:
             //     "サンプル株式会社の社員は、全員がサンプルTECHスクールの卒業生です。",
-            imageLink: [
+            imageLinks: [
                 `<a href="https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" rel="nofollow">
                 <img border="0" width="600" height="500" alt="" src="https://www29.a8.net/svt/bgt?aid=230511271713&wid=001&eno=01&mid=s00000022194001006000&mc=1"></a>
                 <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" alt="">`,
@@ -48,7 +48,7 @@ export function useSchools() {
         },
         {
             id: 1,
-            status: 1,
+            isShow: true,
             name: "サンプルTECHスクール",
             monthlyFee: 20000,
             termNum: 10,
@@ -59,7 +59,7 @@ export function useSchools() {
             そのため、卒業生の約8割がサンプル株式会社に就職しています。`,
             // remarks:
             //     "サンプル株式会社の社員は、全員がサンプルTECHスクールの卒業生です。",
-            imageLink: [
+            imageLinks: [
                 `<a href="https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" rel="nofollow">
                 <img border="0" width="600" height="500" alt="" src="https://www29.a8.net/svt/bgt?aid=230511271713&wid=001&eno=01&mid=s00000022194001006000&mc=1"></a>
                 <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" alt="">`,
@@ -89,7 +89,7 @@ export function useSchools() {
         },
         {
             id: 1,
-            status: 1,
+            isShow: true,
             name: "サンプルTECHスクール",
             monthlyFee: 20000,
             termNum: 10,
@@ -100,7 +100,7 @@ export function useSchools() {
             そのため、卒業生の約8割がサンプル株式会社に就職しています。`,
             // remarks:
             //     "サンプル株式会社の社員は、全員がサンプルTECHスクールの卒業生です。",
-            imageLink: [
+            imageLinks: [
                 `<a href="https://px.a8.net/svt/ejp?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" rel="nofollow">
                 <img border="0" width="600" height="500" alt="" src="https://www29.a8.net/svt/bgt?aid=230511271713&wid=001&eno=01&mid=s00000022194001006000&mc=1"></a>
                 <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=3T8NMV+BSI33M+4R90+5ZMCH" alt="">`,

@@ -1,4 +1,5 @@
 import { School } from "../../types/school";
+import { ref } from "vue";
 
 export function useSchoolCreate() {
     const pages = [
@@ -6,23 +7,54 @@ export function useSchoolCreate() {
         { name: "スクール新規作成", href: "schoolCreate", current: true },
     ];
 
-    const school: School = {
+    const school = ref<School>({
         id: 0,
-        status: 0, //ステータス(enum 0:非表示, 1:表示)
-        name: "", // スクール名
-        monthlyFee: 0, //月額料金
-        termNum: 0, //期間(数値)
-        termUnit: "", //期間(単位)
-        overview: "", //概要
-        remarks: "", //備考
-        imageLink: [], // 画像付きリンク
-        link: "", //リンク(ボタンやメールリンクに使用)
-        recommendations: [], //おすすめポイント
-        features: [], //特徴
-        tags: [], //タグ
-        selectedTagIds: [], //選択されたタグのID
-        mailText: "", //メール本文
-    };
+        isShow: true,
+        name: "",
+        monthlyFee: "",
+        termNum: "",
+        termUnit: 1,
+        overview: "",
+        remarks: "",
+        imageLinks: [],
+        link: "",
+        recommendations: ["", "", ""],
+        features: [],
+        tags: [
+            { id: 1, name: "オンライン通学可能1" },
+            { id: 2, name: "就職に強い1" },
+            { id: 3, name: "働きながら学習可能1" },
+            { id: 4, name: "オンライン通学可能2" },
+            { id: 5, name: "就職に強い2" },
+            { id: 6, name: "働きながら学習可能2" },
+            { id: 7, name: "オンライン通学可能3" },
+            { id: 8, name: "就職に強い3" },
+            { id: 9, name: "働きながら学習可能3" },
+            { id: 10, name: "オンライン通学可能4" },
+            { id: 11, name: "就職に強い4" },
+            { id: 12, name: "働きながら学習可能4" },
+            { id: 13, name: "オンライン通学可能5" },
+            { id: 14, name: "就職に強い5" },
+            { id: 15, name: "働きながら学習可能5" },
+            { id: 16, name: "オンライン通学可能6" },
+            { id: 17, name: "就職に強6" },
+            { id: 18, name: "働きながら学習可能6" },
+            { id: 19, name: "オンライン通学可能7" },
+            { id: 20, name: "就職に強い7" },
+            { id: 21, name: "働きながら学習可能7" },
+            { id: 22, name: "オンライン通学可能8" },
+            { id: 23, name: "就職に強い8" },
+            { id: 24, name: "働きながら学習可能8" },
+            { id: 25, name: "オンライン通学可能9" },
+            { id: 26, name: "就職に強い9" },
+            { id: 27, name: "働きながら学習可能9" },
+            { id: 28, name: "オンライン通学可能10" },
+            { id: 29, name: "就職に強い10" },
+            { id: 30, name: "働きながら学習可能10" },
+        ],
+        selectedTagIds: [],
+        mailText: "",
+    });
 
     return { pages, school };
 }

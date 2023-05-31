@@ -51,6 +51,7 @@ const navigation = [
         current: false,
     },
     { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
+    { name: "タグ一覧", href: "/tags", icon: CalendarIcon, current: false },
 ];
 
 const userNavigation = [

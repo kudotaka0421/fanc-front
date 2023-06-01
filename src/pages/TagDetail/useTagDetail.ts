@@ -18,11 +18,6 @@ export function useTagDetail() {
         text: "",
     });
 
-    const mockTag = ref<Tag>({
-        id: 1,
-        text: "オンラインで学習できる",
-    });
-
     const formType = ref<"view" | "edit">("view");
 
     const changeMode = (mode: "view" | "edit") => {
@@ -31,12 +26,10 @@ export function useTagDetail() {
 
     const fetchTag = async () => {
         try {
-            // TODO: API繋ぎこみ時にここのコメントアウトを外す
-            // const { data } = await axios.get(
-            //     `http://localhost:8080/api/tag/${tagId}`
-            // );
-            // tag.value = data;
-            tag.value = mockTag.value;
+            const { data } = await axios.get(
+                `http://localhost:8080/api/tag/${tagId}`
+            );
+            tag.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
         }

@@ -160,7 +160,7 @@ const hasInvalidValue = computed(() => {
 const emits = defineEmits(["create", "update", "delete", "change-mode"]);
 
 const clickCreate = () => {
-    emits("create", tagVal.value.text);
+    emits("create", tagVal.value);
 };
 
 const clickDelete = () => {

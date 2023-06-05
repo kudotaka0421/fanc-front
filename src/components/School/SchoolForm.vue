@@ -246,13 +246,13 @@
                             <select
                                 id="termUnit"
                                 name="termUnit"
-                                v-model="school.termUnit"
+                                v-model="schoolVal.termUnit"
                                 class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             >
                                 <option
                                     v-for="termUnit in termUnits"
                                     :key="termUnit.id"
-                                    :value="termUnit.value"
+                                    :value="termUnit.id"
                                 >
                                     {{ termUnit.value }}
                                 </option>
@@ -267,7 +267,7 @@
                         </label>
                         <div class="grid grid-cols-4 gap-4 mt-2">
                             <div
-                                v-for="tag in school.tags"
+                                v-for="tag in schoolVal.tags"
                                 :key="tag.id"
                                 class="flex items-center"
                             >
@@ -1120,7 +1120,25 @@ const hasInvalidValue = computed(() => {
 });
 
 const clickCreate = () => {
-    emits("create", school.value);
+    const params = {
+        id: schoolVal.value.id,
+        isShow: schoolVal.value.isShow,
+        name: schoolVal.value.name,
+        monthlyFee: schoolVal.value.monthlyFee,
+        termNum: Number(schoolVal.value.termNum),
+        termUnit: Number(schoolVal.value.termUnit),
+        remarks:
+            schoolVal.value.remarks === "" ? null : schoolVal.value.remarks,
+        overview: schoolVal.value.overview,
+        imageLinks: schoolVal.value.imageLinks,
+        link: schoolVal.value.link,
+        recommendations: schoolVal.value.recommendations,
+        features: schoolVal.value.features,
+        selectedTagIds: schoolVal.value.selectedTagIds,
+        mailText: schoolVal.value.mailText,
+    };
+
+    emits("create", params);
 };
 
 const clickDelete = () => {

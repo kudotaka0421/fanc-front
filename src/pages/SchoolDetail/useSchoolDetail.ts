@@ -66,7 +66,6 @@ export function useSchoolDetail() {
     });
 
     const fetchSchool = async () => {
-        debugger;
         try {
             // ここでfetchのapiを叩く
             school.value = mockSchoolData.value;

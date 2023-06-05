@@ -18,7 +18,6 @@ export type School = {
     features: string[]; //特徴
     tags: Tag[]; //タグ
     selectedTagIds: number[]; //選択されたタグのID
-    mailText: string; //メール本文
 };
 
 export type SchoolParams = {
@@ -35,5 +34,4 @@ export type SchoolParams = {
     recommendations: string[]; //おすすめポイント
     features: string[]; //特徴
     selectedTagIds: number[]; //選択されたタグのID
-    mailText: string; //メール本文
 };

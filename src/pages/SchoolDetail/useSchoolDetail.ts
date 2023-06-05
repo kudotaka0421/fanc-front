@@ -21,7 +21,6 @@ export function useSchoolDetail() {
         features: [],
         tags: [],
         selectedTagIds: [],
-        mailText: "",
     });
 
     const mockSchoolData = ref<School>({
@@ -62,7 +61,6 @@ export function useSchoolDetail() {
             { id: 3, name: "働きながら学習可能" },
         ],
         selectedTagIds: [1, 2, 3],
-        mailText: "aaa",
     });
 
     const fetchSchool = async () => {

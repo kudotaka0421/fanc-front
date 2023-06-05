@@ -59,7 +59,6 @@ export function useSchoolCreate() {
             { id: 30, name: "働きながら学習可能10" },
         ],
         selectedTagIds: [],
-        mailText: "",
     });
 
     const createSchool = async (params: SchoolParams) => {

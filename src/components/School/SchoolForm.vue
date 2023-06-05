@@ -1135,7 +1135,6 @@ const clickCreate = () => {
         recommendations: schoolVal.value.recommendations,
         features: schoolVal.value.features,
         selectedTagIds: schoolVal.value.selectedTagIds,
-        mailText: schoolVal.value.mailText,
     };
 
     emits("create", params);

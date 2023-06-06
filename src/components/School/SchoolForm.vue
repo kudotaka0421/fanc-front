@@ -274,14 +274,14 @@
                                 <input
                                     type="checkbox"
                                     :value="tag.id"
-                                    :id="tag.name"
+                                    :id="tag.text"
                                     class="hover:cursor-pointer"
                                     v-model="schoolVal.selectedTagIds"
                                 />
                                 <label
-                                    :for="tag.name"
+                                    :for="tag.text"
                                     class="ml-2 hover:cursor-pointer"
-                                    >{{ tag.name }}</label
+                                    >{{ tag.text }}</label
                                 >
                             </div>
                         </div>
@@ -1124,7 +1124,7 @@ const clickCreate = () => {
         id: schoolVal.value.id,
         isShow: schoolVal.value.isShow,
         name: schoolVal.value.name,
-        monthlyFee: schoolVal.value.monthlyFee,
+        monthlyFee: Number(schoolVal.value.monthlyFee),
         termNum: Number(schoolVal.value.termNum),
         termUnit: Number(schoolVal.value.termUnit),
         remarks:
@@ -1134,7 +1134,8 @@ const clickCreate = () => {
         link: schoolVal.value.link,
         recommendations: schoolVal.value.recommendations,
         features: schoolVal.value.features,
-        selectedTagIds: schoolVal.value.selectedTagIds,
+        // TODO ここは後で修正
+        selectedTagIds: [1, 2, 3],
     };
 
     emits("create", params);

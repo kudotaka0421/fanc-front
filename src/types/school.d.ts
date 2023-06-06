@@ -1,6 +1,6 @@
 export type Tag = {
     id: number;
-    name: string;
+    text: string;
 };
 
 export type School = {

@@ -246,13 +246,13 @@
                             <select
                                 id="termUnit"
                                 name="termUnit"
-                                v-model="school.termUnit"
+                                v-model="schoolVal.termUnit"
                                 class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             >
                                 <option
                                     v-for="termUnit in termUnits"
                                     :key="termUnit.id"
-                                    :value="termUnit.value"
+                                    :value="termUnit.id"
                                 >
                                     {{ termUnit.value }}
                                 </option>
@@ -267,21 +267,21 @@
                         </label>
                         <div class="grid grid-cols-4 gap-4 mt-2">
                             <div
-                                v-for="tag in school.tags"
+                                v-for="tag in schoolVal.tags"
                                 :key="tag.id"
                                 class="flex items-center"
                             >
                                 <input
                                     type="checkbox"
                                     :value="tag.id"
-                                    :id="tag.name"
+                                    :id="tag.text"
                                     class="hover:cursor-pointer"
                                     v-model="schoolVal.selectedTagIds"
                                 />
                                 <label
-                                    :for="tag.name"
+                                    :for="tag.text"
                                     class="ml-2 hover:cursor-pointer"
-                                    >{{ tag.name }}</label
+                                    >{{ tag.text }}</label
                                 >
                             </div>
                         </div>
@@ -1120,7 +1120,25 @@ const hasInvalidValue = computed(() => {
 });
 
 const clickCreate = () => {
-    emits("create", school.value);
+    const params = {
+        id: schoolVal.value.id,
+        isShow: schoolVal.value.isShow,
+        name: schoolVal.value.name,
+        monthlyFee: Number(schoolVal.value.monthlyFee),
+        termNum: Number(schoolVal.value.termNum),
+        termUnit: Number(schoolVal.value.termUnit),
+        remarks:
+            schoolVal.value.remarks === "" ? null : schoolVal.value.remarks,
+        overview: schoolVal.value.overview,
+        imageLinks: schoolVal.value.imageLinks,
+        link: schoolVal.value.link,
+        recommendations: schoolVal.value.recommendations,
+        features: schoolVal.value.features,
+        // TODO ここは後で修正
+        selectedTagIds: [1, 2, 3],
+    };
+
+    emits("create", params);
 };
 
 const clickDelete = () => {

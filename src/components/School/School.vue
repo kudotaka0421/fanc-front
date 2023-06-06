@@ -43,13 +43,13 @@
                         月額料金(税込)
                     </h3>
                     <p class="text-3xl tracking-tight text-gray-900 mt-2">
-                        {{ school.monthlyFee }}円~
+                        {{ school.monthlyFee }}円 〜
                     </p>
 
                     <h2 class="sr-only">Product information</h2>
                     <h3 class="text-sm font-medium text-gray-900 mt-6">期間</h3>
                     <p class="text-3xl tracking-tight text-gray-900 mt-2">
-                        {{ school.termNum }}{{ school.termUnit }} 〜
+                        {{ termLabel }}
                     </p>
 
                     <form class="mt-10">
@@ -57,7 +57,7 @@
                             <div>
                                 <div
                                     v-for="tag in school.tags"
-                                    :key="tag"
+                                    :key="tag.id"
                                     class="mb-1.5"
                                 >
                                     <span
@@ -70,7 +70,7 @@
                                         >
                                             <circle cx="3" cy="3" r="3" />
                                         </svg>
-                                        {{ tag }}
+                                        {{ tag.text }}
                                     </span>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                 data-title="DMM WEBCAMP"
                                 data-location="案件カードボタン_1"
                                 data-param="CjwKCAjwge2iBhBBEiwAfXDBRzYIyUyG63hzYdPdfWKrZjWtq4z7mc1DbYRecCdO1nVui4apxjqABRoC4JAQAvD_BwE"
-                                >公式ページを見る</a
+                                >公式ページを見る(ここのリンク先にlinkを設定する)</a
                             >
                         </div>
 
@@ -204,7 +204,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 import { School } from "../../types/school";
 
@@ -213,6 +213,17 @@ type Props = {
 };
 
 const props = defineProps<Props>();
+
+const termLabel = computed(() => {
+    switch (props.school.termUnit) {
+        case 1:
+            return `${props.school.termNum}週間 〜 `;
+        case 2:
+            return `${props.school.termNum}ヶ月 〜 `;
+        default:
+            return "";
+    }
+});
 </script>
 
 <style scoped>

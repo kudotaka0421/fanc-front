@@ -1,14 +1,20 @@
-import { School } from "../../types/school";
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { useAlertStore } from "../../store/alert";
+import { School, SchoolParams } from "../../types/school";
 import { ref } from "vue";
 
 export function useSchoolCreate() {
+    const alertStore = useAlertStore();
+    const router = useRouter();
+
     const pages = [
         { name: "スクールを探す", href: "/schools", current: false },
         { name: "スクール新規作成", href: "schoolCreate", current: true },
     ];
 
     const school = ref<School>({
-        id: 0,
+        id: null,
         isShow: true,
         name: "",
         monthlyFee: "",
@@ -18,7 +24,7 @@ export function useSchoolCreate() {
         remarks: "",
         imageLinks: [],
         link: "",
-        recommendations: ["", "", ""],
+        recommendations: [],
         features: [],
         tags: [
             { id: 1, name: "オンライン通学可能1" },
@@ -53,8 +59,17 @@ export function useSchoolCreate() {
             { id: 30, name: "働きながら学習可能10" },
         ],
         selectedTagIds: [],
-        mailText: "",
     });
 
-    return { pages, school };
+    const createSchool = async (params: SchoolParams) => {
+        try {
+            await axios.post("http://localhost:8080/api/school", params);
+            alertStore.showSuccessAlert();
+            router.push("/schools");
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
+    return { pages, school, createSchool };
 }

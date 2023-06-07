@@ -267,7 +267,7 @@
                         </label>
                         <div class="grid grid-cols-4 gap-4 mt-2">
                             <div
-                                v-for="tag in schoolVal.tags"
+                                v-for="tag in tagOptions"
                                 :key="tag.id"
                                 class="flex items-center"
                             >
@@ -886,12 +886,14 @@
 import { Switch } from "@headlessui/vue";
 import { defineProps, ref, computed, reactive, watch } from "vue";
 import { School } from "../../types/school";
+import { Tag } from "../../types/tag";
 
 type FormType = "create" | "edit" | "view";
 
 type Props = {
     school: School;
     formType: FormType;
+    tagOptions: Tag[];
 };
 
 const emits = defineEmits(["create", "update", "delete", "change-mode"]);

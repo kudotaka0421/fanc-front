@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import { useAlertStore } from "../../store/alert";
 import { School, SchoolParams } from "../../types/school";
+import { Tag } from "../../types/tag";
 import { ref, onMounted } from "vue";
 
 export function useSchoolCreate() {
@@ -30,6 +31,8 @@ export function useSchoolCreate() {
         selectedTagIds: [],
     });
 
+    const tagOptions = ref<Tag[]>([]);
+
     const createSchool = async (params: SchoolParams) => {
         try {
             await axios.post("http://localhost:8080/api/school", params);
@@ -40,17 +43,17 @@ export function useSchoolCreate() {
         }
     };
 
-    const fetchTags = async () => {
+    const fetchTagOptions = async () => {
         try {
             const { data } = await axios.get("http://localhost:8080/api/tag");
-            school.value.tags = data;
+            tagOptions.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
         }
     };
 
     onMounted(async () => {
-        fetchTags();
+        fetchTagOptions();
     });
-    return { pages, school, createSchool };
+    return { pages, school, tagOptions, createSchool };
 }

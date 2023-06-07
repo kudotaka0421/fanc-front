@@ -29,6 +29,15 @@
 
                 <div class="lg:row-span-3 lg:mt-20">
                     <button
+                        v-if="isDetailPage"
+                        type="button"
+                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        @click="goToSchoolEdit()"
+                    >
+                        編集
+                    </button>
+                    <button
+                        v-else
                         type="button"
                         class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         @click="goToSchoolDetail()"
@@ -205,14 +214,17 @@ import { defineProps, computed } from "vue";
 import { useRouter } from "vue-router";
 
 import { School } from "../../types/school";
-import SchoolCreate from "../../pages/SchoolCreate/SchoolCreate.vue";
+// import SchoolCreate from "../../pages/SchoolCreate/SchoolCreate.vue";
 
 const router = useRouter();
 type Props = {
     school: School;
+    isDetailPage?: boolean;
 };
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    isDetailPage: false,
+});
 
 const termLabel = computed(() => {
     switch (props.school.termUnit) {
@@ -227,6 +239,12 @@ const termLabel = computed(() => {
 
 const goToSchoolDetail = () => {
     if (props.school.id) router.push(`/schools/${props.school.id}`);
+};
+
+const goToSchoolEdit = () => {
+    // [TODO] スクール編集ページへの遷移処理を実装する
+    // if (props.school.id) router.push(`/schools/${props.school.id}`);
+    console.log("edit");
 };
 </script>
 

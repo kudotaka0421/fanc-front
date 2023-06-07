@@ -16,10 +16,11 @@ export type School = {
     link: string; //リンク(ボタンやメールリンクに使用)
     recommendations: string[]; //おすすめポイント
     features: string[]; //特徴
-    tags: Tag[]; //タグ
+    tags: Tag[]; //選択されたタグ一覧
     selectedTagIds: number[]; //選択されたタグのID
 };
 
+// ↑から「tags: Tag[]; //タグ」を削除した内容
 export type SchoolParams = {
     id: number | null;
     isShow: boolean; // 画面表示

@@ -31,12 +31,9 @@
                     <button
                         type="button"
                         class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        @click="goToSchoolDetail()"
                     >
-                        <CheckCircleIcon
-                            class="-ml-0.5 h-5 w-5"
-                            aria-hidden="true"
-                        />
-                        編集
+                        詳細
                     </button>
 
                     <h3 class="mt-5 text-sm font-medium text-gray-900">
@@ -205,9 +202,12 @@
 
 <script setup lang="ts">
 import { defineProps, computed } from "vue";
-import { CheckCircleIcon } from "@heroicons/vue/20/solid";
-import { School } from "../../types/school";
+import { useRouter } from "vue-router";
 
+import { School } from "../../types/school";
+import SchoolCreate from "../../pages/SchoolCreate/SchoolCreate.vue";
+
+const router = useRouter();
 type Props = {
     school: School;
 };
@@ -224,6 +224,10 @@ const termLabel = computed(() => {
             return "";
     }
 });
+
+const goToSchoolDetail = () => {
+    if (props.school.id) router.push(`/schools/${props.school.id}`);
+};
 </script>
 
 <style scoped>

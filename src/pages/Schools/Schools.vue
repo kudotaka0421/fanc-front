@@ -15,7 +15,7 @@
         ここに検索フォームを置くここに検索フォームを置くここに検索フォームを置くここに検索フォームを置く
         ここに検索フォームを置くここに検索フォームを置く
     </div>
-    <School v-for="school in schools" :school="school" :key="school.id" />
+    <School v-for="school in schools" :school="school" :key="school.name" />
 </template>
 
 <script setup lang="ts">

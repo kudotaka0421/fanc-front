@@ -1134,8 +1134,7 @@ const clickCreate = () => {
         link: schoolVal.value.link,
         recommendations: schoolVal.value.recommendations,
         features: schoolVal.value.features,
-        // TODO ここは後で修正
-        selectedTagIds: [1, 2, 3],
+        selectedTagIds: schoolVal.value.selectedTagIds,
     };
 
     emits("create", params);

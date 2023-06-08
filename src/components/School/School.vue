@@ -28,23 +28,31 @@
                 </div>
 
                 <div class="lg:row-span-3 lg:mt-20">
-                    <button
-                        v-if="isDetailPage"
-                        type="button"
-                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        @click="goToSchoolEdit()"
-                    >
-                        編集
-                    </button>
-                    <button
-                        v-else
-                        type="button"
-                        class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        @click="goToSchoolDetail()"
-                    >
-                        詳細
-                    </button>
-
+                    <span v-if="isDetailPage">
+                        <button
+                            type="button"
+                            class="hover:bg-indigo-500 rounded-md bg-indigo-600 mr-3 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            @click="goToSchoolEdit()"
+                        >
+                            編集
+                        </button>
+                        <button
+                            type="submit"
+                            class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                            @click.prevent="clickDelete"
+                        >
+                            削除
+                        </button>
+                    </span>
+                    <span v-else>
+                        <button
+                            type="button"
+                            class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            @click="goToSchoolDetail()"
+                        >
+                            詳細
+                        </button>
+                    </span>
                     <h3 class="mt-5 text-sm font-medium text-gray-900">
                         月額料金(税込)
                     </h3>
@@ -212,9 +220,9 @@
 <script setup lang="ts">
 import { defineProps, computed } from "vue";
 import { useRouter } from "vue-router";
-
 import { School } from "../../types/school";
-// import SchoolCreate from "../../pages/SchoolCreate/SchoolCreate.vue";
+
+const emits = defineEmits(["delete"]);
 
 const router = useRouter();
 type Props = {
@@ -242,9 +250,13 @@ const goToSchoolDetail = () => {
 };
 
 const goToSchoolEdit = () => {
-    // [TODO] スクール編集ページへの遷移処理を実装する
-    // if (props.school.id) router.push(`/schools/${props.school.id}`);
     if (props.school.id) router.push(`/schools/${props.school.id}/edit`);
+};
+
+const clickDelete = () => {
+    if (window.confirm("本当に削除しますか？")) {
+        emits("delete");
+    }
 };
 </script>
 

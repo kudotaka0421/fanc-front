@@ -244,7 +244,7 @@ const goToSchoolDetail = () => {
 const goToSchoolEdit = () => {
     // [TODO] スクール編集ページへの遷移処理を実装する
     // if (props.school.id) router.push(`/schools/${props.school.id}`);
-    console.log("edit");
+    if (props.school.id) router.push(`/schools/${props.school.id}/edit`);
 };
 </script>
 

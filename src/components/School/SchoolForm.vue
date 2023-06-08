@@ -1,27 +1,6 @@
 <template>
     <form>
         <div class="space-y-12">
-            <div class="h-10">
-                <div
-                    v-if="isViewMode"
-                    class="flex items-center justify-end gap-x-6"
-                >
-                    <button
-                        type="submit"
-                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        @click.prevent="clickEdit"
-                    >
-                        編集
-                    </button>
-                    <button
-                        type="submit"
-                        class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
-                        @click.prevent="clickDelete"
-                    >
-                        削除
-                    </button>
-                </div>
-            </div>
             <div class="border-b border-gray-900/10 pb-12">
                 <div
                     class="mt- grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
@@ -262,7 +241,7 @@
                     <div class="col-span-full">
                         <label
                             for="first-name"
-                            class="block text-sm font-medium leading-6 text-gray-900"
+                            class="block text-sm font-medium leading-6 text-gray4-900"
                             >タグ
                         </label>
                         <div class="grid grid-cols-4 gap-4 mt-2">
@@ -896,7 +875,7 @@ type Props = {
     tagOptions: Tag[];
 };
 
-const emits = defineEmits(["create", "update", "delete", "change-mode"]);
+const emits = defineEmits(["create", "update", "cancel", "delete"]);
 
 const props = defineProps<Props>();
 
@@ -1153,8 +1132,7 @@ const clickEdit = () => {
 };
 
 const clickCancel = () => {
-    changeMode("view");
-    schoolVal.value = { ...props.school };
+    emits("cancel");
 };
 
 const changeMode = (type: string) => {

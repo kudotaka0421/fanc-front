@@ -7,6 +7,7 @@ import StaffCreate from "../pages/StaffCreate/StaffCreate.vue";
 import SchoolDetail from "../pages/SchoolDetail/SchoolDetail.vue";
 import Schools from "../pages/Schools/Schools.vue";
 import SchoolCreate from "../pages/SchoolCreate/SchoolCreate.vue";
+import SchoolEdit from "../pages/SchoolEdit/SchoolEdit.vue";
 import Tags from "../pages/Tags/Tags.vue";
 import TagCreate from "../pages/TagCreate/TagCreate.vue";
 import TagDetail from "../pages/TagDetail/TagDetail.vue";
@@ -51,6 +52,11 @@ const routes: RouteRecordRaw[] = [
         path: "/schoolCreate",
         name: "SchoolCreate",
         component: SchoolCreate,
+    },
+    {
+        path: "/schools/:schoolId/edit",
+        name: "SchoolEdit",
+        component: SchoolEdit,
     },
     {
         path: "/tags",

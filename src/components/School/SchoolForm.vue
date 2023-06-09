@@ -835,7 +835,7 @@
                     ]"
                     @click.prevent="clickCreate"
                 >
-                    新規作成
+                    作成する
                 </button>
             </div>
 

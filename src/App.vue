@@ -43,7 +43,12 @@ const navigation = [
         icon: FolderIcon,
         current: false,
     },
-    { name: "ユーザー一覧", href: "#", icon: CalendarIcon, current: false },
+    {
+        name: "ユーザー一覧",
+        href: "/users",
+        icon: CalendarIcon,
+        current: false,
+    },
     {
         name: "スタッフ一覧",
         href: "/staffs",

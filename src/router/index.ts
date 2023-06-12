@@ -4,6 +4,7 @@ import Counseling from "../pages/Counseling.vue";
 import Staffs from "../pages/Staffs/Staffs.vue";
 import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
+import UserDetail from "../pages/UserDetail/UserDetail.vue";
 import StaffDetail from "../pages/StaffDetail/StaffDetail.vue";
 import StaffCreate from "../pages/StaffCreate/StaffCreate.vue";
 import SchoolDetail from "../pages/SchoolDetail/SchoolDetail.vue";
@@ -49,6 +50,11 @@ const routes: RouteRecordRaw[] = [
         path: "/users",
         name: "Users",
         component: Users,
+    },
+    {
+        path: "/users/:userId",
+        name: "UserDetail",
+        component: UserDetail,
     },
     {
         path: "/schools",

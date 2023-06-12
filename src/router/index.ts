@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import School from "../pages/School.vue";
 import Counseling from "../pages/Counseling.vue";
 import Staffs from "../pages/Staffs/Staffs.vue";
+import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
 import StaffDetail from "../pages/StaffDetail/StaffDetail.vue";
 import StaffCreate from "../pages/StaffCreate/StaffCreate.vue";
@@ -43,6 +44,11 @@ const routes: RouteRecordRaw[] = [
         path: "/userCreate",
         name: "UserCreate",
         component: UserCreate,
+    },
+    {
+        path: "/users",
+        name: "Users",
+        component: Users,
     },
     {
         path: "/schools",

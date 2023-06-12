@@ -86,6 +86,7 @@
                         >
                         <div class="mt-2 h-20">
                             <select
+                                v-if="!isViewMode"
                                 id="role"
                                 name="termUnit"
                                 v-model="user.role"
@@ -99,6 +100,12 @@
                                     {{ role.value }}
                                 </option>
                             </select>
+                            <div
+                                v-else
+                                class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                {{ userRoleLabel }}
+                            </div>
                         </div>
                     </div>
 
@@ -151,7 +158,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:col-span-4">
+                    <div v-if="!user.id" class="sm:col-span-4">
                         <label
                             for="email"
                             class="block text-sm font-medium leading-6 text-gray-900"
@@ -262,14 +269,7 @@
 
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive, watch } from "vue";
-
-type User = {
-    id?: number;
-    name: string;
-    email: string;
-    role: number;
-    password: string;
-};
+import { User, userRole } from "../../types/user";
 
 type FormType = "create" | "edit" | "view";
 
@@ -285,6 +285,19 @@ const isViewMode = computed(() => {
 });
 
 const user = ref<User>({ ...props.user });
+
+const userRoleLabel = computed(() => {
+    switch (user.value.role) {
+        case userRole.Normal:
+            return "ユーザー";
+        case userRole.Staff:
+            return "スタッフ";
+        case userRole.Admin:
+            return "管理者";
+        default:
+            return "";
+    }
+});
 
 const isInitialForm = reactive({
     name: true,
@@ -317,6 +330,9 @@ const isLengthOverPassword = computed(() => {
     return !isEmptyPassword.value && user.value.password.length > 225;
 });
 const isInvalidPassword = computed(() => {
+    if (!user.value.password) {
+        return false;
+    }
     return (
         !isEmptyPassword.value &&
         (!/(?=.*[0-9])(?=.*[a-zA-Z])/.test(user.value.password) ||

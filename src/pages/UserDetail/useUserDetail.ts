@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useAlertStore } from "../../store/alert";
 import { ref, onMounted } from "vue";
-import { userRole, UserRole, User } from "../../types/user";
+import { userRole, User } from "../../types/user";
+import { useRouter } from "vue-router";
 
 export function useUserDetail() {
     const alertStore = useAlertStore();
+    const router = useRouter();
     const pages = [
         { name: "ユーザ一覧", href: "/users", current: false },
         { name: "ユーザー詳細", href: "", current: true },
@@ -46,9 +48,20 @@ export function useUserDetail() {
         }
     };
 
+    const deleteUser = async () => {
+        try {
+            await axios.delete(`http://localhost:8080/api/user/${userId}`);
+            await fetchUser();
+            alertStore.showSuccessAlert();
+            router.push("/users");
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
     onMounted(async () => {
         fetchUser();
     });
 
-    return { pages, user, formType, changeMode, updateUser };
+    return { pages, user, formType, changeMode, updateUser, deleteUser };
 }

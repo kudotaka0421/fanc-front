@@ -5,6 +5,7 @@
         :form-type="formType"
         @changeMode="changeMode"
         @update="updateUser"
+        @delete="deleteUser"
     />/>
 </template>
 
@@ -14,5 +15,6 @@ import UserForm from "../../components/User/UserForm.vue";
 
 import { useUserDetail } from "./useUserDetail";
 
-const { pages, user, formType, changeMode, updateUser } = useUserDetail();
+const { pages, user, formType, changeMode, updateUser, deleteUser } =
+    useUserDetail();
 </script>

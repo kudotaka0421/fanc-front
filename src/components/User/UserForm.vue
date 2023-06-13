@@ -158,7 +158,7 @@
                         </div>
                     </div>
 
-                    <div v-if="!user.id" class="sm:col-span-4">
+                    <div v-if="isCreateMode" class="sm:col-span-4">
                         <label
                             for="email"
                             class="block text-sm font-medium leading-6 text-gray-900"
@@ -284,6 +284,10 @@ const isViewMode = computed(() => {
     return props.formType === "view";
 });
 
+const isCreateMode = computed(() => {
+    return props.formType === "create";
+});
+
 const user = ref<User>({ ...props.user });
 
 const userRoleLabel = computed(() => {
@@ -324,13 +328,20 @@ const hasInvalidName = computed(() => {
 
 // password バリデーション
 const isEmptyPassword = computed(() => {
+    if (!isCreateMode) {
+        return false;
+    }
     return user.value.password === "";
 });
 const isLengthOverPassword = computed(() => {
+    if (!isCreateMode || !user.value.password) {
+        return false;
+    }
+
     return !isEmptyPassword.value && user.value.password.length > 225;
 });
 const isInvalidPassword = computed(() => {
-    if (!user.value.password) {
+    if (!isCreateMode || !user.value.password) {
         return false;
     }
     return (
@@ -340,6 +351,9 @@ const isInvalidPassword = computed(() => {
     );
 });
 const hasInvalidPassword = computed(() => {
+    if (!isCreateMode) {
+        return false;
+    }
     return (
         isEmptyPassword.value ||
         isInvalidPassword.value ||

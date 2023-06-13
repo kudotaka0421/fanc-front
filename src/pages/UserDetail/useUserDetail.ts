@@ -36,7 +36,6 @@ export function useUserDetail() {
     };
 
     const updateUser = async (params: User) => {
-        debugger
         try {
             await axios.put(`http://localhost:8080/api/user/${userId}`, params);
             await fetchUser();
@@ -51,5 +50,5 @@ export function useUserDetail() {
         fetchUser();
     });
 
-    return { pages, user, formType, changeMode ,updateUser};
+    return { pages, user, formType, changeMode, updateUser };
 }

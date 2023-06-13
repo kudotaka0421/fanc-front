@@ -20,7 +20,6 @@ export function useUserCreate() {
     };
 
     const createUser = async (params: User) => {
-        debugger;
         try {
             await axios.post("http://localhost:8080/api/user", params);
             alertStore.showSuccessAlert();

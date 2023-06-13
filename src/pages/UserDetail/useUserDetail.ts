@@ -35,9 +35,20 @@ export function useUserDetail() {
         }
     };
 
+    const updateUser = async (params: User) => {
+        try {
+            await axios.put(`http://localhost:8080/api/user/${userId}`, params);
+            await fetchUser();
+            formType.value = "view";
+            alertStore.showSuccessAlert();
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
     onMounted(async () => {
         fetchUser();
     });
 
-    return { pages, user, formType, changeMode };
+    return { pages, user, formType, changeMode, updateUser };
 }

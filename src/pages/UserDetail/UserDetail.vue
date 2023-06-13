@@ -1,6 +1,11 @@
 <template>
     <Breadcrumbs :pages="pages" />
-    <UserForm :user="user" :form-type="formType" @changeMode="changeMode" />
+    <UserForm
+        :user="user"
+        :form-type="formType"
+        @changeMode="changeMode"
+        @update="updateUser"
+    />/>
 </template>
 
 <script setup lang="ts">
@@ -9,5 +14,5 @@ import UserForm from "../../components/User/UserForm.vue";
 
 import { useUserDetail } from "./useUserDetail";
 
-const { pages, user, formType, changeMode } = useUserDetail();
+const { pages, user, formType, changeMode, updateUser } = useUserDetail();
 </script>

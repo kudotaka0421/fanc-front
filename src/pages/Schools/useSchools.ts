@@ -6,7 +6,7 @@ import { useAlertStore } from "../../store/alert";
 
 export function useSchools() {
     const alertStore = useAlertStore();
-    const pages = [{ name: "スクールを探す", href: "/staffs", current: true }];
+    const pages = [{ name: "スクールを探す", href: "/schools", current: true }];
 
     const schools = ref<School[]>([]);
 

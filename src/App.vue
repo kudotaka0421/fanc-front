@@ -49,12 +49,6 @@ const navigation = [
         icon: CalendarIcon,
         current: false,
     },
-    {
-        name: "スタッフ一覧",
-        href: "/staffs",
-        icon: CalendarIcon,
-        current: false,
-    },
     { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
     { name: "タグ一覧", href: "/tags", icon: CalendarIcon, current: false },
 ];

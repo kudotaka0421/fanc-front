@@ -208,10 +208,10 @@
                                 class="mt-2 text-sm text-red-600"
                                 id="email-error"
                             >
-                                パスワードは英数字両方を含む8文字以上で入力してください
+                                パスワードは英数字両方を含む8文字以上32文字以下で入力してください
                             </p>
 
-                            <p
+                            <!-- <p
                                 v-if="
                                     !isInitialForm.password &&
                                     isLengthOverPassword
@@ -220,7 +220,7 @@
                                 id="email-error"
                             >
                                 メールアドレスは225文字以内で入力してください
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -333,32 +333,31 @@ const isEmptyPassword = computed(() => {
     }
     return user.value.password === "";
 });
-const isLengthOverPassword = computed(() => {
-    if (!isCreateMode || !user.value.password) {
-        return false;
-    }
+// const isLengthOverPassword = computed(() => {
+//     if (!isCreateMode || !user.value.password) {
+//         return false;
+//     }
 
-    return !isEmptyPassword.value && user.value.password.length > 225;
-});
+//     return !isEmptyPassword.value && user.value.password.length > 225;
+// });
 const isInvalidPassword = computed(() => {
     if (!isCreateMode || !user.value.password) {
         return false;
     }
-    return (
-        !isEmptyPassword.value &&
-        (!/(?=.*[0-9])(?=.*[a-zA-Z])/.test(user.value.password) ||
-            user.value.password.length < 8)
-    );
+
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,32}$/;
+
+    // const isInvalidPassword = computed(() => {
+    //    return passwordPattern.test(password.value))
+
+    // }
+    return !isEmptyPassword.value && !passwordPattern.test(user.value.password);
 });
 const hasInvalidPassword = computed(() => {
     if (!isCreateMode) {
         return false;
     }
-    return (
-        isEmptyPassword.value ||
-        isInvalidPassword.value ||
-        isLengthOverPassword.value
-    );
+    return isEmptyPassword.value || isInvalidPassword.value;
 });
 
 // email バリデーション

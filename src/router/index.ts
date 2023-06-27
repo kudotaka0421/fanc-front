@@ -12,11 +12,18 @@ import Tags from "../pages/Tags/Tags.vue";
 import TagCreate from "../pages/TagCreate/TagCreate.vue";
 import TagDetail from "../pages/TagDetail/TagDetail.vue";
 
+import Signup from "../pages/Signup/Signup.vue";
+
 const routes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "School",
         component: School,
+    },
+    {
+        path: "/signup",
+        name: "Signup",
+        component: Signup,
     },
     {
         path: "/counseling",

@@ -26,21 +26,28 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 import BaseAlert from "./components/BaseAlert.vue";
 const navigation = [
     {
-        name: "スクールを探す",
-        href: "/schools",
-        icon: HomeIcon,
-        current: false,
-    },
-    {
         name: "カウンセリングを予約する",
         href: "#",
         icon: UsersIcon,
         current: false,
     },
     {
+        name: "マイページ",
+        href: "#",
+        icon: UsersIcon,
+        current: false,
+    },
+    // ここから下はstaffかadminのみ表示させる
+    {
+        name: "スクールを探す",
+        href: "/schools",
+        icon: CalendarIcon,
+        current: false,
+    },
+    {
         name: "カウンセリング一覧",
         href: "counseling",
-        icon: FolderIcon,
+        icon: CalendarIcon,
         current: false,
     },
     {
@@ -62,6 +69,7 @@ const sidebarOpen = ref(false);
 </script>
 
 <template>
+    <!-- // [TODO]ログインしてたらサイドバー表示、してなかったらサイドバー非表示のサインアップ画面を表示 -->
     <div>
         <TransitionRoot as="template" :show="sidebarOpen">
             <Dialog
@@ -253,7 +261,8 @@ const sidebarOpen = ref(false);
                 </nav>
             </div>
         </div>
-
+    </div>
+    <div>
         <div class="lg:pl-72">
             <div
                 class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"

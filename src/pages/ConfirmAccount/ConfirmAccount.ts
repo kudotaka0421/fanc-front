@@ -9,16 +9,15 @@ export default {
         const route = useRoute();
 
         onMounted(async () => {
-            const token = route.params.token;
+            const tokenParams = route.params.token;
             try {
-                console.log("ConfirmAccount", token);
                 const response = await axios.post(
-                    `http://localhost:8080/api/confirm-account/${token}`
+                    `http://localhost:8080/api/confirm-account/${tokenParams}`
                 );
 
-                const jwtToken = response.data.token;
+                const token = response.data.token;
                 // Save JWT to local storage
-                window.localStorage.setItem("jwtToken", jwtToken);
+                window.localStorage.setItem("token", token);
 
                 router.push("/counseling");
             } catch (error) {

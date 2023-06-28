@@ -66,6 +66,19 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
+
+const handleClick = (itemName) => {
+    if (itemName === "Sign out") {
+        logout();
+    }
+};
+
+const logout = () => {
+    [TODO];
+    // ・TOPページに遷移させる
+    // ・「ログアウトしました」の文言をアラートで表示させる
+    window.localStorage.removeItem("token");
+};
 </script>
 
 <template>
@@ -329,6 +342,7 @@ const sidebarOpen = ref(false);
                                                 active ? 'bg-gray-50' : '',
                                                 'block px-3 py-1 text-sm leading-6 text-gray-900',
                                             ]"
+                                            @click="handleClick(item.name)"
                                             >{{ item.name }}</a
                                         >
                                     </MenuItem>

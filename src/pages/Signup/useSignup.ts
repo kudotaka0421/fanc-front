@@ -10,7 +10,6 @@ export function useSignup() {
     const signup = async (params: User) => {
         try {
             await axios.post("http://localhost:8080/api/user", params);
-            alertStore.showSuccessAlert();
             isAuthenticationMailSent.value = true;
         } catch (err) {
             alertStore.showErrorAlert();

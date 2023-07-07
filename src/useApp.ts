@@ -4,18 +4,6 @@ import { createAxiosInstance } from "./utils/axiosinstance";
 import { CalendarIcon, UsersIcon } from "@heroicons/vue/24/outline";
 
 export function useApp() {
-    const isRequireAuthenticationPage = computed(() => {
-        // 閲覧にログインが必要なページの場合はtrueを返す
-        // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
-        const path = window.location.pathname;
-
-        // console.log("aa".path)
-        if (path === "/login" || path === "/signup" || path === "/lp") {
-            return false;
-        }
-        return true;
-    });
-
     const axiosInstance = createAxiosInstance();
 
     const navigation = [
@@ -91,6 +79,18 @@ export function useApp() {
         // ・「ログアウトしました」の文言をアラートで表示させる
         window.localStorage.removeItem("token");
     };
+
+    const isSignUpOrLoginPage = computed(() => {
+        // 閲覧にログインが必要なページの場合はtrueを返す
+        // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
+        const path = window.location.pathname;
+
+        if (path === "/login" || path === "/signup") {
+            return false;
+        }
+        return true;
+    });
+
     return {
         navigation,
         userNavigation,
@@ -98,5 +98,6 @@ export function useApp() {
         fetchMe,
         logout,
         sidebarOpen,
+        isSignUpOrLoginPage,
     };
 }

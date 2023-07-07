@@ -17,6 +17,8 @@ import TagDetail from "../pages/TagDetail/TagDetail.vue";
 
 import Signup from "../pages/Signup/Signup.vue";
 
+import Error from "../pages/Error/Error.vue";
+
 const routes: RouteRecordRaw[] = [
     {
         path: "/signup",
@@ -92,6 +94,16 @@ const routes: RouteRecordRaw[] = [
         path: "/tags/:tagId",
         name: "TagDetail",
         component: TagDetail,
+    },
+    {
+        path: "/error",
+        name: "Error",
+        component: Error,
+    },
+    {
+        path: "/:catchAll(.*)",
+        name: "NotFound",
+        component: Error,
     },
 ];
 

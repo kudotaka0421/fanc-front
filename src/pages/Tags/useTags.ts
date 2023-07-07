@@ -2,11 +2,13 @@ import axios from "axios";
 import { useAlertStore } from "../../store/alert";
 
 import { Tag } from "../../types/tag";
-
+import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { createAxiosInstance } from "../../utils/axiosinstance";
+import router from "../../router";
 export function useTags() {
     const pages = [{ name: "タグ一覧", href: "/tags", current: true }];
+    const router = useRouter();
 
     const axiosInstance = createAxiosInstance();
 
@@ -22,7 +24,8 @@ export function useTags() {
             // tags.value = data;
             console.log("data", data);
         } catch (err) {
-            console.log("err", err);
+            alertStore.showErrorAlert();
+            router.push("/error");
         }
     };
 
@@ -32,6 +35,7 @@ export function useTags() {
             tags.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
+            router.push("/lp");
         }
     };
 

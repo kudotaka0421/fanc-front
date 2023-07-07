@@ -39,11 +39,6 @@ const routes: RouteRecordRaw[] = [
         component: Lp,
     },
     {
-        path: "/",
-        name: "Lp",
-        component: Lp,
-    },
-    {
         path: "/counseling",
         name: "Counseling",
         component: Counseling,

@@ -1,5 +1,4 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import {
     Dialog,
     DialogPanel,
@@ -10,75 +9,13 @@ import {
     TransitionChild,
     TransitionRoot,
 } from "@headlessui/vue";
-import {
-    Bars3Icon,
-    BellIcon,
-    CalendarIcon,
-    ChartPieIcon,
-    Cog6ToothIcon,
-    DocumentDuplicateIcon,
-    FolderIcon,
-    HomeIcon,
-    UsersIcon,
-    XMarkIcon,
-} from "@heroicons/vue/24/outline";
-import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+import { Bars3Icon, Cog6ToothIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 import BaseAlert from "./components/BaseAlert.vue";
-const navigation = [
-    {
-        name: "カウンセリングを予約する",
-        href: "#",
-        icon: UsersIcon,
-        current: false,
-    },
-    {
-        name: "マイページ",
-        href: "#",
-        icon: UsersIcon,
-        current: false,
-    },
-    // ここから下はstaffかadminのみ表示させる
-    {
-        name: "スクールを探す",
-        href: "/schools",
-        icon: CalendarIcon,
-        current: false,
-    },
-    {
-        name: "カウンセリング一覧",
-        href: "counseling",
-        icon: CalendarIcon,
-        current: false,
-    },
-    {
-        name: "ユーザー一覧",
-        href: "/users",
-        icon: CalendarIcon,
-        current: false,
-    },
-    { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
-    { name: "タグ一覧", href: "/tags", icon: CalendarIcon, current: false },
-];
 
-const userNavigation = [
-    { name: "Your profile", href: "#" },
-    { name: "Sign out", href: "#" },
-];
+import { useApp } from "./useApp";
 
-const sidebarOpen = ref(false);
-
-const handleClick = (itemName) => {
-    if (itemName === "Sign out") {
-        logout();
-    }
-};
-
-const logout = () => {
-    [TODO];
-    // ・TOPページに遷移させる
-    // ・「ログアウトしました」の文言をアラートで表示させる
-    window.localStorage.removeItem("token");
-};
+const { navigation, userNavigation, handleClick, sidebarOpen } = useApp();
 </script>
 
 <template>

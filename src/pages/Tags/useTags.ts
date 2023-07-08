@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useAlertStore } from "../../store/alert";
-
+import { useMeStore } from "../../store/me";
 import { Tag } from "../../types/tag";
 import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { createAxiosInstance } from "../../utils/axiosinstance";
-import router from "../../router";
 export function useTags() {
     const pages = [{ name: "タグ一覧", href: "/tags", current: true }];
     const router = useRouter();
@@ -13,16 +12,13 @@ export function useTags() {
     const axiosInstance = createAxiosInstance();
 
     const alertStore = useAlertStore();
+    const meStore = useMeStore();
     const tags = ref<Tag[]>([]);
 
     const fetchMe = async () => {
-        // [TODO] ここの中身ちゃんと実装する
         try {
             const { data } = await axiosInstance.get("/me");
-            // [todo]
-            // 成功したらユーザ情報のセットと、ログインフラグのtrueをpiniaでする
-            // tags.value = data;
-            console.log("data", data);
+            meStore.setMe(data);
         } catch (err) {
             alertStore.showErrorAlert();
             router.push("/error");

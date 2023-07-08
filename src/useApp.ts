@@ -1,10 +1,11 @@
 import { ref, computed } from "vue";
-import { createAxiosInstance } from "./utils/axiosinstance";
-
+import { useAlertStore } from "./store/alert";
 import { CalendarIcon, UsersIcon } from "@heroicons/vue/24/outline";
+import { useMeStore } from "./store/me";
 
 export function useApp() {
-    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
+    const alertStore = useAlertStore();
 
     const navigation = [
         {
@@ -55,29 +56,13 @@ export function useApp() {
         }
     };
 
-    const fetchMe = async () => {
-        console.log("fetchMe");
-        try {
-            const { data } = await axiosInstance.get("/me");
-            // [todo]
-            // 成功したらユーザ情報のセットと、ログインフラグのtrueをpiniaでする
-            // tags.value = data;
-            console.log("data", data);
-        } catch (err) {
-            console.log("@@@", err);
-            // debugger
-            // [todo]
-            // 失敗したらログインフラグのfalseをpiniaでする
-            // alertStore.showErrorAlert();
-        }
-    };
 
     const logout = () => {
-        // [TODO];
-        // そもそもここで実装場所ここで良いのか？ piniaで実装する？
-        // ・TOPページに遷移させる
-        // ・「ログアウトしました」の文言をアラートで表示させる
         window.localStorage.removeItem("token");
+        meStore.resetMe();
+        // [TODO] 成功メッセージは「ログアウトしました」にする
+        alertStore.showSuccessAlert();
+        window.location.href = "/lp";
     };
 
     const isSignUpOrLoginPage = computed(() => {
@@ -85,19 +70,32 @@ export function useApp() {
         // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
         const path = window.location.pathname;
 
-        if (path === "/login" || path === "/signup") {
-            return false;
-        }
-        return true;
+        return (path === "/login" || path === "/signup")
+
+    });
+
+    const isSignUpOrLoginOrLpPage = computed(() => {
+        // 閲覧にログインが必要なページの場合はtrueを返す
+        // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
+        const path = window.location.pathname;
+
+        return (path === "/login" || path === "/signup" || path === "/lp")
+    });
+
+    const isAuthenticated = computed(() => {
+        const token = window.localStorage.getItem("token");
+        return token ? true : false;
     });
 
     return {
         navigation,
         userNavigation,
         handleClick,
-        fetchMe,
         logout,
         sidebarOpen,
         isSignUpOrLoginPage,
+        isSignUpOrLoginOrLpPage,
+        meStore,
+        isAuthenticated,
     };
 }

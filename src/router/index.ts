@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmAccountコンポーネントのパスに応じて変更してください
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
-import School from "../pages/School.vue";
 import Counseling from "../pages/Counseling.vue";
 import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
@@ -20,21 +19,25 @@ import Signup from "../pages/Signup/Signup.vue";
 import Error from "../pages/Error/Error.vue";
 
 const routes: RouteRecordRaw[] = [
+     // [不要]
     {
         path: "/signup",
         name: "Signup",
         component: Signup,
     },
+     // [不要]
     {
         path: "/confirm-account/:token",
         name: "ConfirmAccount",
         component: ConfirmAccount,
     },
+     // [不要]
     {
         path: "/login",
         name: "Login",
         component: Login,
     },
+     // [不要]
     {
         path: "/lp",
         name: "Lp",
@@ -60,21 +63,25 @@ const routes: RouteRecordRaw[] = [
         name: "UserDetail",
         component: UserDetail,
     },
+    // [done]
     {
         path: "/schools",
         name: "Schools",
         component: Schools,
     },
+    // [done]
     {
         path: "/schools/:schoolId",
         name: "SchoolDetail",
         component: SchoolDetail,
     },
+    // [done]
     {
         path: "/schoolCreate",
         name: "SchoolCreate",
         component: SchoolCreate,
     },
+    // [done]
     {
         path: "/schools/:schoolId/edit",
         name: "SchoolEdit",
@@ -98,11 +105,13 @@ const routes: RouteRecordRaw[] = [
         name: "TagDetail",
         component: TagDetail,
     },
+    // [不要]
     {
         path: "/error",
         name: "Error",
         component: Error,
     },
+    // [不要]
     {
         path: "/:catchAll(.*)",
         name: "NotFound",

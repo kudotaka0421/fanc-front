@@ -1,13 +1,16 @@
-import axios from "axios";
 import { useRouter } from "vue-router";
-import { useAlertStore } from "../../store/alert";
-import { School, SchoolParams } from "../../types/school";
-import { Tag } from "../../types/tag";
+import { useAlertStore } from "@/store/alert";
+import { School, SchoolParams } from "@/types/school";
+import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
+import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useSchoolCreate() {
     const alertStore = useAlertStore();
     const router = useRouter();
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
 
     const pages = [
         { name: "スクールを探す", href: "/schools", current: false },
@@ -35,7 +38,7 @@ export function useSchoolCreate() {
 
     const createSchool = async (params: SchoolParams) => {
         try {
-            await axios.post("http://localhost:8080/api/school", params);
+            await axiosInstance.post("school", params);
             alertStore.showSuccessAlert();
             router.push("/schools");
         } catch (err) {
@@ -43,9 +46,19 @@ export function useSchoolCreate() {
         }
     };
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const fetchTagOptions = async () => {
         try {
-            const { data } = await axios.get("http://localhost:8080/api/tag");
+            const { data } = await axiosInstance.get("tag");
             tagOptions.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
@@ -53,7 +66,8 @@ export function useSchoolCreate() {
     };
 
     onMounted(async () => {
-        fetchTagOptions();
+        await fetchMe();
+        await fetchTagOptions();
     });
     return { pages, school, tagOptions, createSchool };
 }

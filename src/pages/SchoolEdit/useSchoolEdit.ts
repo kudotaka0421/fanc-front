@@ -1,14 +1,17 @@
-import axios from "axios";
-import { useAlertStore } from "../../store/alert";
-import { School } from "../../types/school";
-import { Tag } from "../../types/tag";
+import { useAlertStore } from "@/store/alert";
+import { School } from "@/types/school";
+import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useSchoolEdit() {
     const alertStore = useAlertStore();
     const router = useRouter();
     const schoolId = location.pathname.split("/")[2];
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
     const pages = [
         { name: "スクール一覧", href: "/schools", current: false },
         { name: "スクール詳細", href: `/schools/${schoolId}`, current: false },
@@ -41,18 +44,26 @@ export function useSchoolEdit() {
 
     const fetchSchool = async () => {
         try {
-            const { data } = await axios.get(
-                `http://localhost:8080/api/school/${schoolId}`
-            );
+            const { data } = await axiosInstance.get(`school/${schoolId}`);
             school.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
         }
     };
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const fetchTagOptions = async () => {
         try {
-            const { data } = await axios.get("http://localhost:8080/api/tag");
+            const { data } = await axiosInstance.get("tag");
             tagOptions.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
@@ -61,10 +72,7 @@ export function useSchoolEdit() {
 
     const updateSchool = async (params: School) => {
         try {
-            await axios.put(
-                `http://localhost:8080/api/school/${schoolId}`,
-                params
-            );
+            await axiosInstance.put(`school/${schoolId}`, params);
             goToSchoolDetail();
             alertStore.showSuccessAlert();
         } catch (err) {
@@ -73,8 +81,9 @@ export function useSchoolEdit() {
     };
 
     onMounted(async () => {
-        fetchTagOptions();
-        fetchSchool();
+        await fetchMe();
+        await fetchTagOptions();
+        await fetchSchool();
     });
 
     return { pages, school, tagOptions, updateSchool, goToSchoolDetail };

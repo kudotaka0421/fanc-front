@@ -56,7 +56,6 @@ export function useApp() {
         }
     };
 
-
     const logout = () => {
         window.localStorage.removeItem("token");
         meStore.resetMe();
@@ -70,8 +69,7 @@ export function useApp() {
         // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
         const path = window.location.pathname;
 
-        return (path === "/login" || path === "/signup")
-
+        return path === "/login" || path === "/signup";
     });
 
     const isSignUpOrLoginOrLpPage = computed(() => {
@@ -79,12 +77,20 @@ export function useApp() {
         // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
         const path = window.location.pathname;
 
-        return (path === "/login" || path === "/signup" || path === "/lp")
+        return path === "/login" || path === "/signup" || path === "/lp";
     });
 
     const isAuthenticated = computed(() => {
         const token = window.localStorage.getItem("token");
         return token ? true : false;
+    });
+
+    const userName = computed(() => {
+        if (meStore.me.name) {
+            return `${meStore.me.name}さん`;
+        } else {
+            return "";
+        }
     });
 
     return {
@@ -97,5 +103,6 @@ export function useApp() {
         isSignUpOrLoginOrLpPage,
         meStore,
         isAuthenticated,
+        userName,
     };
 }

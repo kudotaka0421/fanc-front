@@ -22,7 +22,7 @@ const {
     sidebarOpen,
     isSignUpOrLoginPage,
     isSignUpOrLoginOrLpPage,
-    meStore,
+    userName,
 } = useApp();
 </script>
 
@@ -259,7 +259,7 @@ const {
                     <div
                         class="flex flex-1 gap-x-4 self-stretch justify-end lg:gap-x-6"
                     >
-                    <div
+                        <div
                             v-if="isSignUpOrLoginOrLpPage"
                             class="flex items-center gap-x-4 lg:gap-x-6"
                         >
@@ -297,7 +297,8 @@ const {
                                     <span
                                         class="ml-4 text-sm font-semibold leading-6 text-gray-900"
                                         aria-hidden="true"
-                                        >{{ meStore.me.name }} さん</span
+                                    >
+                                        {{ userName }}</span
                                     >
                                     <span
                                         class="hidden lg:flex lg:items-center"

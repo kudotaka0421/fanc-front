@@ -21,11 +21,13 @@ const {
     handleClick,
     sidebarOpen,
     isSignUpOrLoginPage,
+    isSignUpOrLoginOrLpPage,
+    meStore,
 } = useApp();
 </script>
 
 <template>
-    <div v-if="!isSignUpOrLoginPage" class="notRequireAuthenticationPage">
+    <div v-if="isSignUpOrLoginPage" class="notRequireAuthenticationPage">
         <main>
             <div class="px-4 sm:px-6 lg:px-8">
                 <!-- Your content -->
@@ -35,8 +37,6 @@ const {
         </main>
     </div>
     <div v-else class="requireAuthenticationPage">
-        <!-- // [TODO]ログインしてたらサイドバー表示、してなかったらサイドバー非表示のサインアップ画面を表示 -->
-        <!-- // [TODO]ログインしてたらサイドバー表示、してなかったらサイドバー非表示のサインアップ画面を表示 -->
         <div>
             <TransitionRoot as="template" :show="sidebarOpen">
                 <Dialog
@@ -259,26 +259,49 @@ const {
                     <div
                         class="flex flex-1 gap-x-4 self-stretch justify-end lg:gap-x-6"
                     >
-                        <div class="flex items-center gap-x-4 lg:gap-x-6">
+                    <div
+                            v-if="isSignUpOrLoginOrLpPage"
+                            class="flex items-center gap-x-4 lg:gap-x-6"
+                        >
+                            <div class="space-y-12">
+                                <div class="h-10">
+                                    <div
+                                        class="flex items-center justify-end gap-x-6"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        >
+                                            新規登録
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                                        >
+                                            ログイン
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            v-else
+                            class="flex items-center gap-x-4 lg:gap-x-6"
+                        >
                             <!-- Profile dropdown -->
                             <Menu as="div" class="relative">
                                 <MenuButton
                                     class="-m-1.5 flex items-center p-1.5"
                                 >
                                     <span class="sr-only">Open user menu</span>
-                                    <img
-                                        class="h-8 w-8 rounded-full bg-gray-50"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt=""
-                                    />
+                                    <span
+                                        class="ml-4 text-sm font-semibold leading-6 text-gray-900"
+                                        aria-hidden="true"
+                                        >{{ meStore.me.name }} さん</span
+                                    >
                                     <span
                                         class="hidden lg:flex lg:items-center"
                                     >
-                                        <span
-                                            class="ml-4 text-sm font-semibold leading-6 text-gray-900"
-                                            aria-hidden="true"
-                                            >Tom Cook</span
-                                        >
                                         <ChevronDownIcon
                                             class="ml-2 h-5 w-5 text-gray-400"
                                             aria-hidden="true"

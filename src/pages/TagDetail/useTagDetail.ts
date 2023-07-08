@@ -1,12 +1,16 @@
-import axios from "axios";
-import { useAlertStore } from "../../store/alert";
-import { Tag } from "../../types/tag";
+import { useAlertStore } from "@/store/alert";
+import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useTagDetail() {
     const alertStore = useAlertStore();
     const router = useRouter();
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
+
     const pages = [
         { name: "タグ一覧", href: "/tags", current: false },
         { name: "タグ詳細", href: "", current: true },
@@ -24,11 +28,19 @@ export function useTagDetail() {
         formType.value = mode;
     };
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const fetchTag = async () => {
         try {
-            const { data } = await axios.get(
-                `http://localhost:8080/api/tag/${tagId}`
-            );
+            const { data } = await axiosInstance.get(`/tag/${tagId}`);
             tag.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
@@ -37,7 +49,7 @@ export function useTagDetail() {
 
     const updateTag = async (params: Tag) => {
         try {
-            await axios.put(`http://localhost:8080/api/tag/${tagId}`, params);
+            await axiosInstance.put(`tag/${tagId}`, params);
             await fetchTag();
             formType.value = "view";
             alertStore.showSuccessAlert();
@@ -48,7 +60,7 @@ export function useTagDetail() {
 
     const deleteTag = async () => {
         try {
-            await axios.delete(`http://localhost:8080/api/tag/${tagId}`);
+            await axiosInstance.delete(`tag/${tagId}`);
             await fetchTag();
             alertStore.showSuccessAlert();
             router.push("/tags");
@@ -58,7 +70,8 @@ export function useTagDetail() {
     };
 
     onMounted(async () => {
-        fetchTag();
+        await fetchMe();
+        await fetchTag();
     });
 
     return { pages, tag, formType, updateTag, changeMode, deleteTag };

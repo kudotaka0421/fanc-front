@@ -80,16 +80,19 @@ const routes: RouteRecordRaw[] = [
         name: "SchoolEdit",
         component: SchoolEdit,
     },
+    // [done]
     {
         path: "/tags",
         name: "Tags",
         component: Tags,
     },
+    // [done]
     {
         path: "/tagCreate",
         name: "TagCreate",
         component: TagCreate,
     },
+    // [done]
     {
         path: "/tags/:tagId",
         name: "TagDetail",

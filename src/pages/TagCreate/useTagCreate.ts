@@ -1,11 +1,15 @@
-import axios from "axios";
-import { useAlertStore } from "../../store/alert";
+import { useAlertStore } from "@/store/alert";
 import { useRouter } from "vue-router";
-import { Tag } from "../../types/tag";
+import { Tag } from "@/types/tag";
+import { onMounted } from "vue";
+import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useTagCreate() {
     const alertStore = useAlertStore();
     const router = useRouter();
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
 
     const pages = [
         { name: "タグ一覧", href: "/tags", current: false },
@@ -16,14 +20,28 @@ export function useTagCreate() {
         text: "",
     };
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const createTag = async (params: Tag) => {
         try {
-            await axios.post("http://localhost:8080/api/tag", params);
+            await axiosInstance.post("tag", params);
             alertStore.showSuccessAlert();
             router.push("/tags");
         } catch (err) {
             alertStore.showErrorAlert();
         }
     };
+
+    onMounted(async () => {
+        await fetchMe();
+    });
     return { pages, tag, createTag };
 }

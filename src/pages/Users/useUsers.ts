@@ -1,17 +1,32 @@
-import axios from "axios";
-import { useAlertStore } from "../../store/alert";
-import { User } from "../../types/user";
+import { useMeStore } from "@/store/me";
+import { useAlertStore } from "@/store/alert";
+import { User } from "@/types/user";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { createAxiosInstance } from "@/utils/axiosinstance";
 
 export function useUsers() {
     const alertStore = useAlertStore();
     const pages = [{ name: "ユーザー一覧", href: "/users", current: true }];
+    const router = useRouter();
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
 
     const users = ref<User[]>([]);
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const fetchUsers = async () => {
         try {
-            const { data } = await axios.get("http://localhost:8080/api/user");
+            const { data } = await axiosInstance.get("/user");
             users.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
@@ -19,7 +34,8 @@ export function useUsers() {
     };
 
     onMounted(async () => {
-        fetchUsers();
+        await fetchMe();
+        await fetchUsers();
     });
 
     return { pages, users };

@@ -19,25 +19,25 @@ import Signup from "../pages/Signup/Signup.vue";
 import Error from "../pages/Error/Error.vue";
 
 const routes: RouteRecordRaw[] = [
-     // [不要]
+    // [不要]
     {
         path: "/signup",
         name: "Signup",
         component: Signup,
     },
-     // [不要]
+    // [不要]
     {
         path: "/confirm-account/:token",
         name: "ConfirmAccount",
         component: ConfirmAccount,
     },
-     // [不要]
+    // [不要]
     {
         path: "/login",
         name: "Login",
         component: Login,
     },
-     // [不要]
+    // [不要]
     {
         path: "/lp",
         name: "Lp",

@@ -1,12 +1,16 @@
-import axios from "axios";
-import { useAlertStore } from "../../store/alert";
+import { useAlertStore } from "@/store/alert";
 import { ref, onMounted } from "vue";
-import { userRole, User } from "../../types/user";
+import { userRole, User } from "@/types/user";
 import { useRouter } from "vue-router";
+import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useUserDetail() {
     const alertStore = useAlertStore();
     const router = useRouter();
+    const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
+
     const pages = [
         { name: "ユーザ一覧", href: "/users", current: false },
         { name: "ユーザー詳細", href: "", current: true },
@@ -26,11 +30,19 @@ export function useUserDetail() {
         formType.value = mode;
     };
 
+    const fetchMe = async () => {
+        try {
+            const { data } = await axiosInstance.get("/me");
+            meStore.setMe(data);
+        } catch (err) {
+            alertStore.showErrorAlert();
+            router.push("/error");
+        }
+    };
+
     const fetchUser = async () => {
         try {
-            const { data } = await axios.get(
-                `http://localhost:8080/api/user/${userId}`
-            );
+            const { data } = await axiosInstance.get(`/user/${userId}`);
             user.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
@@ -39,7 +51,7 @@ export function useUserDetail() {
 
     const updateUser = async (params: User) => {
         try {
-            await axios.put(`http://localhost:8080/api/user/${userId}`, params);
+            await axiosInstance.put(`/user/${userId}`, params);
             await fetchUser();
             formType.value = "view";
             alertStore.showSuccessAlert();
@@ -50,7 +62,7 @@ export function useUserDetail() {
 
     const deleteUser = async () => {
         try {
-            await axios.delete(`http://localhost:8080/api/user/${userId}`);
+            await axiosInstance.delete(`/user/${userId}`);
             await fetchUser();
             alertStore.showSuccessAlert();
             router.push("/users");
@@ -60,7 +72,8 @@ export function useUserDetail() {
     };
 
     onMounted(async () => {
-        fetchUser();
+        await fetchMe();
+        await fetchUser();
     });
 
     return { pages, user, formType, changeMode, updateUser, deleteUser };

@@ -45,7 +45,7 @@
                             <tr
                                 v-for="user in users"
                                 :key="user.id"
-                                @click="goToUserDetail(user.id)"
+                                @click="user.id && goToUserDetail(user.id)"
                             >
                                 <td
                                     class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"

@@ -105,7 +105,7 @@ const isInitialForm = reactive({
 });
 
 const inputValue = (key: string) => {
-    isInitialForm[key] = false;
+    isInitialForm[key as keyof typeof isInitialForm] = false;
 };
 
 const clickSignup = () => {

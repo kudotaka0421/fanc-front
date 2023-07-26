@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useAlertStore } from "../../store/alert";
 import { LoginParams } from "../../types/auth";
+import { createAxiosInstance } from "@/utils/axiosinstance";
 
 export function useLogin() {
     const alertStore = useAlertStore();
+    const axiosInstance = createAxiosInstance();
 
     const login = async (params: LoginParams) => {
         try {
-            const response = await axios.post(
-                "http://localhost:8080/api/login",
-                { email: params.email, password: params.password }
-            );
+            const response = await axiosInstance.post("/login", {
+                email: params.email,
+                password: params.password,
+            });
             window.localStorage.setItem("token", response.data.token);
             // [TODO]メッセージは「認証に成功しました」に変更する
             alertStore.showSuccessAlert();

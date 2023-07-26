@@ -59,7 +59,7 @@ export function useApp() {
     const logout = () => {
         window.localStorage.removeItem("token");
         meStore.resetMe();
-        // [TODO] 成功メッセージは「ログアウトしました」にする
+        // [TODO] 成功メッセージは「ログアウトしました」にする。
         alertStore.showSuccessAlert();
         window.location.href = "/lp";
     };

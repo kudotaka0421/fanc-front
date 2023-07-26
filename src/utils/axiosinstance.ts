@@ -12,7 +12,7 @@ function createAxiosInstance() {
 // トークンを使用するインスタンス
 function createInstanceWithAuth() {
     const instance = axios.create({
-        baseURL: "http://localhost:8080/api",
+        baseURL: import.meta.env.VITE_APP_API_BASE_URL,
     });
 
     instance.interceptors.request.use((config) => {
@@ -28,7 +28,7 @@ function createInstanceWithAuth() {
 function createInstanceWithoutAuth() {
     console.log("createInstanceWithoutAuth");
     return axios.create({
-        baseURL: "http://localhost:8080/api",
+        baseURL: import.meta.env.VITE_APP_API_BASE_URL,
     });
 }
 

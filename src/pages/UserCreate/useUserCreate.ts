@@ -1,7 +1,7 @@
 import { onMounted } from "vue";
 import { useAlertStore } from "@/store/alert";
 import { useRouter } from "vue-router";
-import { User } from "@/types/user";
+import { User, userRole } from "@/types/user";
 import { createAxiosInstance } from "@/utils/axiosinstance";
 import { useMeStore } from "@/store/me";
 
@@ -20,7 +20,7 @@ export function useUserCreate() {
         name: "",
         email: "",
         password: "",
-        role: 1,
+        role: userRole.Normal,
     };
 
     const fetchMe = async () => {

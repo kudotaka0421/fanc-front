@@ -875,7 +875,13 @@ type Props = {
     tagOptions: Tag[];
 };
 
-const emits = defineEmits(["create", "update", "cancel", "delete"]);
+const emits = defineEmits([
+    "create",
+    "update",
+    "cancel",
+    "delete",
+    "change-mode",
+]);
 
 const props = defineProps<Props>();
 
@@ -1162,7 +1168,7 @@ const isInitialForm = reactive({
 });
 
 const inputValue = (key: string) => {
-    isInitialForm[key] = false;
+    isInitialForm[key as keyof typeof isInitialForm] = false;
 };
 
 watch(

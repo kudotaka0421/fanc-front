@@ -241,12 +241,10 @@ const isInitialForm = reactive({
 });
 
 const inputValue = (key: string) => {
-    isInitialForm[key] = false;
+    isInitialForm[key as keyof typeof isInitialForm] = false;
 };
 
 const clickSignup = () => {
-    console.log("TODO create");
-
     const params = {
         name: name.value,
         email: email.value,

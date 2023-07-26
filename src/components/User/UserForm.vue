@@ -409,7 +409,7 @@ const clickUpdate = () => {
 };
 
 const inputValue = (key: string) => {
-    isInitialForm[key] = false;
+    isInitialForm[key as keyof typeof isInitialForm] = false;
 };
 
 watch(

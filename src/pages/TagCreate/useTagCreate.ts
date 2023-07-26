@@ -17,6 +17,7 @@ export function useTagCreate() {
     ];
 
     const tag = {
+        id: 0,
         text: "",
     };
 

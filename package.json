@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "eslint --ext .js,.ts,.vue --fix",
     "format": "prettier -w src",
-    "fix": "npm run lint && npm run format"
+    "fix": "npm run lint && npm run format",
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.13",

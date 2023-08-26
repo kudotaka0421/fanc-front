@@ -6,11 +6,6 @@ import { useRouter } from "vue-router";
 import { createAxiosInstance } from "@/utils/axiosinstance";
 
 export function useUsers() {
-
-
-
-
-    
     const alertStore = useAlertStore();
     const pages = [{ name: "ユーザー一覧", href: "/users", current: true }];
     const router = useRouter();

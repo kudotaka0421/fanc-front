@@ -1,0 +1,79 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  build:
+    name: Build and Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.13.0'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint Check
+      run: npm run lint
+
+    - name: Build Check
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          npm run build:production
+        elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+          npm run build:staging
+        elsediff
+          npm run build
+        fi
+
+  deploy:
+    name: Deploy to S3
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.13.0'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build for Prod or Staging
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          npm run build:production
+        else
+          npm run build:staging
+        fi
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Deploy to S3
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          aws s3 sync dist s3://fanc-bucket-prod
+        else
+          aws s3 sync dist s3://fanc-bucket-stg
+        fi

@@ -69,11 +69,6 @@ jobs:
           npm run build
         fi
 
-    # Debugging step to output content of the build file
-    # You may need to adjust the path to the correct file
-    - name: Cat related build files
-      run: cat dist/path-to-your-related-file.js
-
     # Debugging step to output the Vite configuration
     - name: Cat Vite config
       run: cat vite.config.js

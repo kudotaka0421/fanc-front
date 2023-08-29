@@ -115,7 +115,7 @@ jobs:
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           aws s3 sync dist s3://fanc-bucket-prod
-        else:
+        else
           aws s3 sync dist s3://fanc-bucket-stg
         fi
 

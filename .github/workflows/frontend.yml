@@ -100,7 +100,7 @@ jobs:
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           npm run build:production
-        else:
+        else
           npm run build:staging
         fi
 
@@ -115,7 +115,7 @@ jobs:
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           aws s3 sync dist s3://fanc-bucket-prod
-        else:
+        else
           aws s3 sync dist s3://fanc-bucket-stg
         fi
 
@@ -123,6 +123,6 @@ jobs:
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }} --paths "/*"
-        else:
+        else
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STG }} --paths "/*"
         fi

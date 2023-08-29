@@ -55,6 +55,15 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
+    # Set environment variable based on branch
+    - name: Set VITE_APP_API_BASE_URL for respective environment
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "VITE_APP_API_BASE_URL=https://api.fancapp.com/api" >> $GITHUB_ENV
+        elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+          echo "VITE_APP_API_BASE_URL=https://api.stg.fancapp.com/api" >> $GITHUB_ENV
+        fi
+
     # Debugging step to output VITE_APP_API_BASE_URL
     - name: Print VITE_APP_API_BASE_URL
       run: echo $VITE_APP_API_BASE_URL
@@ -69,16 +78,12 @@ jobs:
           npm run build
         fi
 
-    # Debugging step to output the Vite configuration
-    - name: Cat Vite config
-      run: cat vite.config.js
-
   deploy:
     name: Deploy to S3
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -110,7 +115,7 @@ jobs:
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then
           aws s3 sync dist s3://fanc-bucket-prod
-        else
+        else:
           aws s3 sync dist s3://fanc-bucket-stg
         fi
 

@@ -11,6 +11,7 @@ function createAxiosInstance() {
 
 // トークンを使用するインスタンス
 function createInstanceWithAuth() {
+    console.log("(1)VITE_APP_API_BASE_URL:", import.meta.env.VITE_APP_API_BASE_URL);
     const instance = axios.create({
         baseURL: import.meta.env.VITE_APP_API_BASE_URL,
     });
@@ -26,6 +27,7 @@ function createInstanceWithAuth() {
 
 // トークンを使用しないインスタンス
 function createInstanceWithoutAuth() {
+    console.log("(2)VITE_APP_API_BASE_URL:", import.meta.env.VITE_APP_API_BASE_URL);
     console.log("createInstanceWithoutAuth");
     return axios.create({
         baseURL: import.meta.env.VITE_APP_API_BASE_URL,

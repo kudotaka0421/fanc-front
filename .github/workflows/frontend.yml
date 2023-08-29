@@ -55,14 +55,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Create .env based on branch
-      run: |
-        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          echo "VITE_APP_API_BASE_URL=https://api.fancapp.com/api" > .env.production
-        elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
-          echo "VITE_APP_API_BASE_URL=https://api.stg.fancapp.com/api" > .env.staging
-        fi
-
     - name: Build
       run: |
         if [ "${{ github.ref }}" == "refs/heads/main" ]; then

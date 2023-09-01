@@ -70,7 +70,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -104,4 +104,12 @@ jobs:
           aws s3 sync dist s3://fanc-bucket-prod
         else
           aws s3 sync dist s3://fanc-bucket-stg
+        fi
+
+    - name: Clear CloudFront Cache
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }} --paths "/*"
+        else
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STG }} --paths "/*"
         fi

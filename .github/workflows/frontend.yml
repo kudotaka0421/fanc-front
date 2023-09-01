@@ -38,6 +38,28 @@ jobs:
     - name: Lint Check
       run: npm run lint
 
+    - name: Slack Notification on Success
+      if: success()
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: dev_fanc_front
+        SLACK_TITLE: デプロイが成功しました
+        SLACK_COLOR: good
+        SLACK_USERNAME: ちくわ
+        SLACK_ICON: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.yakult-swallows.co.jp%2Fpages%2Fguide%2Fmascot%2F2896_tsubakurou&psig=AOvVaw2MRWobUmMGSMu0w7-kuBBF&ust=1693641769341000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKjFm7L5iIEDFQAAAAAdAAAAABAF
+        DEV_FANC_FRONT_SLACK_WEBHOOK_URL: ${{ secrets.DEV_FANC_FRONT_SLACK_WEBHOOK_URL }}
+
+    - name: Slack Notification on Failure
+      uses: rtCamp/action-slack-notify@v2.0.2
+      if: failure()
+      env:
+        SLACK_CHANNEL: dev_fanc_front
+        SLACK_TITLE: デプロイが失敗しました
+        SLACK_COLOR: danger
+        SLACK_USERNAME: ちくわ
+        SLACK_ICON: https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Fmiurakaigan5%2Fstatus%2F1084815890846081025&psig=AOvVaw261r_erDENUttMk8KDKp8j&ust=1693641849033000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJCejNj5iIEDFQAAAAAdAAAAABAE
+        DEV_FANC_FRONT_SLACK_WEBHOOK_URL: ${{ secrets.DEV_FANC_FRONT_SLACK_WEBHOOK_URL }}
+
   build:
     name: Build Check
     runs-on: ubuntu-latest
@@ -113,3 +135,28 @@ jobs:
         else
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_STG }} --paths "/*"
         fi
+
+    - name: Slack Notification on Success
+      if: success()
+      uses: rtCamp/action-slack-notify@v2.0.2
+      env:
+        SLACK_CHANNEL: dev_fanc_front
+        SLACK_TITLE: デプロイが成功しました
+        SLACK_COLOR: good
+        SLACK_USERNAME: ちくわ
+        SLACK_ICON: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.yakult-swallows.co.jp%2Fpages%2Fguide%2Fmascot%2F2896_tsubakurou&psig=AOvVaw2MRWobUmMGSMu0w7-kuBBF&ust=1693641769341000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKjFm7L5iIEDFQAAAAAdAAAAABAF
+        DEV_FANC_FRONT_SLACK_WEBHOOK_URL: ${{ secrets.DEV_FANC_FRONT_SLACK_WEBHOOK_URL }}
+
+    # テスト失敗時はこちらのステップが実行される
+    - name: Slack Notification on Failure
+      uses: rtCamp/action-slack-notify@v2.0.2
+      if: failure()
+      env:
+        SLACK_CHANNEL: dev_fanc_front
+        SLACK_TITLE: デプロイが失敗しました
+        SLACK_COLOR: danger
+        SLACK_USERNAME: ちくわ
+        SLACK_ICON: https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Fmiurakaigan5%2Fstatus%2F1084815890846081025&psig=AOvVaw261r_erDENUttMk8KDKp8j&ust=1693641849033000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJCejNj5iIEDFQAAAAAdAAAAABAE
+        DEV_FANC_FRONT_SLACK_WEBHOOK_URL: ${{ secrets.DEV_FANC_FRONT_SLACK_WEBHOOK_URL }}
+
+

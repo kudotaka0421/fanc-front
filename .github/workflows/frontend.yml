@@ -59,7 +59,7 @@ jobs:
         SLACK_USERNAME: ちくわ
         SLACK_ICON: https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Fmiurakaigan5%2Fstatus%2F1084815890846081025&psig=AOvVaw261r_erDENUttMk8KDKp8j&ust=1693641849033000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJCejNj5iIEDFQAAAAAdAAAAABAE
         SLACK_WEBHOOK: ${{ secrets.DEV_FANC_FRONT_SLACK_WEBHOOK_URL }}
-        SLACK_MESSAGE: '@channel'
+        SLACK_MESSAGE: '<!channel> Job ${{ job.status }}.'
 
   build:
     name: Build Check

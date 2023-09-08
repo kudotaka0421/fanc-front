@@ -1,6 +1,17 @@
-export function useLp() {
-    const img =
-        "https://web-camp.io/magazine/wp-content/uploads/2018/11/220208_puroguramingusukuru.png";
+import { useRouter } from "vue-router";
 
-    return { img };
+export function useLp() {
+    const router = useRouter();
+    const img =
+        "https://images.microcms-assets.io/assets/e3ac696edd424fde8f059de7938110e9/c7f85e6091124738ab57bebbf8530f52/samuraiengineer.jpeg?w=640";
+
+    const goToSignUp = () => {
+        router.push("/signup");
+    };
+
+    const goToLogin = () => {
+        router.push("/login");
+    };
+
+    return { img, goToSignUp, goToLogin };
 }

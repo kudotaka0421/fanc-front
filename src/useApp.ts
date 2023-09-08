@@ -64,12 +64,10 @@ export function useApp() {
         window.location.href = "/lp";
     };
 
-    const isSignUpOrLoginPage = computed(() => {
-        // 閲覧にログインが必要なページの場合はtrueを返す
-        // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
-        const path = window.location.pathname;
+    const isNotRequireAuthenticationPage = computed(() => {
+        const unauthenticatedPaths = ["/login", "/signup", "/lp"];
 
-        return path === "/login" || path === "/signup";
+        return unauthenticatedPaths.includes(window.location.pathname);
     });
 
     const isSignUpOrLoginOrLpPage = computed(() => {
@@ -99,7 +97,7 @@ export function useApp() {
         handleClick,
         logout,
         sidebarOpen,
-        isSignUpOrLoginPage,
+        isNotRequireAuthenticationPage,
         isSignUpOrLoginOrLpPage,
         meStore,
         isAuthenticated,

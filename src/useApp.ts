@@ -7,42 +7,6 @@ export function useApp() {
     const meStore = useMeStore();
     const alertStore = useAlertStore();
 
-    const navigation = [
-        {
-            name: "カウンセリングを予約する",
-            href: "#",
-            icon: UsersIcon,
-            current: false,
-        },
-        {
-            name: "マイページ",
-            href: "#",
-            icon: UsersIcon,
-            current: false,
-        },
-        // ここから下はstaffかadminのみ表示させる
-        {
-            name: "スクールを探す",
-            href: "/schools",
-            icon: CalendarIcon,
-            current: false,
-        },
-        {
-            name: "カウンセリング一覧",
-            href: "counseling",
-            icon: CalendarIcon,
-            current: false,
-        },
-        {
-            name: "ユーザー一覧",
-            href: "/users",
-            icon: CalendarIcon,
-            current: false,
-        },
-        { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
-        { name: "タグ一覧", href: "/tags", icon: CalendarIcon, current: false },
-    ];
-
     const userNavigation = [
         { name: "Your profile", href: "#" },
         { name: "Sign out", href: "#" },
@@ -63,6 +27,70 @@ export function useApp() {
         alertStore.showSuccessAlert();
         window.location.href = "/lp";
     };
+
+    const navigation = computed(() => {
+        if (meStore.isStaffOrAdmin) {
+            return [
+                {
+                    name: "カウンセリング",
+                    href: "#",
+                    icon: UsersIcon,
+                    current: false,
+                },
+                {
+                    name: "登録情報",
+                    href: "#",
+                    icon: UsersIcon,
+                    current: false,
+                },
+                {
+                    name: "スクール一覧",
+                    href: "/schools",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "カウンセリング一覧",
+                    href: "counseling",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "ユーザー一覧",
+                    href: "/users",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "決済一覧",
+                    href: "#",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "タグ一覧",
+                    href: "/tags",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+            ];
+        } else {
+            return [
+                {
+                    name: "カウンセリング",
+                    href: "#",
+                    icon: UsersIcon,
+                    current: false,
+                },
+                {
+                    name: "登録情報",
+                    href: "#",
+                    icon: UsersIcon,
+                    current: false,
+                },
+            ];
+        }
+    });
 
     const isNotRequireAuthenticationPage = computed(() => {
         const unauthenticatedPaths = ["/login", "/signup", "/lp"];

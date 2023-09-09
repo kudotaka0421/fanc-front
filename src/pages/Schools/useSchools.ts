@@ -8,7 +8,7 @@ import { useMeStore } from "@/store/me";
 export function useSchools() {
     const alertStore = useAlertStore();
     const router = useRouter();
-    const pages = [{ name: "スクールを探す", href: "/schools", current: true }];
+    const pages = [{ name: "スクール一覧", href: "/schools", current: true }];
     const axiosInstance = createAxiosInstance();
     const meStore = useMeStore();
 

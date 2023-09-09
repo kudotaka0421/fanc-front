@@ -13,7 +13,7 @@ export function useSchoolCreate() {
     const meStore = useMeStore();
 
     const pages = [
-        { name: "スクールを探す", href: "/schools", current: false },
+        { name: "スクール一覧", href: "/schools", current: false },
         { name: "スクール新規作成", href: "schoolCreate", current: true },
     ];
 

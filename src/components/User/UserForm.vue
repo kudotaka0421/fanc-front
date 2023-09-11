@@ -14,6 +14,7 @@
                         編集
                     </button>
                     <button
+                        v-if="meStore.isStaffOrAdmin"
                         type="submit"
                         class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
                         @click.prevent="clickDelete"
@@ -78,7 +79,7 @@
 
                     <!-- [TODO] 管理画面のユーザーフォームの場合は表示、
                     ユーザーが新規登録する際はセレクトを非表示にしてroleは初期値の1(ユーザー)で固定する -->
-                    <div class="sm:col-span-2">
+                    <div v-if="meStore.isStaffOrAdmin" class="sm:col-span-2">
                         <label
                             for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900"
@@ -270,6 +271,7 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive, watch } from "vue";
 import { User, userRole } from "../../types/user";
+import { useMeStore } from "@/store/me";
 
 type FormType = "create" | "edit" | "view";
 
@@ -277,6 +279,7 @@ type Props = {
     user: User;
     formType: FormType;
 };
+const meStore = useMeStore();
 
 const props = defineProps<Props>();
 

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { UserRole, userRole } from "@/types/user"; // user.ts から必要な部分をインポート
 
 const meDefault = {
+    id: null,
     name: "",
     email: "",
     isAuthenticated: false,
@@ -11,6 +12,7 @@ const meDefault = {
 export const useMeStore = defineStore("me", {
     state: () => {
         const me = {
+            id: null,
             name: "",
             email: "",
             isAuthenticated: false,

@@ -7,15 +7,21 @@ export function useApp() {
     const meStore = useMeStore();
     const alertStore = useAlertStore();
 
-    const userNavigation = [
-        { name: "Your profile", href: "#" },
-        { name: "Sign out", href: "#" },
-    ];
+    const userDetailPageUrl = computed(() => {
+        return meStore.me.id ? `/users/${meStore.me.id}` : "";
+    });
+
+    const userNavigation = computed(() => {
+        return [
+            { name: "登録情報", href: userDetailPageUrl.value },
+            { name: "ログアウト", href: "#" },
+        ];
+    });
 
     const sidebarOpen = ref(false);
 
     const handleClick = (itemName: string) => {
-        if (itemName === "Sign out") {
+        if (itemName === "ログアウト") {
             logout();
         }
     };
@@ -39,7 +45,7 @@ export function useApp() {
                 },
                 {
                     name: "登録情報",
-                    href: "#",
+                    href: userDetailPageUrl.value,
                     icon: UsersIcon,
                     current: false,
                 },
@@ -84,7 +90,7 @@ export function useApp() {
                 },
                 {
                     name: "登録情報",
-                    href: "#",
+                    href: userDetailPageUrl.value,
                     icon: UsersIcon,
                     current: false,
                 },

@@ -1,12 +1,10 @@
 import { useAlertStore } from "@/store/alert";
 import { useMeStore } from "@/store/me";
 import { Tag } from "@/types/tag";
-import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
 export function useTags() {
     const pages = [{ name: "タグ一覧", href: "/tags", current: true }];
-    const router = useRouter();
 
     const axiosInstance = createAxiosInstance();
 
@@ -19,8 +17,8 @@ export function useTags() {
             const { data } = await axiosInstance.get("/me");
             meStore.setMe(data);
         } catch (err) {
-            alertStore.showErrorAlert();
-            router.push("/error");
+            window.location.href = "/error";
+            return;
         }
     };
 
@@ -30,7 +28,6 @@ export function useTags() {
             tags.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
-            router.push("/lp");
         }
     };
 

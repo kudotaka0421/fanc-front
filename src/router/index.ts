@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmAccountコンポーネントのパスに応じて変更してください
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
-import Counseling from "../pages/Counseling.vue";
+import Counselings from "../pages/Counselings.vue";
 import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
 import UserDetail from "../pages/UserDetail/UserDetail.vue";
@@ -40,9 +40,9 @@ const routes: RouteRecordRaw[] = [
         component: Lp,
     },
     {
-        path: "/counseling",
-        name: "Counseling",
-        component: Counseling,
+        path: "/counselings",
+        name: "Counselings",
+        component: Counselings,
     },
     {
         path: "/userCreate",

@@ -24,11 +24,12 @@ export const useMeStore = defineStore("me", {
         };
     },
     getters: {
-        isStaffOrAdmin(): boolean {
-            return (
-                this.me.role === userRole.Staff ||
-                this.me.role === userRole.Admin
-            );
+        isStaff(): boolean {
+            return this.me.role === userRole.Staff;
+        },
+
+        isAdmin(): boolean {
+            return this.me.role === userRole.Admin;
         },
     },
     actions: {

@@ -14,7 +14,6 @@
                         編集
                     </button>
                     <button
-                        v-if="meStore.isStaffOrAdmin"
                         type="submit"
                         class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
                         @click.prevent="clickDelete"
@@ -77,9 +76,7 @@
                         </div>
                     </div>
 
-                    <!-- [TODO] 管理画面のユーザーフォームの場合は表示、
-                    ユーザーが新規登録する際はセレクトを非表示にしてroleは初期値の1(ユーザー)で固定する -->
-                    <div v-if="meStore.isStaffOrAdmin" class="sm:col-span-2">
+                    <div class="sm:col-span-2">
                         <label
                             for="first-name"
                             class="block text-sm font-medium leading-6 text-gray-900"

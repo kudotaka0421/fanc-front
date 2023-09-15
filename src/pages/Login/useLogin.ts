@@ -17,7 +17,7 @@ export function useLogin() {
             // [TODO]メッセージは「認証に成功しました」に変更する
             alertStore.showSuccessAlert();
             setTimeout(() => {
-                location.href = "/counseling";
+                location.href = "/counselings";
             }, 1000);
         } catch (err) {
             console.log(err);

@@ -7,15 +7,8 @@ export function useApp() {
     const meStore = useMeStore();
     const alertStore = useAlertStore();
 
-    const userDetailPageUrl = computed(() => {
-        return meStore.me.id ? `/users/${meStore.me.id}` : "";
-    });
-
     const userNavigation = computed(() => {
-        return [
-            { name: "登録情報", href: userDetailPageUrl.value },
-            { name: "ログアウト", href: "#" },
-        ];
+        return [{ name: "ログアウト", href: "#" }];
     });
 
     const sidebarOpen = ref(false);
@@ -29,23 +22,25 @@ export function useApp() {
     const logout = () => {
         window.localStorage.removeItem("token");
         meStore.resetMe();
-        // [TODO] 成功メッセージは「ログアウトしました」にする
         alertStore.showSuccessAlert();
-        window.location.href = "/lp";
+        window.location.href = "/login";
     };
 
     const navigation = computed(() => {
-        if (meStore.isStaffOrAdmin) {
+        if (meStore.isStaff) {
             return [
                 {
-                    name: "カウンセリング",
-                    href: "#",
+                    name: "カウンセリング一覧",
+                    href: "counselings",
                     icon: UsersIcon,
                     current: false,
                 },
+            ];
+        } else {
+            return [
                 {
-                    name: "登録情報",
-                    href: userDetailPageUrl.value,
+                    name: "カウンセリング一覧",
+                    href: "/counselings",
                     icon: UsersIcon,
                     current: false,
                 },
@@ -56,20 +51,8 @@ export function useApp() {
                     current: false,
                 },
                 {
-                    name: "カウンセリング一覧",
-                    href: "counseling",
-                    icon: CalendarIcon,
-                    current: false,
-                },
-                {
                     name: "ユーザー一覧",
                     href: "/users",
-                    icon: CalendarIcon,
-                    current: false,
-                },
-                {
-                    name: "決済一覧",
-                    href: "#",
                     icon: CalendarIcon,
                     current: false,
                 },
@@ -77,21 +60,6 @@ export function useApp() {
                     name: "タグ一覧",
                     href: "/tags",
                     icon: CalendarIcon,
-                    current: false,
-                },
-            ];
-        } else {
-            return [
-                {
-                    name: "カウンセリング",
-                    href: "#",
-                    icon: UsersIcon,
-                    current: false,
-                },
-                {
-                    name: "登録情報",
-                    href: userDetailPageUrl.value,
-                    icon: UsersIcon,
                     current: false,
                 },
             ];

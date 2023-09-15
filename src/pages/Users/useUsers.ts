@@ -19,8 +19,8 @@ export function useUsers() {
             const { data } = await axiosInstance.get("/me");
             meStore.setMe(data);
         } catch (err) {
-            alertStore.showErrorAlert();
-            router.push("/error");
+            window.location.href = "/error";
+            return;
         }
     };
 

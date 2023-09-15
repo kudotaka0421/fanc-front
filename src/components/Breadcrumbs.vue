@@ -3,7 +3,10 @@
         <ol role="list" class="mx-auto flex w-full">
             <li class="flex">
                 <div class="flex items-center">
-                    <a href="/" class="text-gray-400 hover:text-gray-500">
+                    <a
+                        href="/counselings"
+                        class="text-gray-400 hover:text-gray-500"
+                    >
                         <HomeIcon
                             class="h-5 w-5 flex-shrink-0"
                             aria-hidden="true"

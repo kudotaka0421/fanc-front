@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmAccountコンポーネントのパスに応じて変更してください
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
-import Counselings from "../pages/Counselings.vue";
+import Counselings from "../pages/Counselings/Counselings.vue";
 import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
 import UserDetail from "../pages/UserDetail/UserDetail.vue";

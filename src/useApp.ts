@@ -36,7 +36,7 @@ export function useApp() {
                     current: false,
                 },
             ];
-        } else {
+        } else if (meStore.isAdmin) {
             return [
                 {
                     name: "カウンセリング一覧",

@@ -7,9 +7,8 @@ export type User = {
 };
 
 export const userRole = {
-    Normal: 1,
-    Staff: 2,
-    Admin: 3,
+    Staff: 1,
+    Admin: 2,
 } as const;
 
 export type UserRole = (typeof userRole)[keyof typeof userRole];

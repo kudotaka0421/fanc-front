@@ -292,8 +292,6 @@ const user = ref<User>({ ...props.user });
 
 const userRoleLabel = computed(() => {
     switch (user.value.role) {
-        case userRole.Normal:
-            return "ユーザー";
         case userRole.Staff:
             return "スタッフ";
         case userRole.Admin:

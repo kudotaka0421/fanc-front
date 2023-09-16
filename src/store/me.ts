@@ -6,7 +6,7 @@ const meDefault = {
     name: "",
     email: "",
     isAuthenticated: false,
-    role: 1 as UserRole,
+    role: userRole.Staff as UserRole,
 };
 
 export const useMeStore = defineStore("me", {
@@ -16,7 +16,7 @@ export const useMeStore = defineStore("me", {
             name: "",
             email: "",
             isAuthenticated: false,
-            role: userRole.Normal as UserRole,
+            role: userRole.Staff as UserRole,
         };
 
         return {

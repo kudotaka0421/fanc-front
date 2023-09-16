@@ -249,7 +249,7 @@ const clickSignup = () => {
         name: name.value,
         email: email.value,
         password: password.value,
-        role: userRole.Normal,
+        role: userRole.Staff,
     };
     emits("signup", params);
 };

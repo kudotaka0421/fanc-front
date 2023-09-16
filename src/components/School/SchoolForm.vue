@@ -276,7 +276,7 @@
                             <label
                                 for="first-name"
                                 class="block text-sm font-medium leading-6 text-gray-900"
-                                >1<span
+                                >1(大きめ画像)<span
                                     v-show="!isViewMode"
                                     class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                                     >必須</span
@@ -326,7 +326,7 @@
                         </div>
                     </div>
                     <div class="mt-20 col-span-full">
-                        2
+                        2(メール用小さめ画像)
                         <textarea
                             v-if="!isViewMode"
                             v-model="schoolVal.imageLinks[1]"
@@ -750,7 +750,7 @@
                     <label
                         for="first-name"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                        >リンク<span
+                        >リンク(ここ使用していないので適当なリンク載せてOK)<span
                             v-show="!isViewMode"
                             class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
                             >必須</span

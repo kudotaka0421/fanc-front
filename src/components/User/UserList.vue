@@ -90,8 +90,6 @@ const goToUserDetail = (userId: number) => {
 
 const getUserRoleLabel = (role: number) => {
     switch (role) {
-        case userRole.Normal:
-            return "ユーザー";
         case userRole.Staff:
             return "スタッフ";
         case userRole.Admin:

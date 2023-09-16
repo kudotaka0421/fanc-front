@@ -19,7 +19,7 @@ export function useUserDetail() {
         id: 0,
         name: "",
         email: "",
-        role: userRole.Normal,
+        role: userRole.Staff,
     });
 
     const formType = ref<"view" | "edit">("view");

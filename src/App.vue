@@ -20,14 +20,16 @@ const {
     userNavigation,
     handleClick,
     sidebarOpen,
-    isSignUpOrLoginPage,
-    isSignUpOrLoginOrLpPage,
+    isNotRequireAuthenticationPage,
     userName,
 } = useApp();
 </script>
 
 <template>
-    <div v-if="isSignUpOrLoginPage" class="notRequireAuthenticationPage">
+    <div
+        v-if="isNotRequireAuthenticationPage"
+        class="notRequireAuthenticationPage"
+    >
         <main>
             <div class="px-4 sm:px-6 lg:px-8">
                 <!-- Your content -->
@@ -150,18 +152,6 @@ const {
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="mt-auto">
-                                                <a
-                                                    href="#"
-                                                    class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                                                >
-                                                    <Cog6ToothIcon
-                                                        class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
-                                                        aria-hidden="true"
-                                                    />
-                                                    Settings
-                                                </a>
-                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -219,18 +209,6 @@ const {
                                     </li>
                                 </ul>
                             </li>
-                            <li class="mt-auto">
-                                <a
-                                    href="#"
-                                    class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
-                                >
-                                    <Cog6ToothIcon
-                                        class="h-6 w-6 shrink-0 text-indigo-200 group-hover:text-white"
-                                        aria-hidden="true"
-                                    />
-                                    Settings
-                                </a>
-                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -259,35 +237,7 @@ const {
                     <div
                         class="flex flex-1 gap-x-4 self-stretch justify-end lg:gap-x-6"
                     >
-                        <div
-                            v-if="isSignUpOrLoginOrLpPage"
-                            class="flex items-center gap-x-4 lg:gap-x-6"
-                        >
-                            <div class="space-y-12">
-                                <div class="h-10">
-                                    <div
-                                        class="flex items-center justify-end gap-x-6"
-                                    >
-                                        <button
-                                            type="submit"
-                                            class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            新規登録
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
-                                        >
-                                            ログイン
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            v-else
-                            class="flex items-center gap-x-4 lg:gap-x-6"
-                        >
+                        <div class="flex items-center gap-x-4 lg:gap-x-6">
                             <!-- Profile dropdown -->
                             <Menu as="div" class="relative">
                                 <MenuButton
@@ -352,7 +302,6 @@ const {
             </div>
         </div>
     </div>
-    >
 </template>
 
 <style scoped>

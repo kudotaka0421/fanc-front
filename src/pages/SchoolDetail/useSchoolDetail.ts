@@ -3,14 +3,12 @@ import { School } from "../../types/school";
 import { useAlertStore } from "../../store/alert";
 import { useRouter } from "vue-router";
 import { createAxiosInstance } from "@/utils/axiosinstance";
-import { useMeStore } from "@/store/me";
 
 export function useSchoolDetail() {
     const router = useRouter();
     const alertStore = useAlertStore();
     const schoolId = location.pathname.split("/")[2];
     const axiosInstance = createAxiosInstance();
-    const meStore = useMeStore();
     const pages = [
         { name: "スクールを検索する", href: "/schools", current: false },
         { name: "スクール詳細", href: "", current: true },
@@ -42,15 +40,6 @@ export function useSchoolDetail() {
             alertStore.showErrorAlert();
         }
     };
-    const fetchMe = async () => {
-        try {
-            const { data } = await axiosInstance.get("/me");
-            meStore.setMe(data);
-        } catch (err) {
-            alertStore.showErrorAlert();
-            router.push("/error");
-        }
-    };
 
     const deleteSchool = async () => {
         try {
@@ -63,7 +52,6 @@ export function useSchoolDetail() {
     };
 
     onMounted(async () => {
-        await fetchMe();
         await fetchSchool();
     });
 

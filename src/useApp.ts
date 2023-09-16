@@ -7,51 +7,14 @@ export function useApp() {
     const meStore = useMeStore();
     const alertStore = useAlertStore();
 
-    const navigation = [
-        {
-            name: "カウンセリングを予約する",
-            href: "#",
-            icon: UsersIcon,
-            current: false,
-        },
-        {
-            name: "マイページ",
-            href: "#",
-            icon: UsersIcon,
-            current: false,
-        },
-        // ここから下はstaffかadminのみ表示させる
-        {
-            name: "スクールを探す",
-            href: "/schools",
-            icon: CalendarIcon,
-            current: false,
-        },
-        {
-            name: "カウンセリング一覧",
-            href: "counseling",
-            icon: CalendarIcon,
-            current: false,
-        },
-        {
-            name: "ユーザー一覧",
-            href: "/users",
-            icon: CalendarIcon,
-            current: false,
-        },
-        { name: "決済一覧", href: "#", icon: CalendarIcon, current: false },
-        { name: "タグ一覧", href: "/tags", icon: CalendarIcon, current: false },
-    ];
-
-    const userNavigation = [
-        { name: "Your profile", href: "#" },
-        { name: "Sign out", href: "#" },
-    ];
+    const userNavigation = computed(() => {
+        return [{ name: "ログアウト", href: "#" }];
+    });
 
     const sidebarOpen = ref(false);
 
     const handleClick = (itemName: string) => {
-        if (itemName === "Sign out") {
+        if (itemName === "ログアウト") {
             logout();
         }
     };
@@ -59,17 +22,54 @@ export function useApp() {
     const logout = () => {
         window.localStorage.removeItem("token");
         meStore.resetMe();
-        // [TODO] 成功メッセージは「ログアウトしました」にする
         alertStore.showSuccessAlert();
-        window.location.href = "/lp";
+        window.location.href = "/login";
     };
 
-    const isSignUpOrLoginPage = computed(() => {
-        // 閲覧にログインが必要なページの場合はtrueを返す
-        // これのboolによって、表示文言を変えたり、API通信時にtokenを付与するかどうかを判断する
-        const path = window.location.pathname;
+    const navigation = computed(() => {
+        if (meStore.isStaff) {
+            return [
+                {
+                    name: "カウンセリング一覧",
+                    href: "counselings",
+                    icon: UsersIcon,
+                    current: false,
+                },
+            ];
+        } else if (meStore.isAdmin) {
+            return [
+                {
+                    name: "カウンセリング一覧",
+                    href: "/counselings",
+                    icon: UsersIcon,
+                    current: false,
+                },
+                {
+                    name: "スクール一覧",
+                    href: "/schools",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "ユーザー一覧",
+                    href: "/users",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+                {
+                    name: "タグ一覧",
+                    href: "/tags",
+                    icon: CalendarIcon,
+                    current: false,
+                },
+            ];
+        }
+    });
 
-        return path === "/login" || path === "/signup";
+    const isNotRequireAuthenticationPage = computed(() => {
+        const unauthenticatedPaths = ["/login", "/signup", "/lp", "/error"];
+
+        return unauthenticatedPaths.includes(window.location.pathname);
     });
 
     const isSignUpOrLoginOrLpPage = computed(() => {
@@ -99,7 +99,7 @@ export function useApp() {
         handleClick,
         logout,
         sidebarOpen,
-        isSignUpOrLoginPage,
+        isNotRequireAuthenticationPage,
         isSignUpOrLoginOrLpPage,
         meStore,
         isAuthenticated,

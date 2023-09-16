@@ -4,14 +4,13 @@ import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { createAxiosInstance } from "@/utils/axiosinstance";
-import { useMeStore } from "@/store/me";
 
 export function useSchoolEdit() {
     const alertStore = useAlertStore();
     const router = useRouter();
     const schoolId = location.pathname.split("/")[2];
     const axiosInstance = createAxiosInstance();
-    const meStore = useMeStore();
+
     const pages = [
         { name: "スクール一覧", href: "/schools", current: false },
         { name: "スクール詳細", href: `/schools/${schoolId}`, current: false },
@@ -51,16 +50,6 @@ export function useSchoolEdit() {
         }
     };
 
-    const fetchMe = async () => {
-        try {
-            const { data } = await axiosInstance.get("/me");
-            meStore.setMe(data);
-        } catch (err) {
-            alertStore.showErrorAlert();
-            router.push("/error");
-        }
-    };
-
     const fetchTagOptions = async () => {
         try {
             const { data } = await axiosInstance.get("tag");
@@ -81,7 +70,6 @@ export function useSchoolEdit() {
     };
 
     onMounted(async () => {
-        await fetchMe();
         await fetchTagOptions();
         await fetchSchool();
     });

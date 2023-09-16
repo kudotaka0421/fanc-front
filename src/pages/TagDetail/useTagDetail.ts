@@ -3,13 +3,11 @@ import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { createAxiosInstance } from "@/utils/axiosinstance";
-import { useMeStore } from "@/store/me";
 
 export function useTagDetail() {
     const alertStore = useAlertStore();
     const router = useRouter();
     const axiosInstance = createAxiosInstance();
-    const meStore = useMeStore();
 
     const pages = [
         { name: "タグ一覧", href: "/tags", current: false },
@@ -26,16 +24,6 @@ export function useTagDetail() {
 
     const changeMode = (mode: "view" | "edit") => {
         formType.value = mode;
-    };
-
-    const fetchMe = async () => {
-        try {
-            const { data } = await axiosInstance.get("/me");
-            meStore.setMe(data);
-        } catch (err) {
-            alertStore.showErrorAlert();
-            router.push("/error");
-        }
     };
 
     const fetchTag = async () => {
@@ -70,7 +58,6 @@ export function useTagDetail() {
     };
 
     onMounted(async () => {
-        await fetchMe();
         await fetchTag();
     });
 

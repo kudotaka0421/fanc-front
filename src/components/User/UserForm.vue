@@ -76,8 +76,6 @@
                         </div>
                     </div>
 
-                    <!-- [TODO] 管理画面のユーザーフォームの場合は表示、
-                    ユーザーが新規登録する際はセレクトを非表示にしてroleは初期値の1(ユーザー)で固定する -->
                     <div class="sm:col-span-2">
                         <label
                             for="first-name"
@@ -292,8 +290,6 @@ const user = ref<User>({ ...props.user });
 
 const userRoleLabel = computed(() => {
     switch (user.value.role) {
-        case userRole.Normal:
-            return "ユーザー";
         case userRole.Staff:
             return "スタッフ";
         case userRole.Admin:
@@ -310,7 +306,6 @@ const isInitialForm = reactive({
 });
 
 const roleOptions = [
-    { id: 1, value: "ユーザー" },
     { id: 2, value: "スタッフ" },
     { id: 3, value: "管理者" },
 ];

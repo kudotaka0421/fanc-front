@@ -3,13 +3,11 @@ import { ref, onMounted } from "vue";
 import { userRole, User } from "@/types/user";
 import { useRouter } from "vue-router";
 import { createAxiosInstance } from "@/utils/axiosinstance";
-import { useMeStore } from "@/store/me";
 
 export function useUserDetail() {
     const alertStore = useAlertStore();
     const router = useRouter();
     const axiosInstance = createAxiosInstance();
-    const meStore = useMeStore();
 
     const pages = [
         { name: "ユーザ一覧", href: "/users", current: false },
@@ -28,16 +26,6 @@ export function useUserDetail() {
 
     const changeMode = (mode: "view" | "edit") => {
         formType.value = mode;
-    };
-
-    const fetchMe = async () => {
-        try {
-            const { data } = await axiosInstance.get("/me");
-            meStore.setMe(data);
-        } catch (err) {
-            window.location.href = "/error";
-            return;
-        }
     };
 
     const fetchUser = async () => {
@@ -72,7 +60,6 @@ export function useUserDetail() {
     };
 
     onMounted(async () => {
-        await fetchMe();
         await fetchUser();
     });
 

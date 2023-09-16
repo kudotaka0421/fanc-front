@@ -17,7 +17,7 @@ export function useUserCreate() {
         name: "",
         email: "",
         password: "",
-        role: userRole.Normal,
+        role: userRole.Staff,
     };
 
     const createUser = async (params: User) => {

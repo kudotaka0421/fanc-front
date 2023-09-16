@@ -268,7 +268,6 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, reactive, watch } from "vue";
 import { User, userRole } from "../../types/user";
-import { useMeStore } from "@/store/me";
 
 type FormType = "create" | "edit" | "view";
 
@@ -276,7 +275,6 @@ type Props = {
     user: User;
     formType: FormType;
 };
-const meStore = useMeStore();
 
 const props = defineProps<Props>();
 
@@ -292,8 +290,6 @@ const user = ref<User>({ ...props.user });
 
 const userRoleLabel = computed(() => {
     switch (user.value.role) {
-        case userRole.Normal:
-            return "ユーザー";
         case userRole.Staff:
             return "スタッフ";
         case userRole.Admin:
@@ -310,7 +306,6 @@ const isInitialForm = reactive({
 });
 
 const roleOptions = [
-    { id: 1, value: "ユーザー" },
     { id: 2, value: "スタッフ" },
     { id: 3, value: "管理者" },
 ];

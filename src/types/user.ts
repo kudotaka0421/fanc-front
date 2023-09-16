@@ -7,7 +7,6 @@ export type User = {
 };
 
 export const userRole = {
-    Normal: 1,
     Staff: 2,
     Admin: 3,
 } as const;

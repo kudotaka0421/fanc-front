@@ -95,7 +95,6 @@
                         v-html="school.imageLinks[1]"
                         class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                     ></div>
-
                 </div>
 
                 <div

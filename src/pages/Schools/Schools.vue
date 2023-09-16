@@ -11,10 +11,6 @@
             </button>
         </div>
     </div>
-    <div class="bg-red-600">
-        ここに検索フォームを置くここに検索フォームを置くここに検索フォームを置くここに検索フォームを置く
-        ここに検索フォームを置くここに検索フォームを置く
-    </div>
     <School v-for="school in schools" :school="school" :key="school.name" />
 </template>
 

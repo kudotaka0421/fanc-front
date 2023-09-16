@@ -96,52 +96,6 @@
                         class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                     ></div>
 
-                    <div
-                        class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:gap-x-8 lg:px-8"
-                    >
-                        <div
-                            class="button hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
-                        ></div>
-                        <div class="block lg:hidden">
-                            <div class="block lg:hidden">
-                                <div v-html="school.imageLinks[1]"></div>
-                            </div>
-                        </div>
-                        <div class="button_area">
-                            <p class="message">
-                                簡単2ステップ<span style="color: red"
-                                    >当日面談可能！</span
-                                >
-                            </p>
-                            <a
-                                href="/redirect?key=136&amp;ref=/?utm_source=google&amp;utm_medium=search&amp;utm_campaign=gs-100&amp;utm_content=gs-100-0000&amp;ugad=vT0yfFq7&amp;gad=1&amp;gclid=CjwKCAjwge2iBhBBEiwAfXDBRzYIyUyG63hzYdPdfWKrZjWtq4z7mc1DbYRecCdO1nVui4apxjqABRoC4JAQAvD_BwE"
-                                class="school_counseling_link reflection bct_analyze"
-                                target="_blank"
-                                data-title="DMM WEBCAMP"
-                                data-location="案件カードボタン_1"
-                                data-param="CjwKCAjwge2iBhBBEiwAfXDBRzYIyUyG63hzYdPdfWKrZjWtq4z7mc1DbYRecCdO1nVui4apxjqABRoC4JAQAvD_BwE"
-                                >公式ページを見る(ここのリンク先にlinkを設定する)</a
-                            >
-                        </div>
-
-                        <div class="button_area">
-                            <p class="message">
-                                スクールを卒業し活躍している現役エンジニアが<br /><span
-                                    style="color: red"
-                                    >スクール選びや学習のコツ、就職対策など相談にのります</span
-                                >
-                            </p>
-                            <a
-                                href="/redirect?key=136&amp;ref=/?utm_source=google&amp;utm_medium=search&amp;utm_campaign=gs-100&amp;utm_content=gs-100-0000&amp;ugad=vT0yfFq7&amp;gad=1&amp;gclid=CjwKCAjwge2iBhBBEiwAfXDBRzYIyUyG63hzYdPdfWKrZjWtq4z7mc1DbYRecCdO1nVui4apxjqABRoC4JAQAvD_BwE"
-                                class="school_counseling_link reflection bct_analyze"
-                                target="_blank"
-                                data-title="DMM WEBCAMP"
-                                data-location="案件カードボタン_1"
-                                data-param="CjwKCAjwge2iBhBBEiwAfXDBRzYIyUyG63hzYdPdfWKrZjWtq4z7mc1DbYRecCdO1nVui4apxjqABRoC4JAQAvD_BwE"
-                                >相談の予約をする</a
-                            >
-                        </div>
-                    </div>
                 </div>
 
                 <div

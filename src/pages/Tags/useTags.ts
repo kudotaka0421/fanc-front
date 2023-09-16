@@ -1,5 +1,4 @@
 import { useAlertStore } from "@/store/alert";
-import { useMeStore } from "@/store/me";
 import { Tag } from "@/types/tag";
 import { ref, onMounted } from "vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -9,18 +8,8 @@ export function useTags() {
     const axiosInstance = createAxiosInstance();
 
     const alertStore = useAlertStore();
-    const meStore = useMeStore();
-    const tags = ref<Tag[]>([]);
 
-    const fetchMe = async () => {
-        try {
-            const { data } = await axiosInstance.get("/me");
-            meStore.setMe(data);
-        } catch (err) {
-            window.location.href = "/error";
-            return;
-        }
-    };
+    const tags = ref<Tag[]>([]);
 
     const fetchTags = async () => {
         try {
@@ -32,7 +21,6 @@ export function useTags() {
     };
 
     onMounted(async () => {
-        await fetchMe();
         await fetchTags();
     });
 

@@ -54,7 +54,6 @@ const routes: RouteRecordRaw[] = [
             allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
-    ,
     {
         path: "/counselingCreate",
         name: "CounselingCreate",

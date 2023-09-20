@@ -7,16 +7,18 @@
                 onclick="location.href='counselingCreate'"
                 class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-                作成する
+                新規作成
             </button>
         </div>
     </div>
+    <CounselingList :counselings="counselings" />
 </template>
 
 <script setup lang="ts">
 import Breadcrumbs from "../../components/Breadcrumbs.vue";
+import CounselingList from "../../components/Counseling/CounselingList.vue";
 
 import { useCounselings } from "./useCounselings";
 
-const { pages } = useCounselings();
+const { pages, counselings } = useCounselings();
 </script>

@@ -18,6 +18,7 @@
     "@heroicons/vue": "^2.0.17",
     "axios": "^1.4.0",
     "pinia": "^2.0.35",
+    "v-calendar": "^3.0.3",
     "vue": "^3.2.47",
     "vue-router": "^4.0.13"
   },

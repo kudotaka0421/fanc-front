@@ -4,5 +4,9 @@ import App from "./App.vue";
 import router from "./router";
 import "./index.css";
 import { setupPinia } from "./store";
+import VCalendar from "v-calendar";
+import "v-calendar/style.css";
 
-createApp(App).use(router).use(setupPinia()).mount("#app");
+const app = createApp(App);
+
+app.use(router).use(setupPinia()).use(VCalendar).mount("#app");

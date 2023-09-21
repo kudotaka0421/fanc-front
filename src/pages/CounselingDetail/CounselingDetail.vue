@@ -6,6 +6,8 @@
         :school-options="schoolOptions"
         :user-options="userOptions"
         @changeMode="changeMode"
+        @update="updateCounseling"
+        @delete="deleteCounseling"
     />/>
 </template>
 
@@ -15,6 +17,14 @@ import Breadcrumbs from "../../components/Breadcrumbs.vue";
 
 import { useCounselingDetail } from "./useCounselingDetail";
 
-const { pages, counseling, formType, changeMode, schoolOptions, userOptions } =
-    useCounselingDetail();
+const {
+    pages,
+    counseling,
+    formType,
+    changeMode,
+    schoolOptions,
+    userOptions,
+    updateCounseling,
+    deleteCounseling,
+} = useCounselingDetail();
 </script>

@@ -1,6 +1,29 @@
 <template>
     <form>
         <div class="space-y-12">
+            <div class="space-y-12">
+                <div
+                    v-if="isViewMode"
+                    class="flex items-center justify-end gap-x-6"
+                >
+                    <button
+                        type="submit"
+                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        @click.prevent="clickEdit"
+                    >
+                        編集
+                    </button>
+                    <button
+                        v-if="meStore.isAdmin"
+                        type="submit"
+                        class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                        @click.prevent="clickDelete"
+                    >
+                        削除
+                    </button>
+                </div>
+            </div>
+
             <div class="border-gray-900/10 pb-12">
                 <div
                     class="mt- grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
@@ -177,7 +200,7 @@
                                 {{
                                     counselingVal.user
                                         ? counselingVal.user.name
-                                        : "っっっs"
+                                        : ""
                                 }}
                             </div>
                         </div>
@@ -333,6 +356,29 @@
                     作成する
                 </button>
             </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button
+                    v-if="!isViewMode && counseling.id"
+                    type="submit"
+                    class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-gray-500"
+                    @click.stop="clickCancel"
+                >
+                    キャンセル
+                </button>
+                <button
+                    v-if="!isViewMode && counseling.id"
+                    :disabled="hasInvalidValue"
+                    type="submit"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    :class="[
+                        hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
+                    ]"
+                    @click.prevent="clickUpdate"
+                >
+                    更新
+                </button>
+            </div>
         </div>
     </form>
 </template>
@@ -343,6 +389,9 @@ import { Counseling, counselingsStatus } from "@/types/counseling";
 import { School } from "@/types/school";
 import { User } from "@/types/user";
 import { formatDate } from "@/utils/formatDate";
+import { useMeStore } from "@/store/me";
+
+import cloneDeep from "lodash/cloneDeep";
 
 type FormType = "create" | "edit" | "view";
 
@@ -352,6 +401,7 @@ type Props = {
     schoolOptions: School[];
     userOptions: User[];
 };
+const meStore = useMeStore();
 
 const emits = defineEmits([
     "create",
@@ -389,6 +439,45 @@ const statusRoleLabel = computed(() => {
             return "";
     }
 });
+
+const clickDelete = () => {
+    if (window.confirm("本当に削除しますか？")) {
+        emits("delete");
+    }
+};
+
+const clickEdit = () => {
+    changeMode("edit");
+};
+
+const clickCancel = () => {
+    changeMode("view");
+    counselingVal.value = { ...props.counseling };
+};
+
+const clickUpdate = () => {
+    const dateStr =
+        counselingVal.value.date instanceof Date
+            ? counselingVal.value.date.toISOString()
+            : counselingVal.value.date;
+
+    const params = {
+        id: counselingVal.value?.id,
+        counseleeName: counselingVal.value.counseleeName,
+        email: counselingVal.value.email,
+        date: dateStr,
+        status: counselingVal.value.status,
+        remarks: counselingVal.value.remarks,
+        message: counselingVal.value.message,
+        userId: counselingVal.value.user?.id,
+        schoolIds: counselingVal.value.selectedSchoolIds,
+    };
+    emits("update", params);
+};
+
+const changeMode = (type: string) => {
+    emits("change-mode", type);
+};
 
 // counseleeName バリデーション
 const isEmptyCounseleeName = computed(() => {
@@ -495,7 +584,7 @@ const clickCreate = () => {
 watch(
     () => props.counseling,
     (newCounseling) => {
-        counselingVal.value = { ...newCounseling };
+        counselingVal.value = cloneDeep(newCounseling);
     },
     { deep: true }
 );

@@ -194,12 +194,23 @@
                                 >必須</span
                             >
                         </label>
-                        <div class="mt-2">
+                        <div
+                            v-if="isViewMode"
+                            class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        >
+                            {{
+                                counseling.date
+                                    ? formatDate(counseling.date)
+                                    : ""
+                            }}
+                        </div>
+                        <div v-else>
                             <v-date-picker
                                 v-model="counselingVal.date"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                                 is24hr
                                 mode="dateTime"
+                                :disabled="true"
                             ></v-date-picker>
                         </div>
                     </div>
@@ -220,6 +231,7 @@
                                     type="checkbox"
                                     :value="school.id"
                                     :id="school.name"
+                                    :disabled="isViewMode"
                                     class="hover:cursor-pointer"
                                     v-model="counselingVal.selectedSchoolIds"
                                 />
@@ -330,6 +342,7 @@ import { defineProps, ref, computed, reactive, watch } from "vue";
 import { Counseling, counselingsStatus } from "@/types/counseling";
 import { School } from "@/types/school";
 import { User } from "@/types/user";
+import { formatDate } from "@/utils/formatDate";
 
 type FormType = "create" | "edit" | "view";
 

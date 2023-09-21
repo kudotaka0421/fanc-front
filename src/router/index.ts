@@ -3,6 +3,7 @@ import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmA
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
 import Counselings from "../pages/Counselings/Counselings.vue";
+import CounselingDetail from "../pages/CounselingDetail/CounselingDetail.vue";
 import CounselingCreate from "../pages/CounselingCreate/CounselingCreate.vue";
 import Users from "../pages/Users/Users.vue";
 import UserCreate from "../pages/UserCreate/UserCreate.vue";
@@ -52,6 +53,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
             requiresAuth: true,
             allowedRoles: [userRole.Admin, userRole.Staff],
+        },
+    },
+    {
+        path: "/counselings/:counselingId",
+        name: "CounselingDetail",
+        component: CounselingDetail,
+        meta: {
+            requiresAuth: true,
+            allowedRoles: [userRole.Admin],
         },
     },
     {

@@ -189,7 +189,6 @@ const termLabel = computed(() => {
     }
 });
 
-
 const goToSchoolEdit = () => {
     if (props.school.id) router.push(`/schools/${props.school.id}/edit`);
 };

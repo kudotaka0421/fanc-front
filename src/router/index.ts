@@ -107,7 +107,7 @@ const routes: RouteRecordRaw[] = [
         component: Schools,
         meta: {
             requiresAuth: true,
-            allowedRoles: [userRole.Admin],
+            allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
     {
@@ -116,7 +116,7 @@ const routes: RouteRecordRaw[] = [
         component: SchoolDetail,
         meta: {
             requiresAuth: true,
-            allowedRoles: [userRole.Admin],
+            allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
     {

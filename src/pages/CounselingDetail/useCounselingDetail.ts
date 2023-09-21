@@ -1,24 +1,21 @@
-import { useRouter } from "vue-router";
 import { useAlertStore } from "@/store/alert";
-import { Counseling, CounselingParams } from "@/types/counseling";
-import { School } from "@/types/school";
-import { User, userRole } from "@/types/user";
 import { ref, onMounted } from "vue";
+import { Counseling } from "@/types/counseling";
+import { User, userRole } from "@/types/user";
+import { School } from "@/types/school";
 import { createAxiosInstance } from "@/utils/axiosinstance";
+// import { useRouter } from "vue-router";
 
-export function useCounselingCreate() {
+export function useCounselingDetail() {
     const alertStore = useAlertStore();
-    const router = useRouter();
+    // const router = useRouter();
     const axiosInstance = createAxiosInstance();
 
     const pages = [
         { name: "カウンセリング一覧", href: "/counselings", current: false },
-        {
-            name: "カウンセリング新規作成",
-            href: "counselingCreate",
-            current: true,
-        },
+        { name: "カウンセリング詳細", href: "", current: true },
     ];
+    const counselingId = location.pathname.split("/")[2];
 
     const counseling = ref<Counseling>({
         id: null,
@@ -40,11 +37,18 @@ export function useCounselingCreate() {
     const schoolOptions = ref<School[]>([]);
     const userOptions = ref<User[]>([]);
 
-    const createCounseling = async (params: CounselingParams) => {
+    const formType = ref<"view" | "edit">("view");
+
+    const changeMode = (mode: "view" | "edit") => {
+        formType.value = mode;
+    };
+
+    const fetchCounseling = async () => {
         try {
-            await axiosInstance.post("counseling", params);
-            alertStore.showSuccessAlert();
-            router.push("/counselings");
+            const { data } = await axiosInstance.get(
+                `/counseling/${counselingId}`
+            );
+            counseling.value = data;
         } catch (err) {
             alertStore.showErrorAlert();
         }
@@ -69,8 +73,17 @@ export function useCounselingCreate() {
     };
 
     onMounted(async () => {
+        await fetchCounseling();
         await fetchSchoolOptions();
         await fetchUserOptions();
     });
-    return { pages, counseling, schoolOptions, userOptions, createCounseling };
+
+    return {
+        pages,
+        counseling,
+        formType,
+        changeMode,
+        schoolOptions,
+        userOptions,
+    };
 }

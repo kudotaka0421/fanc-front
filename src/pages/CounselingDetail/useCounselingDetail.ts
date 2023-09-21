@@ -1,14 +1,14 @@
 import { useAlertStore } from "@/store/alert";
 import { ref, onMounted } from "vue";
-import { Counseling } from "@/types/counseling";
+import { Counseling, CounselingParams } from "@/types/counseling";
 import { User, userRole } from "@/types/user";
 import { School } from "@/types/school";
 import { createAxiosInstance } from "@/utils/axiosinstance";
-// import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 export function useCounselingDetail() {
     const alertStore = useAlertStore();
-    // const router = useRouter();
+    const router = useRouter();
     const axiosInstance = createAxiosInstance();
 
     const pages = [
@@ -72,6 +72,28 @@ export function useCounselingDetail() {
         }
     };
 
+    const updateCounseling = async (params: CounselingParams) => {
+        try {
+            await axiosInstance.put(`/counseling/${counselingId}`, params);
+            await fetchCounseling();
+            formType.value = "view";
+            alertStore.showSuccessAlert();
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
+    const deleteCounseling = async () => {
+        try {
+            await axiosInstance.delete(`/counseling/${counselingId}`);
+            await fetchCounseling();
+            alertStore.showSuccessAlert();
+            router.push("/counselings");
+        } catch (err) {
+            alertStore.showErrorAlert();
+        }
+    };
+
     onMounted(async () => {
         await fetchCounseling();
         await fetchSchoolOptions();
@@ -85,5 +107,7 @@ export function useCounselingDetail() {
         changeMode,
         schoolOptions,
         userOptions,
+        updateCounseling,
+        deleteCounseling,
     };
 }

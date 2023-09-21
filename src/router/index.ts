@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
         component: CounselingDetail,
         meta: {
             requiresAuth: true,
-            allowedRoles: [userRole.Admin],
+            allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
     {
@@ -70,7 +70,7 @@ const routes: RouteRecordRaw[] = [
         component: CounselingCreate,
         meta: {
             requiresAuth: true,
-            allowedRoles: [userRole.Admin],
+            allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
 

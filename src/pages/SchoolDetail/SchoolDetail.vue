@@ -1,6 +1,6 @@
 <template>
     <Breadcrumbs :pages="pages" />
-    <School :school="school" :is-detail-page="true" @delete="deleteSchool" />
+    <School :school="school" @delete="deleteSchool" />
 </template>
 
 <script setup lang="ts">

@@ -346,6 +346,7 @@
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button
                     v-if="!isViewMode && !counselingVal.id"
+                    :disabled="hasInvalidValue"
                     type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     :class="[
@@ -432,7 +433,7 @@ const statusRoleLabel = computed(() => {
         case counselingsStatus.Ready:
             return "実施前";
         case counselingsStatus.Completed:
-            return "完了";
+            return "実施完了";
         case counselingsStatus.Canceled:
             return "キャンセル";
         default:
@@ -472,7 +473,25 @@ const clickUpdate = () => {
         userId: counselingVal.value.user?.id,
         schoolIds: counselingVal.value.selectedSchoolIds,
     };
-    emits("update", params);
+
+    if (
+        (props.counseling.status == counselingsStatus.Ready &&
+            params.status == counselingsStatus.Completed) ||
+        (props.counseling.status == counselingsStatus.Canceled &&
+            params.status == counselingsStatus.Completed)
+    ) {
+        if (
+            window.confirm(
+                "ステータスが「実施完了」に更新すると、相談者にカウンセリング完了メールが送信されます。こちらの内容でよろしいですか？"
+            )
+        ) {
+            emits("update", params);
+        } else {
+            return;
+        }
+    } else {
+        emits("update", params);
+    }
 };
 
 const changeMode = (type: string) => {
@@ -578,7 +597,19 @@ const clickCreate = () => {
         schoolIds: counselingVal.value.selectedSchoolIds,
     };
 
-    emits("create", params);
+    if (params.status == counselingsStatus.Completed) {
+        if (
+            window.confirm(
+                "ステータスが「実施完了」で作成すると、相談者にカウンセリング完了メールが送信されます。こちらの内容でよろしいですか？"
+            )
+        ) {
+            emits("create", params);
+        } else {
+            return;
+        }
+    } else {
+        emits("create", params);
+    }
 };
 
 watch(

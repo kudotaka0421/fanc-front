@@ -492,7 +492,6 @@ const clickUpdate = () => {
     } else {
         emits("update", params);
     }
-    emits("update", params);
 };
 
 const changeMode = (type: string) => {

@@ -270,10 +270,15 @@
 
                 <div class="mt-20 col-span-full">
                     <label
-                        for="first-name"
+                        for="email"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                        >メッセージ</label
+                        >メッセージ<span
+                            v-show="!isViewMode"
+                            class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
+                            >必須</span
+                        ></label
                     >
+
                     <div class="mt-2">
                         <textarea
                             v-if="!isViewMode"
@@ -295,6 +300,14 @@
                         >
                             {{ counselingVal.message }}
                         </div>
+
+                        <p
+                            v-if="!isInitialForm.message && isEmptyMessage"
+                            class="mt-2 text-sm text-red-600"
+                            id="email-error"
+                        >
+                            メッセージを入力してください
+                        </p>
                         <p
                             v-if="!isInitialForm.message && isLengthOverMessage"
                             class="mt-2 text-sm text-red-600"
@@ -540,13 +553,16 @@ const hasInvalidDate = computed(() => {
 });
 
 // message バリデーション
+
+const isEmptyMessage = computed(() => {
+    return counselingVal.value.message === "";
+});
+
 const isLengthOverMessage = computed(() => {
-    return (
-        counselingVal.value.message && counselingVal.value.message.length > 1000
-    );
+    return !isEmptyMessage.value && counselingVal.value.message.length > 1000;
 });
 const hasInvalidMessage = computed(() => {
-    return isLengthOverMessage.value;
+    return isEmptyMessage.value || isLengthOverMessage.value;
 });
 
 // remarks バリデーション

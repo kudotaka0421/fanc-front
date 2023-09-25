@@ -83,7 +83,7 @@
                     </form>
 
                     <div
-                        v-html="school.imageLinks[1]"
+                        v-html="formattedTextLink"
                         class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                     ></div>
                 </div>
@@ -198,6 +198,14 @@ const clickDelete = () => {
         emits("delete");
     }
 };
+
+const formattedTextLink = computed(() => {
+    if (!props.school.imageLinks[1]) {
+        return;
+    } else {
+        return props.school.imageLinks[1].replace(/\n/g, "<br>");
+    }
+});
 </script>
 
 <style scoped>

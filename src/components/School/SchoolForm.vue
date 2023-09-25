@@ -326,7 +326,16 @@
                         </div>
                     </div>
                     <div class="mt-20 col-span-full">
-                        2(メール用小さめ画像)
+                        <label
+                            for="first-name"
+                            class="block text-sm font-medium leading-6 text-gray-900"
+                            >2(画像下に表示するメールタイプのメッセージテキストリンク)<span
+                                v-show="!isViewMode"
+                                class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
+                                >必須</span
+                            ></label
+                        >
+
                         <textarea
                             v-if="!isViewMode"
                             v-model="schoolVal.imageLinks[1]"
@@ -351,12 +360,20 @@
                         </div>
                         <p
                             v-if="
-                                !isInitialForm.imageLink2 &&
-                                isLengthOverImageLink2
+                                !isInitialForm.imageLink2 && isEmptyImageLink2
                             "
                             class="mt-2 text-sm text-red-600"
                         >
-                            画像付きリンクタグ1は1000文字以内で入力してください
+                            画像付きリンクタグ2を入力してください
+                        </p>
+                        <p
+                            v-if="
+                                !isInitialForm.imageLink1 &&
+                                isLengthOverImageLink1
+                            "
+                            class="mt-2 text-sm text-red-600"
+                        >
+                            画像付きリンクタグ2は1000文字以内で入力してください
                         </p>
                     </div>
                 </div>
@@ -828,6 +845,7 @@
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button
                     v-if="!isViewMode && !schoolVal.id"
+                    :disabled="hasInvalidValue"
                     type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     :class="[
@@ -850,8 +868,12 @@
                 </button>
                 <button
                     v-if="!isViewMode && schoolVal.id"
+                    :disabled="hasInvalidValue"
                     type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    :class="[
+                        hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
+                    ]"
                     @click.prevent="clickUpdate"
                 >
                     更新
@@ -982,7 +1004,7 @@ const hasInvalidLink = computed(() => {
 
 // remarks バリデーション
 const isLengthOverRemarks = computed(() => {
-    return schoolVal.value.remarks && schoolVal.value.remarks.length > 1000;
+    return !!schoolVal.value.remarks && schoolVal.value.remarks.length > 1000;
 });
 const hasInvalidRemarks = computed(() => {
     return isLengthOverRemarks.value;
@@ -1071,16 +1093,22 @@ const isLengthOverImageLink1 = computed(() => {
 const hasInvalidImageLink1 = computed(() => {
     return isEmptyImageLink1.value || isLengthOverImageLink1.value;
 });
+
 // imageLink2 バリデーション
+const isEmptyImageLink2 = computed(() => {
+    return schoolVal.value.imageLinks[1] === "";
+});
 const isLengthOverImageLink2 = computed(() => {
-    return schoolVal.value.imageLinks[1].length > 1000;
+    return (
+        !isEmptyImageLink2.value && schoolVal.value.imageLinks[1].length > 1000
+    );
 });
 const hasInvalidImageLink2 = computed(() => {
-    return isLengthOverImageLink2.value;
+    return isEmptyImageLink2.value || isLengthOverImageLink2.value;
 });
 // imageLink3 バリデーション
 const isLengthOverImageLink3 = computed(() => {
-    return schoolVal.value.imageLinks[2].length > 1000;
+    return schoolVal.value.imageLinks[2]?.length > 1000;
 });
 const hasInvalidImageLink3 = computed(() => {
     return isLengthOverImageLink3.value;

@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="lg:row-span-3 lg:mt-20">
-                    <span v-if="isDetailPage">
+                    <span v-if="meStore.isAdmin">
                         <button
                             type="button"
                             class="hover:bg-indigo-500 rounded-md bg-indigo-600 mr-3 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -42,15 +42,6 @@
                             @click.prevent="clickDelete"
                         >
                             削除
-                        </button>
-                    </span>
-                    <span v-else>
-                        <button
-                            type="button"
-                            class="inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            @click="goToSchoolDetail()"
-                        >
-                            詳細
                         </button>
                     </span>
                     <h3 class="mt-5 text-sm font-medium text-gray-900">
@@ -92,7 +83,7 @@
                     </form>
 
                     <div
-                        v-html="school.imageLinks[1]"
+                        v-html="formattedTextLink"
                         class="mt-10 hidden lg:block aspect-h-4 aspect-w-3 overflow-hidden rounded-lg"
                     ></div>
                 </div>
@@ -174,18 +165,18 @@
 import { defineProps, computed } from "vue";
 import { useRouter } from "vue-router";
 import { School } from "../../types/school";
+import { useMeStore } from "@/store/me";
 
 const emits = defineEmits(["delete"]);
 
 const router = useRouter();
 type Props = {
     school: School;
-    isDetailPage?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-    isDetailPage: false,
-});
+const props = defineProps<Props>();
+
+const meStore = useMeStore();
 
 const termLabel = computed(() => {
     switch (props.school.termUnit) {
@@ -198,10 +189,6 @@ const termLabel = computed(() => {
     }
 });
 
-const goToSchoolDetail = () => {
-    if (props.school.id) router.push(`/schools/${props.school.id}`);
-};
-
 const goToSchoolEdit = () => {
     if (props.school.id) router.push(`/schools/${props.school.id}/edit`);
 };
@@ -211,6 +198,14 @@ const clickDelete = () => {
         emits("delete");
     }
 };
+
+const formattedTextLink = computed(() => {
+    if (!props.school.imageLinks[1]) {
+        return;
+    } else {
+        return props.school.imageLinks[1].replace(/\n/g, "<br>");
+    }
+});
 </script>
 
 <style scoped>

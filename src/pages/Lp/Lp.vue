@@ -15,6 +15,15 @@
             box-sizing: content-box;
         "
     ></div>
+
+    <div>
+        <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc1vyVWM_fWrP6KPTmVEPgjGBEtENeIJT7GRFadG51eVUYqEw/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            >お問い合わせ</a
+        >
+    </div>
 </template>
 <script setup lang="ts">
 import { useLp } from "./useLp";

@@ -1,14 +1,14 @@
-import { useRouter } from "vue-router";
 import { School } from "@/types/school";
 import { ref, onMounted } from "vue";
 import { useAlertStore } from "@/store/alert";
 import { createAxiosInstance } from "@/utils/axiosinstance";
+import { useMeStore } from "@/store/me";
 
 export function useSchools() {
     const alertStore = useAlertStore();
-    const router = useRouter();
     const pages = [{ name: "スクール一覧", href: "/schools", current: true }];
     const axiosInstance = createAxiosInstance();
+    const meStore = useMeStore();
 
     const schools = ref<School[]>([]);
 
@@ -25,5 +25,5 @@ export function useSchools() {
         await fetchSchools();
     });
 
-    return { pages, schools };
+    return { pages, schools, meStore };
 }

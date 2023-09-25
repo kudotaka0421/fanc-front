@@ -35,6 +35,12 @@ export function useApp() {
                     icon: UsersIcon,
                     current: false,
                 },
+                {
+                    name: "スクール一覧",
+                    href: "/schools",
+                    icon: UsersIcon,
+                    current: false,
+                },
             ];
         } else if (meStore.isAdmin) {
             return [
@@ -47,7 +53,7 @@ export function useApp() {
                 {
                     name: "スクール一覧",
                     href: "/schools",
-                    icon: CalendarIcon,
+                    icon: UsersIcon,
                     current: false,
                 },
                 {

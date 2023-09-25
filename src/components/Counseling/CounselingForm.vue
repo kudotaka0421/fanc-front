@@ -1,6 +1,29 @@
 <template>
     <form>
         <div class="space-y-12">
+            <div class="space-y-12">
+                <div
+                    v-if="isViewMode"
+                    class="flex items-center justify-end gap-x-6"
+                >
+                    <button
+                        type="submit"
+                        class="hover:bg-indigo-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        @click.prevent="clickEdit"
+                    >
+                        編集
+                    </button>
+                    <button
+                        v-if="meStore.isAdmin"
+                        type="submit"
+                        class="rounded-md bg-red-100 px-3 py-2 text-sm font-semibold hover:bg-red-100 text-red-700 shadow-sm bg-red-200 focus-visible:outline"
+                        @click.prevent="clickDelete"
+                    >
+                        削除
+                    </button>
+                </div>
+            </div>
+
             <div class="border-gray-900/10 pb-12">
                 <div
                     class="mt- grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
@@ -177,7 +200,7 @@
                                 {{
                                     counselingVal.user
                                         ? counselingVal.user.name
-                                        : "っっっs"
+                                        : ""
                                 }}
                             </div>
                         </div>
@@ -194,12 +217,23 @@
                                 >必須</span
                             >
                         </label>
-                        <div class="mt-2">
+                        <div
+                            v-if="isViewMode"
+                            class="bg-slate-200 p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        >
+                            {{
+                                counseling.date
+                                    ? formatDate(counseling.date)
+                                    : ""
+                            }}
+                        </div>
+                        <div v-else>
                             <v-date-picker
                                 v-model="counselingVal.date"
                                 class="p-2 block w-full rounded-md border-0 py-1.5 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                                 is24hr
                                 mode="dateTime"
+                                :disabled="true"
                             ></v-date-picker>
                         </div>
                     </div>
@@ -220,6 +254,7 @@
                                     type="checkbox"
                                     :value="school.id"
                                     :id="school.name"
+                                    :disabled="isViewMode"
                                     class="hover:cursor-pointer"
                                     v-model="counselingVal.selectedSchoolIds"
                                 />
@@ -235,10 +270,15 @@
 
                 <div class="mt-20 col-span-full">
                     <label
-                        for="first-name"
+                        for="email"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                        >メッセージ</label
+                        >メッセージ<span
+                            v-show="!isViewMode"
+                            class="ml-2 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10"
+                            >必須</span
+                        ></label
                     >
+
                     <div class="mt-2">
                         <textarea
                             v-if="!isViewMode"
@@ -260,6 +300,14 @@
                         >
                             {{ counselingVal.message }}
                         </div>
+
+                        <p
+                            v-if="!isInitialForm.message && isEmptyMessage"
+                            class="mt-2 text-sm text-red-600"
+                            id="email-error"
+                        >
+                            メッセージを入力してください
+                        </p>
                         <p
                             v-if="!isInitialForm.message && isLengthOverMessage"
                             class="mt-2 text-sm text-red-600"
@@ -311,6 +359,7 @@
             <div class="mt-6 flex items-center justify-end gap-x-6">
                 <button
                     v-if="!isViewMode && !counselingVal.id"
+                    :disabled="hasInvalidValue"
                     type="submit"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     :class="[
@@ -319,6 +368,29 @@
                     @click.prevent="clickCreate"
                 >
                     作成する
+                </button>
+            </div>
+
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button
+                    v-if="!isViewMode && counseling.id"
+                    type="submit"
+                    class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-gray-500"
+                    @click.stop="clickCancel"
+                >
+                    キャンセル
+                </button>
+                <button
+                    v-if="!isViewMode && counseling.id"
+                    :disabled="hasInvalidValue"
+                    type="submit"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    :class="[
+                        hasInvalidValue ? 'opacity-30' : 'hover:bg-indigo-500',
+                    ]"
+                    @click.prevent="clickUpdate"
+                >
+                    更新
                 </button>
             </div>
         </div>
@@ -330,6 +402,10 @@ import { defineProps, ref, computed, reactive, watch } from "vue";
 import { Counseling, counselingsStatus } from "@/types/counseling";
 import { School } from "@/types/school";
 import { User } from "@/types/user";
+import { formatDate } from "@/utils/formatDate";
+import { useMeStore } from "@/store/me";
+
+import cloneDeep from "lodash/cloneDeep";
 
 type FormType = "create" | "edit" | "view";
 
@@ -339,6 +415,7 @@ type Props = {
     schoolOptions: School[];
     userOptions: User[];
 };
+const meStore = useMeStore();
 
 const emits = defineEmits([
     "create",
@@ -369,13 +446,70 @@ const statusRoleLabel = computed(() => {
         case counselingsStatus.Ready:
             return "実施前";
         case counselingsStatus.Completed:
-            return "完了";
+            return "実施完了";
         case counselingsStatus.Canceled:
             return "キャンセル";
         default:
             return "";
     }
 });
+
+const clickDelete = () => {
+    if (window.confirm("本当に削除しますか？")) {
+        emits("delete");
+    }
+};
+
+const clickEdit = () => {
+    changeMode("edit");
+};
+
+const clickCancel = () => {
+    changeMode("view");
+    counselingVal.value = { ...props.counseling };
+};
+
+const clickUpdate = () => {
+    const dateStr =
+        counselingVal.value.date instanceof Date
+            ? counselingVal.value.date.toISOString()
+            : counselingVal.value.date;
+
+    const params = {
+        id: counselingVal.value?.id,
+        counseleeName: counselingVal.value.counseleeName,
+        email: counselingVal.value.email,
+        date: dateStr,
+        status: counselingVal.value.status,
+        remarks: counselingVal.value.remarks,
+        message: counselingVal.value.message,
+        userId: counselingVal.value.user?.id,
+        schoolIds: counselingVal.value.selectedSchoolIds,
+    };
+
+    if (
+        (props.counseling.status == counselingsStatus.Ready &&
+            params.status == counselingsStatus.Completed) ||
+        (props.counseling.status == counselingsStatus.Canceled &&
+            params.status == counselingsStatus.Completed)
+    ) {
+        if (
+            window.confirm(
+                "ステータスが「実施完了」に更新すると、相談者にカウンセリング完了メールが送信されます。こちらの内容でよろしいですか？"
+            )
+        ) {
+            emits("update", params);
+        } else {
+            return;
+        }
+    } else {
+        emits("update", params);
+    }
+};
+
+const changeMode = (type: string) => {
+    emits("change-mode", type);
+};
 
 // counseleeName バリデーション
 const isEmptyCounseleeName = computed(() => {
@@ -419,13 +553,16 @@ const hasInvalidDate = computed(() => {
 });
 
 // message バリデーション
+
+const isEmptyMessage = computed(() => {
+    return counselingVal.value.message === "";
+});
+
 const isLengthOverMessage = computed(() => {
-    return (
-        counselingVal.value.message && counselingVal.value.message.length > 1000
-    );
+    return !isEmptyMessage.value && counselingVal.value.message.length > 1000;
 });
 const hasInvalidMessage = computed(() => {
-    return isLengthOverMessage.value;
+    return isEmptyMessage.value || isLengthOverMessage.value;
 });
 
 // remarks バリデーション
@@ -476,13 +613,25 @@ const clickCreate = () => {
         schoolIds: counselingVal.value.selectedSchoolIds,
     };
 
-    emits("create", params);
+    if (params.status == counselingsStatus.Completed) {
+        if (
+            window.confirm(
+                "ステータスが「実施完了」で作成すると、相談者にカウンセリング完了メールが送信されます。こちらの内容でよろしいですか？"
+            )
+        ) {
+            emits("create", params);
+        } else {
+            return;
+        }
+    } else {
+        emits("create", params);
+    }
 };
 
 watch(
     () => props.counseling,
     (newCounseling) => {
-        counselingVal.value = { ...newCounseling };
+        counselingVal.value = cloneDeep(newCounseling);
     },
     { deep: true }
 );

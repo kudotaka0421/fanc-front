@@ -3,6 +3,8 @@ import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmA
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
 import TermsOfService from "../pages/TermsOfService/TermsOfService.vue";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.vue";
+
 import Counselings from "../pages/Counselings/Counselings.vue";
 import CounselingDetail from "../pages/CounselingDetail/CounselingDetail.vue";
 import CounselingCreate from "../pages/CounselingCreate/CounselingCreate.vue";
@@ -51,6 +53,12 @@ const routes: RouteRecordRaw[] = [
         path: "/terms-of-service",
         name: "TermsOfService",
         component: TermsOfService,
+    },
+
+    {
+        path: "/privacy-policy",
+        name: "PrivacyPolicy",
+        component: PrivacyPolicy,
     },
 
     {

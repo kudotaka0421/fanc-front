@@ -68,7 +68,8 @@
                         カウンセリング終了後担当者からのメールを受け取る。
                         <ul class="list-disc pl-5 space-y-2">
                             <li class="text-base">
-                                カウンセリング内容をもとにご紹介したスクールの詳細情報と、担当者からの応援メッセージをメールにて送信いたします。
+                                <!-- カウンセリング内容をもとにご紹介したスクールの詳細情報と、担当者からの応援メッセージをメールにて送信いたします。 -->
+                                カウンセリング内容をまとめた内容と、担当者からの応援メッセージをメールにて送信いたします。
                             </li>
                         </ul>
                     </li>
@@ -107,7 +108,9 @@
                             >
                         </li>
                         <li>
-                            <a href="#" class="text-white hover:underline"
+                            <a
+                                href="/privacy-policy"
+                                class="text-white hover:underline"
                                 >プライバシーポリシー</a
                             >
                         </li>

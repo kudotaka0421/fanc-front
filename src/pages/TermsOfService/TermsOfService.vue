@@ -136,13 +136,6 @@
                     <ul class="flex space-x-6">
                         <li>
                             <a
-                                href="/operator-info"
-                                class="text-white hover:underline"
-                                >運営情報</a
-                            >
-                        </li>
-                        <li>
-                            <a
                                 href="https://docs.google.com/forms/d/e/1FAIpQLSc1vyVWM_fWrP6KPTmVEPgjGBEtENeIJT7GRFadG51eVUYqEw/viewform"
                                 target="_blank"
                                 rel="noopener noreferrer"

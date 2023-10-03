@@ -4,7 +4,6 @@ import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
 import TermsOfService from "../pages/TermsOfService/TermsOfService.vue";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.vue";
-import OperatorInfo from "../pages/OperatorInfo/OperatorInfo.vue";
 import Counselings from "../pages/Counselings/Counselings.vue";
 import CounselingDetail from "../pages/CounselingDetail/CounselingDetail.vue";
 import CounselingCreate from "../pages/CounselingCreate/CounselingCreate.vue";
@@ -58,11 +57,6 @@ const routes: RouteRecordRaw[] = [
         path: "/privacy-policy",
         name: "PrivacyPolicy",
         component: PrivacyPolicy,
-    },
-    {
-        path: "/operator-info",
-        name: "OperatorInfo",
-        component: OperatorInfo,
     },
     {
         path: "/counselings",

@@ -35,8 +35,8 @@ jobs:
           exit 1
         fi
 
-    - name: Lint Check
-      run: npm run lint
+    - name: Lint And Format Check
+      run: npm run fix
 
   build:
     name: Build Check

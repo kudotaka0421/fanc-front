@@ -80,6 +80,7 @@ export function useApp() {
             "/error",
             "/terms-of-service",
             "/privacy-policy",
+            "/operator-info",
         ];
 
         return unauthenticatedPaths.includes(window.location.pathname);

@@ -87,7 +87,9 @@
                 <nav>
                     <ul class="flex space-x-6">
                         <li>
-                            <a href="#" class="text-white hover:underline"
+                            <a
+                                href="/operator-info"
+                                class="text-white hover:underline"
                                 >運営情報</a
                             >
                         </li>
@@ -103,6 +105,7 @@
                         <li>
                             <a
                                 href="/terms-of-service"
+                                target="_blank"
                                 class="text-white hover:underline"
                                 >利用規約</a
                             >
@@ -110,6 +113,7 @@
                         <li>
                             <a
                                 href="/privacy-policy"
+                                target="_blank"
                                 class="text-white hover:underline"
                                 >プライバシーポリシー</a
                             >

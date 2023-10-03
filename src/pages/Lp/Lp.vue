@@ -100,7 +100,9 @@
                             >
                         </li>
                         <li>
-                            <a href="#" class="text-white hover:underline"
+                            <a
+                                href="/terms-of-service"
+                                class="text-white hover:underline"
                                 >利用規約</a
                             >
                         </li>

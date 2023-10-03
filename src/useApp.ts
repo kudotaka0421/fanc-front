@@ -73,7 +73,7 @@ export function useApp() {
     });
 
     const isNotRequireAuthenticationPage = computed(() => {
-        const unauthenticatedPaths = ["/login", "/signup", "/lp", "/error"];
+        const unauthenticatedPaths = ["/login", "/signup", "/lp", "/error", "/terms-of-service"];
 
         return unauthenticatedPaths.includes(window.location.pathname);
     });

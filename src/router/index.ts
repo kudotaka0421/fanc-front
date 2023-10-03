@@ -2,6 +2,9 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import ConfirmAccount from "../pages/ConfirmAccount/ConfirmAccount"; // ConfirmAccountコンポーネントのパスに応じて変更してください
 import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
+import TermsOfService from "../pages/TermsOfService/TermsOfService.vue";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.vue";
+import OperatorInfo from "../pages/OperatorInfo/OperatorInfo.vue";
 import Counselings from "../pages/Counselings/Counselings.vue";
 import CounselingDetail from "../pages/CounselingDetail/CounselingDetail.vue";
 import CounselingCreate from "../pages/CounselingCreate/CounselingCreate.vue";
@@ -45,6 +48,21 @@ const routes: RouteRecordRaw[] = [
         path: "/lp",
         name: "Lp",
         component: Lp,
+    },
+    {
+        path: "/terms-of-service",
+        name: "TermsOfService",
+        component: TermsOfService,
+    },
+    {
+        path: "/privacy-policy",
+        name: "PrivacyPolicy",
+        component: PrivacyPolicy,
+    },
+    {
+        path: "/operator-info",
+        name: "OperatorInfo",
+        component: OperatorInfo,
     },
     {
         path: "/counselings",

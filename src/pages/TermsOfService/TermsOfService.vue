@@ -1,18 +1,27 @@
 <template>
     <div class="bg-gradient-to-b from-blue-100 to-white min-h-screen font-sans">
-        <!-- ヘッダーセクション -->
         <header class="bg-blue-400 p-5 shadow-md">
-            <div
-                class="container mx-auto flex justify-between items-center"
-            ></div>
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold text-white mb-5">
-                    利用規約
-                </h1>
+            <div class="container mx-auto flex items-center">
+                <a href="/lp" class="hover:text-current">
+                    <img
+                        src="/Fanc-logos.jpeg"
+                        alt="Logo"
+                        class="md:w-24 md:h-24 w-10 h-10 cursor-pointer hover:opacity-80 transition-opacity duration-200 hidden md:block"
+                    />
+                </a>
+                <div class="flex-grow text-center">
+                    <h1 class="text-4xl font-extrabold text-white mb-5">
+                        <a href="/lp" class="hover:text-current">Fanc</a>
+                    </h1>
+                    <p class="text-xl text-white">
+                        あなたに最適なプログラミングスクールをご提案します
+                    </p>
+                </div>
             </div>
         </header>
 
         <div class="container mx-auto mt-10 px-8">
+            <h1 class="text-center text-6xl font-bold mb-12">利用規約</h1>
             <p class="mb-5">
                 この利用規約（以下，「本規約」といいます。）は運営者がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
             </p>
@@ -137,31 +146,29 @@
                         <li>
                             <a
                                 href="https://docs.google.com/forms/d/e/1FAIpQLSc1vyVWM_fWrP6KPTmVEPgjGBEtENeIJT7GRFadG51eVUYqEw/viewform"
-                                target="_blank"
                                 rel="noopener noreferrer"
-                                class="text-white hover:underline"
+                                class="hover:text-current text-white hover:underline"
                                 >お問い合わせ</a
                             >
                         </li>
                         <li>
                             <a
                                 href="/terms-of-service"
-                                class="text-white hover:underline"
+                                class="hover:text-current text-white hover:underline"
                                 >利用規約</a
                             >
                         </li>
                         <li>
                             <a
                                 href="/privacy-policy"
-                                class="text-white hover:underline"
+                                class="hover:text-current text-white hover:underline"
                                 >プライバシーポリシー</a
                             >
                         </li>
                         <li>
                             <a
                                 href="/commercial-transaction-law"
-                                target="_blank"
-                                class="text-white hover:underline"
+                                class="hover:text-current text-white hover:underline"
                                 >特定商取引法に基づく表記</a
                             >
                         </li>

@@ -1,15 +1,22 @@
 <template>
     <div class="bg-gradient-to-b from-blue-100 to-white min-h-screen font-sans">
-        <!-- ヘッダーセクション -->
         <header class="bg-blue-400 p-5 shadow-md">
-            <div
-                class="container mx-auto flex justify-between items-center"
-            ></div>
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold text-white mb-5">Fanc</h1>
-                <p class="text-xl text-white">
-                    あなたに最適なプログラミングスクールをご提案します
-                </p>
+            <div class="container mx-auto flex items-center">
+                <a href="/lp" class="hover:text-current">
+                    <img
+                        src="/Fanc-logos.jpeg"
+                        alt="Logo"
+                        class="md:w-24 md:h-24 w-10 h-10 cursor-pointer hover:opacity-80 transition-opacity duration-200 hidden md:block"
+                    />
+                </a>
+                <div class="flex-grow text-center">
+                    <h1 class="text-4xl font-extrabold text-white mb-5">
+                        <a href="/lp" class="hover:text-current">Fanc</a>
+                    </h1>
+                    <p class="text-xl text-white">
+                        あなたに最適なプログラミングスクールをご提案します
+                    </p>
+                </div>
             </div>
         </header>
 
@@ -131,41 +138,45 @@
                 </section>
             </div>
         </div>
-
-        <footer class="bg-blue-400 text-white p-10">
-            <div class="container mx-auto flex justify-end items-center">
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li>
-                            <a
-                                href="https://docs.google.com/forms/d/e/1FAIpQLSc1vyVWM_fWrP6KPTmVEPgjGBEtENeIJT7GRFadG51eVUYqEw/viewform"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-white hover:underline"
-                                >お問い合わせ</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/terms-of-service"
-                                target="_blank"
-                                class="text-white hover:underline"
-                                >利用規約</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/privacy-policy"
-                                target="_blank"
-                                class="text-white hover:underline"
-                                >プライバシーポリシー</a
-                            >
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </footer>
     </div>
+
+    <footer class="bg-blue-400 text-white p-10">
+        <div class="container mx-auto flex justify-end items-center">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li>
+                        <a
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSc1vyVWM_fWrP6KPTmVEPgjGBEtENeIJT7GRFadG51eVUYqEw/viewform"
+                            rel="noopener noreferrer"
+                            class="hover:text-current text-white hover:underline"
+                            >お問い合わせ</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/terms-of-service"
+                            class="hover:text-current text-white hover:underline"
+                            >利用規約</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/privacy-policy"
+                            class="hover:text-current text-white hover:underline"
+                            >プライバシーポリシー</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/commercial-transaction-law"
+                            class="hover:text-current text-white hover:underline"
+                            >特定商取引法に基づく表記</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
 </template>
 
 <script setup lang="ts">

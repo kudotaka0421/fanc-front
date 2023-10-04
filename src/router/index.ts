@@ -4,6 +4,8 @@ import Login from "../pages/Login/Login.vue";
 import Lp from "../pages/Lp/Lp.vue";
 import TermsOfService from "../pages/TermsOfService/TermsOfService.vue";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.vue";
+import CommercialTransactionLaw from "../pages/CommercialTransactionLaw/CommercialTransactionLaw.vue";
+
 import Counselings from "../pages/Counselings/Counselings.vue";
 import CounselingDetail from "../pages/CounselingDetail/CounselingDetail.vue";
 import CounselingCreate from "../pages/CounselingCreate/CounselingCreate.vue";
@@ -59,6 +61,11 @@ const routes: RouteRecordRaw[] = [
         component: PrivacyPolicy,
     },
     {
+        path: "/commercial-transaction-law",
+        name: "CommercialTransactionLaw",
+        component: CommercialTransactionLaw,
+    },
+    {
         path: "/counselings",
         name: "Counselings",
         component: Counselings,
@@ -67,6 +74,7 @@ const routes: RouteRecordRaw[] = [
             allowedRoles: [userRole.Admin, userRole.Staff],
         },
     },
+
     {
         path: "/counselings/:counselingId",
         name: "CounselingDetail",

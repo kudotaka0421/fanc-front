@@ -149,6 +149,14 @@
                                 >プライバシーポリシー</a
                             >
                         </li>
+                        <li>
+                            <a
+                                href="/commercial-transaction-law"
+                                target="_blank"
+                                class="text-white hover:underline"
+                                >特定商取引法に基づく表記</a
+                            >
+                        </li>
                     </ul>
                 </nav>
             </div>

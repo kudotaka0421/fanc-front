@@ -81,6 +81,7 @@ export function useApp() {
             "/terms-of-service",
             "/privacy-policy",
             "/operator-info",
+            "/commercial-transaction-law",
         ];
 
         return unauthenticatedPaths.includes(window.location.pathname);

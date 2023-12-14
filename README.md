@@ -22,3 +22,7 @@
 ![image](https://github.com/kudotaka0421/fanc-front/assets/54498213/be8cbc84-c91a-4619-93a6-8089dcf5c1f5)
 
 
+# 関連リポジトリ
+
+- インフラ:https://github.com/kudotaka0421/fanc-terraform
+- API:https://github.com/kudotaka0421/fanc-api

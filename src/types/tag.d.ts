@@ -1,4 +1,4 @@
 export type Tag = {
-    id: number;っd
+    id: number;
     text: string;
 };

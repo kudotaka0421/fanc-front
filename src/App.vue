@@ -45,7 +45,7 @@ const {
                 <Dialog
                     as="div"
                     class="relative z-50 lg:hidden"
-                    @close="sidebarOpen = false"
+                    @close="sidebarOpen === false"
                 >
                     <TransitionChild
                         as="template"

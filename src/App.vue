@@ -21,14 +21,14 @@ const {
     userNavigation,
     handleClick,
     sidebarOpen,
-    isNotRequireddddAuthenticationPage,
+    isNotRequireAuthenticationPage,
     userName,
 } = useApp();
 </script>
 
 <template>
     <div
-        v-if="isNotRequireddddAuthenticationPage"
+        v-if="isNotRequireAuthenticationPage"
         class="notRequireAuthenticationPage"
     >
         <main>

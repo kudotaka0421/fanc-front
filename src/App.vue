@@ -16,18 +16,19 @@ import BaseAlert from "./components/BaseAlert.vue";
 import { useApp } from "./useApp";
 
 const {
+    
     navigation,
     userNavigation,
     handleClick,
     sidebarOpen,
-    isNotRequireAuthenticationPage,
+    isNotRequireddddAuthenticationPage,
     userName,
 } = useApp();
 </script>
 
 <template>
     <div
-        v-if="isNotRequireAuthenticationPage"
+        v-if="isNotRequireddddAuthenticationPage"
         class="notRequireAuthenticationPage"
     >
         <main>

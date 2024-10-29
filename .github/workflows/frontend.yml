@@ -1,13 +1,13 @@
 name: Frontend CI/CD
 
-on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    types: [opened, reopened, ready_for_review]
-  issue_comment:
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop
+#   pull_request:
+#     types: [opened, reopened, ready_for_review]
+#   issue_comment:
 
 jobs:
   pr_agent_job:

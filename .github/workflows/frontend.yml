@@ -1,5 +1,6 @@
 name: Frontend CI/CD
 
+# AWS止めているためCIを動かしたくない。なので一時的にコメントアウトしてる。
 # on:
 #   push:
 #     branches:

@@ -16,6 +16,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",
+    "@testing-library/svelte": "^5.2.4",
     "axios": "^1.4.0",
     "pinia": "^2.0.35",
     "v-calendar": "^3.0.3",

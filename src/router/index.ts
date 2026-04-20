@@ -25,6 +25,7 @@ import Signup from "../pages/Signup/Signup.vue";
 import LabIndex from "../pages/Lab/LabIndex.vue";
 import LabPlaceholder from "../pages/Lab/LabPlaceholder.vue";
 import LabS3 from "../pages/Lab/LabS3.vue";
+import LabQueue from "../pages/Lab/LabQueue.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -201,8 +202,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/queue",
         name: "LabQueue",
-        component: LabPlaceholder,
-        props: { title: "#2 SQS + Worker" },
+        component: LabQueue,
     },
     {
         path: "/lab/fanout",

@@ -22,6 +22,9 @@ import TagDetail from "../pages/TagDetail/TagDetail.vue";
 
 import Signup from "../pages/Signup/Signup.vue";
 
+import LabIndex from "../pages/Lab/LabIndex.vue";
+import LabPlaceholder from "../pages/Lab/LabPlaceholder.vue";
+
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
 import { useMeStore } from "@/store/me";
@@ -183,6 +186,77 @@ const routes: RouteRecordRaw[] = [
             requiresAuth: true,
             allowedRoles: [userRole.Admin],
         },
+    },
+    {
+        path: "/lab",
+        name: "LabIndex",
+        component: LabIndex,
+    },
+    {
+        path: "/lab/s3",
+        name: "LabS3",
+        component: LabPlaceholder,
+        props: { title: "#1 S3 Presigned Multipart" },
+    },
+    {
+        path: "/lab/queue",
+        name: "LabQueue",
+        component: LabPlaceholder,
+        props: { title: "#2 SQS + Worker" },
+    },
+    {
+        path: "/lab/fanout",
+        name: "LabFanout",
+        component: LabPlaceholder,
+        props: { title: "#3 SNS → SQS Fanout" },
+    },
+    {
+        path: "/lab/lambda",
+        name: "LabLambda",
+        component: LabPlaceholder,
+        props: { title: "#4 Lambda" },
+    },
+    {
+        path: "/lab/cache",
+        name: "LabCache",
+        component: LabPlaceholder,
+        props: { title: "#5 Redis Cache-Aside" },
+    },
+    {
+        path: "/lab/rls",
+        name: "LabRls",
+        component: LabPlaceholder,
+        props: { title: "#6 Postgres RLS" },
+    },
+    {
+        path: "/lab/partition",
+        name: "LabPartition",
+        component: LabPlaceholder,
+        props: { title: "#7 Postgres パーティショニング" },
+    },
+    {
+        path: "/lab/bulk",
+        name: "LabBulk",
+        component: LabPlaceholder,
+        props: { title: "#8 Postgres Bulk" },
+    },
+    {
+        path: "/lab/breaker",
+        name: "LabBreaker",
+        component: LabPlaceholder,
+        props: { title: "#9 Circuit Breaker" },
+    },
+    {
+        path: "/lab/realtime",
+        name: "LabRealtime",
+        component: LabPlaceholder,
+        props: { title: "#10 SSE / WebSocket" },
+    },
+    {
+        path: "/lab/pprof",
+        name: "LabPprof",
+        component: LabPlaceholder,
+        props: { title: "#11 pprof" },
     },
     {
         path: "/error",

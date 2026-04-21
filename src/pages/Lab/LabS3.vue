@@ -6,11 +6,12 @@
         >
             ← Lab トップへ
         </router-link>
-        <h1 class="mt-4 text-2xl font-bold">#1 S3 Presigned Multipart</h1>
+        <h1 class="mt-4 text-2xl font-bold">#1 S3 Presigned PUT</h1>
         <p class="mt-2 text-sm text-gray-500">
-            ファイルを {{ PART_MIB }}MiB の chunk に分割し、パートごとに
-            presigned URL を取得してブラウザから直接 S3 (LocalStack) に PUT
-            する。最後に ETag を集めて CompleteMultipartUpload。
+            backend から発行した presigned URL に対してブラウザが
+            ファイル全体を 1 回の PUT で送る single upload 方式。
+            B2B SaaS の請求書・経費系（&lt; 100 MB 想定）なら multipart を
+            避けて実装を最小化できる。
         </p>
 
         <section class="mt-6 rounded-md border border-gray-200 p-4">
@@ -35,8 +36,7 @@
                 v-if="file"
                 class="mt-3 text-xs text-gray-600"
             >
-                選択中: {{ file.name }} ({{ humanSize(file.size) }},
-                パート数 {{ totalParts }})
+                選択中: {{ file.name }} ({{ humanSize(file.size) }})
             </div>
 
             <div
@@ -51,7 +51,6 @@
                 </div>
                 <div class="mt-1 text-xs text-gray-500">
                     {{ progress.toFixed(1) }}%
-                    ({{ completedParts }}/{{ totalParts }} parts)
                 </div>
             </div>
 
@@ -118,10 +117,6 @@
 import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 
-// S3 multipart は非最終パートに 5MiB 下限がある。
-const PART_MIB = 5;
-const PART_SIZE = PART_MIB * 1024 * 1024;
-
 type LabObject = { key: string; size: number; lastModified: string };
 type LogLine = { level: "info" | "error"; msg: string };
 
@@ -129,23 +124,20 @@ const apiBase = import.meta.env.VITE_APP_API_BASE_URL as string;
 
 const file = ref<File | null>(null);
 const uploading = ref(false);
-const completedParts = ref(0);
+const uploadedBytes = ref(0);
 const objects = ref<LabObject[]>([]);
 const log = ref<LogLine[]>([]);
 
-const totalParts = computed(() =>
-    file.value ? Math.max(1, Math.ceil(file.value.size / PART_SIZE)) : 0
-);
 const progress = computed(() =>
-    totalParts.value === 0
-        ? 0
-        : (completedParts.value / totalParts.value) * 100
+    file.value && file.value.size > 0
+        ? (uploadedBytes.value / file.value.size) * 100
+        : 0
 );
 
 const onFileChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     file.value = input.files?.[0] ?? null;
-    completedParts.value = 0;
+    uploadedBytes.value = 0;
     log.value = [];
 };
 
@@ -170,86 +162,54 @@ const upload = async () => {
     const f = file.value;
 
     uploading.value = true;
-    completedParts.value = 0;
+    uploadedBytes.value = 0;
     log.value = [];
 
-    let uploadId = "";
-    let key = "";
     try {
-        pushLog("info", `CreateMultipartUpload: ${f.name} (${humanSize(f.size)})`);
-        const createRes = await axios.post(`${apiBase}/lab/s3/multipart/create`, {
-            filename: f.name,
-            contentType: f.type || "application/octet-stream",
-        });
-        uploadId = createRes.data.uploadId;
-        key = createRes.data.key;
-        pushLog("info", `uploadId=${uploadId.slice(0, 12)}... key=${key}`);
-
-        const parts: { partNumber: number; eTag: string }[] = [];
-        for (let i = 0; i < totalParts.value; i++) {
-            const partNumber = i + 1;
-            const start = i * PART_SIZE;
-            const end = Math.min(start + PART_SIZE, f.size);
-            const chunk = f.slice(start, end);
-
-            const signRes = await axios.post(
-                `${apiBase}/lab/s3/multipart/sign-part`,
-                { key, uploadId, partNumber }
-            );
-            const url: string = signRes.data.url;
-
-            const putRes = await fetch(url, {
-                method: "PUT",
-                body: chunk,
-            });
-            if (!putRes.ok) {
-                throw new Error(
-                    `PUT part ${partNumber} failed: HTTP ${putRes.status}`
-                );
-            }
-            const etag = (
-                putRes.headers.get("ETag") ||
-                putRes.headers.get("etag") ||
-                ""
-            ).replace(/^"|"$/g, "");
-            if (!etag) {
-                throw new Error(
-                    `part ${partNumber}: ETag not exposed (check S3 CORS ExposeHeaders)`
-                );
-            }
-            parts.push({ partNumber, eTag: etag });
-            completedParts.value = partNumber;
-            pushLog(
-                "info",
-                `PUT part ${partNumber}/${totalParts.value} etag=${etag.slice(0, 8)}...`
-            );
-        }
-
-        pushLog("info", `CompleteMultipartUpload (${parts.length} parts)`);
-        const completeRes = await axios.post(
-            `${apiBase}/lab/s3/multipart/complete`,
-            { key, uploadId, parts }
+        pushLog(
+            "info",
+            `presign-put: ${f.name} (${humanSize(f.size)}, ${f.type || "application/octet-stream"})`
         );
-        pushLog("info", `done: ${completeRes.data.location}`);
+        const { data } = await axios.post(
+            `${apiBase}/lab/s3/presign-put`,
+            {
+                filename: f.name,
+                contentType: f.type || "application/octet-stream",
+            }
+        );
+        const url: string = data.url;
+        const key: string = data.key;
+        pushLog("info", `key=${key}`);
+
+        // XMLHttpRequest を使うのは fetch だと upload.onprogress 相当の
+        // 進捗イベントが取れないため（fetch streams は未サポートなブラウザあり）。
+        // axios に任せる手もあるが、axios は Content-Type を自動で付けるため
+        // 署名と不一致を起こすリスクがある → 生 XHR を使う。
+        await new Promise<void>((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("PUT", url);
+            xhr.upload.onprogress = (ev) => {
+                if (ev.lengthComputable) {
+                    uploadedBytes.value = ev.loaded;
+                }
+            };
+            xhr.onload = () => {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    uploadedBytes.value = f.size;
+                    resolve();
+                } else {
+                    reject(new Error(`PUT failed: HTTP ${xhr.status}`));
+                }
+            };
+            xhr.onerror = () => reject(new Error("PUT network error"));
+            xhr.send(f);
+        });
+
+        pushLog("info", "upload done");
         await loadObjects();
     } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         pushLog("error", msg);
-        if (uploadId && key) {
-            try {
-                await axios.post(`${apiBase}/lab/s3/multipart/abort`, {
-                    key,
-                    uploadId,
-                });
-                pushLog("info", "AbortMultipartUpload: 中断済み");
-            } catch (abortErr) {
-                const am =
-                    abortErr instanceof Error
-                        ? abortErr.message
-                        : String(abortErr);
-                pushLog("error", `abort failed: ${am}`);
-            }
-        }
     } finally {
         uploading.value = false;
     }

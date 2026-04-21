@@ -24,6 +24,7 @@ import Signup from "../pages/Signup/Signup.vue";
 
 import LabIndex from "../pages/Lab/LabIndex.vue";
 import LabPlaceholder from "../pages/Lab/LabPlaceholder.vue";
+import LabS3 from "../pages/Lab/LabS3.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -195,8 +196,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/s3",
         name: "LabS3",
-        component: LabPlaceholder,
-        props: { title: "#1 S3 Presigned Multipart" },
+        component: LabS3,
     },
     {
         path: "/lab/queue",

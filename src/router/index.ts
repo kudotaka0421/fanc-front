@@ -28,6 +28,7 @@ import LabS3 from "../pages/Lab/LabS3.vue";
 import LabQueue from "../pages/Lab/LabQueue.vue";
 import LabFanout from "../pages/Lab/LabFanout.vue";
 import LabLambda from "../pages/Lab/LabLambda.vue";
+import LabCache from "../pages/Lab/LabCache.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -219,8 +220,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/cache",
         name: "LabCache",
-        component: LabPlaceholder,
-        props: { title: "#5 Redis Cache-Aside" },
+        component: LabCache,
     },
     {
         path: "/lab/rls",

@@ -27,6 +27,7 @@ import LabPlaceholder from "../pages/Lab/LabPlaceholder.vue";
 import LabS3 from "../pages/Lab/LabS3.vue";
 import LabQueue from "../pages/Lab/LabQueue.vue";
 import LabFanout from "../pages/Lab/LabFanout.vue";
+import LabLambda from "../pages/Lab/LabLambda.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -213,8 +214,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/lambda",
         name: "LabLambda",
-        component: LabPlaceholder,
-        props: { title: "#4 Lambda" },
+        component: LabLambda,
     },
     {
         path: "/lab/cache",

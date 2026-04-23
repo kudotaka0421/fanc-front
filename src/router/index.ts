@@ -30,6 +30,7 @@ import LabFanout from "../pages/Lab/LabFanout.vue";
 import LabLambda from "../pages/Lab/LabLambda.vue";
 import LabCache from "../pages/Lab/LabCache.vue";
 import LabRls from "../pages/Lab/LabRls.vue";
+import LabPartition from "../pages/Lab/LabPartition.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -231,8 +232,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/partition",
         name: "LabPartition",
-        component: LabPlaceholder,
-        props: { title: "#7 Postgres パーティショニング" },
+        component: LabPartition,
     },
     {
         path: "/lab/bulk",

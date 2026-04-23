@@ -29,6 +29,7 @@ import LabQueue from "../pages/Lab/LabQueue.vue";
 import LabFanout from "../pages/Lab/LabFanout.vue";
 import LabLambda from "../pages/Lab/LabLambda.vue";
 import LabCache from "../pages/Lab/LabCache.vue";
+import LabRls from "../pages/Lab/LabRls.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -225,8 +226,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/rls",
         name: "LabRls",
-        component: LabPlaceholder,
-        props: { title: "#6 Postgres RLS" },
+        component: LabRls,
     },
     {
         path: "/lab/partition",

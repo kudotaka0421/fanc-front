@@ -31,6 +31,7 @@ import LabLambda from "../pages/Lab/LabLambda.vue";
 import LabCache from "../pages/Lab/LabCache.vue";
 import LabRls from "../pages/Lab/LabRls.vue";
 import LabPartition from "../pages/Lab/LabPartition.vue";
+import LabBulk from "../pages/Lab/LabBulk.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -237,8 +238,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/bulk",
         name: "LabBulk",
-        component: LabPlaceholder,
-        props: { title: "#8 Postgres Bulk" },
+        component: LabBulk,
     },
     {
         path: "/lab/breaker",

@@ -32,6 +32,7 @@ import LabCache from "../pages/Lab/LabCache.vue";
 import LabRls from "../pages/Lab/LabRls.vue";
 import LabPartition from "../pages/Lab/LabPartition.vue";
 import LabBulk from "../pages/Lab/LabBulk.vue";
+import LabBreaker from "../pages/Lab/LabBreaker.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -243,8 +244,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/breaker",
         name: "LabBreaker",
-        component: LabPlaceholder,
-        props: { title: "#9 Circuit Breaker" },
+        component: LabBreaker,
     },
     {
         path: "/lab/realtime",

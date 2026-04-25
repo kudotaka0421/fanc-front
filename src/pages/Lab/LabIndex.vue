@@ -67,8 +67,8 @@ const topics = [
     },
     {
         path: "/lab/realtime",
-        title: "#10 SSE / WebSocket",
-        summary: "サーバーからリアルタイム push",
+        title: "#10 SSE Realtime",
+        summary: "EventSource で 1 対多 fan-out + heartbeat",
     },
     {
         path: "/lab/pprof",

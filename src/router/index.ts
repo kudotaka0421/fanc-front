@@ -33,6 +33,7 @@ import LabRls from "../pages/Lab/LabRls.vue";
 import LabPartition from "../pages/Lab/LabPartition.vue";
 import LabBulk from "../pages/Lab/LabBulk.vue";
 import LabBreaker from "../pages/Lab/LabBreaker.vue";
+import LabRealtime from "../pages/Lab/LabRealtime.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -249,8 +250,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/realtime",
         name: "LabRealtime",
-        component: LabPlaceholder,
-        props: { title: "#10 SSE / WebSocket" },
+        component: LabRealtime,
     },
     {
         path: "/lab/pprof",

@@ -23,7 +23,6 @@ import TagDetail from "../pages/TagDetail/TagDetail.vue";
 import Signup from "../pages/Signup/Signup.vue";
 
 import LabIndex from "../pages/Lab/LabIndex.vue";
-import LabPlaceholder from "../pages/Lab/LabPlaceholder.vue";
 import LabS3 from "../pages/Lab/LabS3.vue";
 import LabQueue from "../pages/Lab/LabQueue.vue";
 import LabFanout from "../pages/Lab/LabFanout.vue";
@@ -34,6 +33,7 @@ import LabPartition from "../pages/Lab/LabPartition.vue";
 import LabBulk from "../pages/Lab/LabBulk.vue";
 import LabBreaker from "../pages/Lab/LabBreaker.vue";
 import LabRealtime from "../pages/Lab/LabRealtime.vue";
+import LabPprof from "../pages/Lab/LabPprof.vue";
 
 import Error from "../pages/Error/Error.vue";
 import { createAxiosInstance } from "@/utils/axiosinstance";
@@ -255,8 +255,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/lab/pprof",
         name: "LabPprof",
-        component: LabPlaceholder,
-        props: { title: "#11 pprof" },
+        component: LabPprof,
     },
     {
         path: "/error",
